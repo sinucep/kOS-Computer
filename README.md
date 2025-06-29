@@ -30,5 +30,6 @@ You can log data from the following data sources:
 * Ground Speed (horizontal speed)
 * Latitude
 * Longitude
+* 
 You can select one or more data sources.
 You can save to and load from file the data logs.
