@@ -3,6 +3,8 @@ kOS Computer is a flight management system and a guidance computer designed to f
 ## Installation
 Copy the files in the KSP directory respecting file paths, as usual.
 The file "Patch.cfg" must be replaced: don't worry, it's a small thing (you can make a copy if you want).
+## How to use the mod
+You need a IVA with the Raster Prop Monitor (DE IVA is a good one). Until you understand how to do it you can simply load the ship "kos rover.craft". Check on the kOs processor that the boot file is set on "KOSmodore-BOOT.ks". When you are in game, pres "C" to go to IVA mode, then on a Raster Prop Monitor press three times the button "RESC.ST/TOT" on the top right. You will see the main page of the kos computer. You may need to restart your computer by double-pressing the "STDBY" key.
 ## Features
 ### Multitasking
 You can execute more tasks at the same time. For example you can follow a track with a rover, log data and enter a logbook note at the same time.
