@@ -1,5 +1,20 @@
 # kOS-Computer
-kOS Computer is a flight management system and a guidance computer designed to fully work with VR.
+kOS-Computer is a flight management system and a guidance computer designed to fully work with VR. But you don't need VR for this mod!
+
+The mod is 100% KerboScript (maybe you know kOSHUD or BakerOS). This means it is completely rewritable. The code is meant to be understood, and I will slowly comment it out so it is as readable as possible. A lot of documentation will come.
+
+The idea is that everyone can add features to the mod that is 100% KerboScript. Then if someone wants to contribute I will publish in the "official" mod the features that deserve it (quoting the author).
+
+As June 2025 the mod has just been released in an embryonic state, many features will arrive, based on the wishes of the users.
+
+#### Dependencies:
+* kOSPropMonitor-Adopted
+* DE_IVAExtension
+* Reviva
+
+### Recommended:
+* kOS for All!
+
 ## Installation
 Copy the files in the KSP directory respecting file paths, as usual.
 The file "Patch.cfg" must be replaced: don't worry, it's a small thing (you can make a copy if you want).
