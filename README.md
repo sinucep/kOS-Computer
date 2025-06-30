@@ -7,7 +7,7 @@ The idea is that everyone can add features to the mod that is 100% KerboScript. 
 
 As June 2025 the mod has just been released in an embryonic state, many features will arrive, based on the wishes of the users.
 
-#### Dependencies:
+### Dependencies:
 * kOSPropMonitor-Adopted
 * DE_IVAExtension
 * Reviva
