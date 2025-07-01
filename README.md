@@ -1,9 +1,10 @@
-# kOS-Computer
-kOS-Computer is a flight management system and a guidance computer designed to fully work with VR. But you don't need VR for this mod!
+# kOS-Computer - Version 1.0 
+
+kOS-Computer is a flight management system and a guidance computer designed to fully work with VR. But **you don't need VR** for this mod!
 
 The mod is 100% KerboScript (maybe you know kOSHUD or BakerOS). This means it is completely rewritable. The code is meant to be understood, and I will slowly comment it out so it is as readable as possible. A lot of documentation will come.
 
-The idea is that everyone can add features to the mod that is 100% KerboScript. Then if someone wants to contribute I will publish in the "official" mod the features that deserve it (quoting the author).
+The idea is that everyone can add features to the mod. Then, if someone wants to contribute, I will publish in the "official" mod the features that deserve it (quoting the authors, of course).
 
 As June 2025 the mod has just been released in an embryonic state, many features will arrive, based on the wishes of the users.
 
@@ -19,7 +20,7 @@ As June 2025 the mod has just been released in an embryonic state, many features
 Copy the files in the KSP directory respecting file paths, as usual.
 The file "Patch.cfg" must be replaced: don't worry, it's a small thing (you can make a copy if you want).
 
-About the craft files you can copy them in "../saves/[yoursave]/Ships/SPH" or in "../saves/[yoursave]/Ships/VAB".
+About the craft files you can copy them in "../saves/**[yoursave]**/Ships/SPH" or in "../saves/**[yoursave]**/Ships/VAB".
 ## How to use the mod
 You need a IVA with the Raster Prop Monitor (DE IVA is a good one). Until you understand how to do it you can simply load the ship "kos rover.craft". Check on the kOs processor that the boot file is set on "KOSmodore-BOOT.ks". When you are in game, pres "C" to go to IVA mode, then on a Raster Prop Monitor press three times the button "RESC.ST/TOT" on the top right. You will see the main page of the kos computer. You may need to restart your computer by double-pressing the "STDBY" key.
 ## Features
