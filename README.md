@@ -1,4 +1,4 @@
-# kOS-Computer - Version 1.0 
+# kOS-Computer - Version 1.0.2
 
 kOS-Computer is a flight management system and a guidance computer designed to fully work with VR. But **you don't need VR** for this mod!
 
@@ -53,3 +53,5 @@ You can log data from the following data sources:
 
 You can select one or more data sources.
 You can save to and load from file the data logs.
+### Run user programs
+You can load from file and run kerboscript programs in kOS-Computer.
