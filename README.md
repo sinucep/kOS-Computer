@@ -18,9 +18,20 @@ As June 2025 the mod has just been released in an embryonic state, many features
 
 ## Installation
 Copy the files in the KSP directory respecting file paths, as usual.
-The file "Patch.cfg" must be replaced: don't worry, it's a small thing (you can make a copy if you want).
 
 About the craft files you can copy them in "../saves/**[yoursave]**/Ships/SPH" or in "../saves/**[yoursave]**/Ships/VAB".
+
+### If you need more detailed instructions:
+* Find your KSP1 installation folder. Let's call it [KSP1Directory].
+* Copy the folders in "\GameData\GameData\" to "[KSP1Directory]\GameData\"
+* Copy files and folders in "\Ships\Script\KOSmodore" to "[KSP1Directory]\Ships\Script\KOSmodore"
+  (If the folder doesn't exist, just create it)
+* Copy the files in "\Ships\Script\boot" to "[KSP1Directory]\Ships\Script\boot"
+  (If the folder doesn't exist, just create it)
+
+If you want you can use the crafts of this mod:
+* Copy the files in "\Craft\Ships\SPH" to "[KSP1Directory]\saves\[YourSaveDirectory]\Ships\SPH"
+* Copy the files in "\Craft\Ships\VAB" to "[KSP1Directory]\saves\[YourSaveDirectory]\Ships\VAB"
 ## How to use the mod
 You need a IVA with the Raster Prop Monitor (DE IVA is a good one). Until you understand how to do it you can simply load the ship "kos rover.craft". Check on the kOs processor that the boot file is set on "KOSmodore-BOOT.ks". When you are in game, pres "C" to go to IVA mode, then on a Raster Prop Monitor press three times the button "RESC.ST/TOT" on the top right. You will see the main page of the kos computer. You may need to restart your computer by double-pressing the "STDBY" key.
 ## Features
