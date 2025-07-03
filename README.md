@@ -2,7 +2,7 @@
 
 kOS-Computer is a programmable flight management system (or guidance computer) designed to fully work with VR. But **you don't need VR** for this mod!
 
-The mod is 100% KerboScript (maybe you know _kOSHUD_ or _BakerOS_). This means it is completely rewritable. The code is meant to be understood, and I will slowly comment it out so it is as readable as possible. A lot of documentation will come.
+The mod is 100% KerboScript (maybe you know _kOSHUD_ and _BakerOS_). This means it is completely rewritable. The code is meant to be understood, and I will slowly comment it out so it is as readable as possible. A lot of documentation will come.
 
 The idea is that everyone can add features to the mod. Then, if someone wants to contribute, I will publish in the "official" mod the features that deserve it (quoting the authors, of course).
 
