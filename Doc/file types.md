@@ -13,5 +13,7 @@ There are various types of files that kOS can read and/or create:
 It is a text file, the same type produced and read by kOS
 ## kOS serialized text
 This is where the [ **.kst** ] type comes in. It's a JSON file with text lines serialized according to kOS rules. 
+## Logbook
+It is where the logbook is saved. It is a serialized list of lists of strings (a list of pages).
   
   
