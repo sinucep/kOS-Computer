@@ -79,11 +79,11 @@ This file lists what the active keys do for each page (function keys are not lis
 ## 221 - Eelect and load basic prog from file
 ## 222 - View preprocessed basic prog
 ## 230 - Running basic program
-## 237 - Edit basic program 0
-## 238 - Edit basic program 1
-## 239 - Edit basic program 2
-## 240 - Edit basic program 3
-## 243 - Save basic program 0
-## 244 - Save basic program 1
-## 245 - Save basic program 2
+## 237 - Edit basic program (uppercase)
+## 238 - Edit basic program (lowercase)
+## 239 - Edit basic program (numbers)
+## 240 - Edit basic program (commands)
+## 243 - Save basic program (uppercase)
+## 244 - Save basic program (lowercase)
+## 245 - Save basic program (numbers)
 
