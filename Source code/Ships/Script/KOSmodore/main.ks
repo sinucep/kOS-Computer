@@ -17,6 +17,7 @@ run once "/KOSmodore/sampling.ks".
 run once "/KOSmodore/pages.ks".
 run once "/KOSmodore/datalog.ks".
 run once "/KOSmodore/settings.ks".
+run once "/KOSmodore/runKS.ks".
 
 global fine to false. // per uscire dal programma e usare il terminale
 
@@ -142,10 +143,10 @@ function DataLogAdd {
 			}
 			
 			If Npage = 70 {
-				SamplePAGE().
+				GoPage(70).
 			}
 			If Npage = 72 {
-				ViewDataLogPage().
+				GoPage(72).
 			}
 }
 
@@ -189,10 +190,10 @@ if myflags:getstate(0) {
 			LoadedTrack[LoadedTrack:LENGTH-1]:add(SHIP:GEOPOSITION:LNG).
 			
 			If Npage = 30 {
-				TrackPAGE().
+				Gopage(30).
 			}
 			If Npage = 32 {
-				ViewTrack().
+				GoPage(32).
 			}
 			
 			set GPSLogStart to GPSLogStart + SettingsL[2]. //  track sampling time interval

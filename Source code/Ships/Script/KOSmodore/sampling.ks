@@ -5,7 +5,7 @@ function ClearSensLOG {
 	SensLOG:clear.
 	InitSensLog().
 	if	npage = 70 {
-		SamplePAGE().
+		GoPage(70).
 	}
 }
 

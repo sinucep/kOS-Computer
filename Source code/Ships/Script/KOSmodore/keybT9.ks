@@ -22,29 +22,43 @@ set symset to 0.
 
 function cicleset {
 	set symset to symset + 1.
-	if symset > 2 {
-		set symset to 0.
-	}
-	
+		
 	if NPage = 41 or NPage = 42 or NPage = 43 {
-		if symset = 0 {	LogBookPage1(). }
-		if symset = 1 {	LogBookPage2().	}
-		if symset = 2 {	LogBookPage3().	}
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(41). }
+		if symset = 1 {	GoPage(42).	}
+		if symset = 2 {	GoPage(43).	}
 	}
 	if NPage = 52 or NPage = 53 or NPage = 54 {
-		if symset = 0 {	SaveDests(). }
-		if symset = 1 {	SaveDests1().	}
-		if symset = 2 {	SaveDests2().	}
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(52). }
+		if symset = 1 {	GoPage(53).	}
+		if symset = 2 {	GoPage(54).	}
 	}
 	if NPage = 33 or NPage = 34 or NPage = 35 {
-		if symset = 0 {	SaveTrack(). }
-		if symset = 1 {	SaveTrack1().	}
-		if symset = 2 {	SaveTrack2().	}
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(33). }
+		if symset = 1 {	GoPage(34).	}
+		if symset = 2 {	GoPage(35).	}
 	}
 	if NPage = 83 or NPage = 84 or NPage = 85 {
-		if symset = 0 {	SaveDataLog(). }
-		if symset = 1 {	SaveDataLog1().	}
-		if symset = 2 {	SaveDataLog2().	}
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(83). }
+		if symset = 1 {	GoPage(84).	}
+		if symset = 2 {	GoPage(85).	}
+	}
+	if NPage = 243 or NPage = 244 or NPage = 245 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(243). }
+		if symset = 1 {	GoPage(244).	}
+		if symset = 2 {	GoPage(245).	}
+	}
+	if NPage = 240 or NPage = 239 or NPage = 238 or NPage = 237{
+		if symset > 3 { set symset to 0. }
+		if symset = 0 {	GoPage(240). }
+		if symset = 1 {	GoPage(239).	}
+		if symset = 2 {	GoPage(238).	}
+		if symset = 3 {	GoPage(237).	}
 	}
 }
 

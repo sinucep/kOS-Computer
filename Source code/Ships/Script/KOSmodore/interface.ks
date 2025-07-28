@@ -2,7 +2,8 @@
 
 run once "/KOSmodore/globals.ks".
 
-global lind to 0.           //selezione della lista di cose
+ 
+global lind to 0.           // selezione della lista di cose
 global Npage to 0.
 global li to list().        // lista per il menu scorrevole
 global selcolumn to -1.     // datasource selezionata
@@ -10,6 +11,60 @@ global selcolumn to -1.     // datasource selezionata
 							// 1: prima sorgente impostata
 							// 2: seconda sorgente...
 global maxcolumn to 0.      // numero di colonne disponibili
+
+//associates a back page to any page 
+global PageBacks to list(
+	list(  0,   -1),
+	list(  1,   -1), 
+	list( 20,    1),
+	list( 30,    1),
+	list( 31,   30),
+	list( 32,   30),   
+	list( 33,   30),
+	list( 34,   30),
+	list( 35,   30),
+	list( 40,    1),
+	list( 41,   40),
+	list( 42,   40),
+	list( 43,   40),
+	list( 50,    1),
+	list( 51,   50),
+	list( 52,   50),
+	list( 53,   50),
+	list( 54,   50),
+	list( 55,   50),
+	list( 56,   50),
+	list( 70,    1),
+	list( 71,   70),
+	list( 72,   70),
+	list( 75,   70),
+	list( 76,   75),
+	list( 77,   75),
+	list( 83,   70),
+	list( 84,   70),
+	list( 85,   70),
+	list(100,    1),
+	list(101,  100),
+	list(102,  100),
+	list(103,  100),
+	list(200,    1),
+	list(201,   -1), 
+	list(210,  200),
+	list(220,  200),
+	list(221,  200),
+	list(240,  220)
+).
+
+// returns the back page
+function PageBack {
+	
+	for s in PageBacks {
+		if s[0] = NPage {
+			return s[1].
+		}
+	}
+}
+
 //global li to list().                           // lista per il menu scorrevole
 
 //dice al sistema qual è la pagina corrente e prepara lo schermo spingendo il cursore lontano
@@ -29,9 +84,9 @@ global maxcolumn to 0.      // numero di colonne disponibili
 //  35        save track 2
 
 //  40        Logbook 
-//  41        Logbook 1 write
-//  42        Logbook 2 write
-//  43        Logbook 3 write
+//  41        Logbook write 1
+//  42        Logbook write 2
+//  43        Logbook write 3
 
 //  50        Destination
 //  51        selezione e carica destinazione da file
@@ -42,8 +97,9 @@ global maxcolumn to 0.      // numero di colonne disponibili
 //  56        type d. longitude
 
 //  70        datalog page
-//  71        carica datalog da file
+//  71        select e carica datalog da file
 //  72        data log view
+//  74        ask confirmation before changing the source list
 //  75        seleziona data sources
 //  76        add data source da lista
 //  77        del data source da lista
@@ -56,16 +112,31 @@ global maxcolumn to 0.      // numero di colonne disponibili
 //  102       type Data sampling time interval
 //  103       type Track sampling time interval
 
+//  200       programs
+//  201       select and load kerboscript program from file
+//  210       running program
+//  211       ended program
+//  220       view basic prog
+//  221       select and load basic prog from file
+//  222       view preprocessed basic prog
+//  230       running basic program
+//  240       edit basic program
+//  243       save basic program 0
+//  244       save basic program 1
+//  245       save basic program 2
 
 function EscSaveFile {
 	if NPage = 52 or NPage = 53 or NPage = 54 {
-		DestinationsPAGE().
+		GoPage(50).
 	}
 	if NPage = 33 or NPage = 34 or NPage = 35 {
-		TrackPAGE().
+		Gopage(30).
 	}
 	if NPage = 83 or NPage = 84 or NPage = 85 {
-		TrackPAGE().
+		Gopage(70).
+	}
+	if NPage = 243 or NPage = 244 or NPage = 245 {
+		Gopage(220).
 	}
 }
 
@@ -76,7 +147,7 @@ function TypeRealNumAccept {     //tipico caso in cui l'ordine degli if conta
 		GPSPOS:clear.
 		GPSPOS:add(INPstr1:tonumber(-9999)). //se non è un numero valido 	restituisce -9999
 		GPSPOS:add(INPstr2:tonumber(-9999)).		
-		DestinationsPAGE().
+		GoPage(50).
     }
 	if Npage = 55 {
 		set INPstr1 to linea.
@@ -87,42 +158,42 @@ function TypeRealNumAccept {     //tipico caso in cui l'ordine degli if conta
 		set INPstr1 to linea.
 		set linea to "".
 		set SettingsL[0] to INPstr1:tonumber(-9999).
-		SettingsPage().
+		GoPage(100).
 	}
 	if Npage = 102 {
 		set INPstr1 to linea.
 		set linea to "".
 		set SettingsL[1] to INPstr1:tonumber(-9999).
-		SettingsPage().
+		GoPage(100).
 	}
 	if Npage = 103 {
 		set INPstr1 to linea.
 		set linea to "".
 		set SettingsL[2] to INPstr1:tonumber(-9999).
-		SettingsPage().
+		GoPage(100).
 	}
 }
 
 function TypeRealNumCancel {     //tipico caso in cui l'ordine degli if conta
 	if Npage = 55 {
-		DestinationsPAGE().
+		GoPage(50).
     }
 	if Npage = 56 {
-		DestinationsPAGE().
+		GoPage(50).
 	}
 	if Npage = 101 {
-		SettingsPage().
+		GoPage(100).
 	}
 	if Npage = 102 {
-		SettingsPage().
+		GoPage(100).
 	}
 	if Npage = 103 {
-		SettingsPage().
+		GoPage(100).
 	}
 }
 
-function SPage{
-	parameter p.
+// cancella la pagina facendo sparire il cursore
+function ClsNoCur {
 	clearscreen.
 	FROM {               //porta il cursore dove non lo vede nessuno
 		local xx is 1.
@@ -133,9 +204,15 @@ function SPage{
 	DO {
 		print " ".
 	}
+}
+
+function SPage{
+	parameter p.
+	ClsNoCur().
 	print "P" + p at(36,16).
 		set Npage to p.
 }
+
 
 function SPageTile{
 	parameter p,title.
@@ -191,6 +268,35 @@ function listafile {   //stampa una lista selezionalible di file
 	print ">" at(1,lind). 
 }
 
+// prints the cursor and changes its position in memory. it is the cursor of the 
+// text editors
+function SetEditCursor {
+	parameter li.
+	local cou to 0.
+	
+	FOR bod in li {
+		//PRINT "#" at(bod:length,cou). // when it will scroll, cut it
+		set cou to cou + 1.
+	}
+	
+	
+	
+	if lind > cou-1 {
+		set lind to cou-1.
+	}
+	if lind < 0 {
+		set lind to 0.
+	}
+	//PRINT "#" at(li[lind]:length + linea:length, lind). // when it will scroll, cut it
+	print "_" at(li[lind]:length,lind). 
+	
+	setxy(emptyprog[lind]:length,lind).
+	//print lind at(0,8). 
+	
+}
+
+
+
 function listastr {   //stampa una lista selezionalible di stringhe
 	parameter lis.
 	//global li to LIST().
@@ -221,6 +327,27 @@ function ListaFileUp{
 		listafile(li).
 }
 
+function EditLineDown{
+	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
+		set emptyprog[lind] to emptyprog[lind] + linea.
+		PRINT " " at(emptyprog[lind]:length, lind).
+		set lind to lind +1.
+		SetEditCursor(li).
+		
+		set linea to "".
+}
+
+function EditLineUp{
+	//if (Npage = 10 ) or (Npage = 11) or (Npage = 51) {
+		set emptyprog[lind] to emptyprog[lind] + linea.
+		PRINT " " at(emptyprog[lind]:length, lind).
+		set lind to lind -1.
+		SetEditCursor(li).
+		
+		set linea to "".
+		
+}
+
 function ListaStrDown{
 	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
 		parameter li.
@@ -240,11 +367,11 @@ function ListaStrUp{
 function EnterListselect{
 	if Npage = 51 {
 		set GPSPOS TO READJSON("/KOSmodore/positions/" + li[lind]).
-		DestinationsPAGE().
+		GoPage(50).
 	}
 	if Npage = 31 {
 		set LoadedTrack TO READJSON("/KOSmodore/tracks/" + li[lind]).
-		TrackPAGE().
+		Gopage(30).
 	}
 	if Npage = 71 {
 		set SensLog TO READJSON("/KOSmodore/sampling/" + li[lind]).
@@ -262,15 +389,26 @@ function EnterListselect{
 			set co to co + 1.
 		}
 		
-		SamplePAGE().
+		GoPage(70).
 	}
 	if Npage = 76 {
 		set DataSourcesAdded to AddIfNoItem(DataSourcesAdded,DataSources[lind]).
-		DataSourcePage().
+		GoPage(75).
 	}
 	if Npage = 77 {
 		set DataSourcesAdded to SubItem(DataSourcesAdded,DataSourcesAdded[lind]).
-		DataSourcePage().
+		GoPage(75).
+	}
+	if Npage = 201 {
+		GoPage(210).
+		RunKS(li[lind]).
+		GoPage(211).
+		
+	}
+	if Npage = 221 {
+		set emptyprog to readjson("/KOSmodore/ksp-basic/" + li[lind]).
+		GoPage(220).
+		
 	}
 }
 
@@ -287,5 +425,4 @@ function NextColumn {
 		ViewDataLogSource(selcolumn).
 	}
 }
-
 

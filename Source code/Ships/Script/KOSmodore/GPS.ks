@@ -12,21 +12,21 @@ function AddHereToTrack{
 	LoadedTrack[LoadedTrack:LENGTH-1]:add(TIME:SECONDS).			
 	LoadedTrack[LoadedTrack:LENGTH-1]:add(SHIP:GEOPOSITION:LAT).
 	LoadedTrack[LoadedTrack:LENGTH-1]:add(SHIP:GEOPOSITION:LNG).
-	TrackPAGE().
+	Gopage(30).
 }
 
 function RemoveLastFromTrack{
 	if LoadedTrack:LENGTH > 1{
 		LoadedTrack:Remove(LoadedTrack:LENGTH-1).	
 	}
-	TrackPAGE().
+	Gopage(30).
 }
 
 function RemoveFirstFromTrack{
 	if LoadedTrack:LENGTH > 1{
 		LoadedTrack:Remove(1).
 	}
-	TrackPAGE().
+	Gopage(30).
 }
 
 function InitGPSLog {	
@@ -37,19 +37,19 @@ function InitGPSLog {
 }
 
 // old view track
-function ViewTrackold {
-	clearscreen.
-	local x to 0.
-	local y to 0.
-	FOR S IN LoadedTrack {
-		FOR SS IN S {
-			print round(SS,2) at (X,Y).
-			set x to x+9.
-		}		
-		set y to y+1.
-		set x to 0.
-	}	
-}
+//function ViewTrackold {
+//	clearscreen.
+//	local x to 0.
+//	local y to 0.
+//	FOR S IN LoadedTrack {
+//		FOR SS IN S {
+//			print round(SS,2) at (X,Y).
+//			set x to x+9.
+//		}		
+//		set y to y+1.
+//		set x to 0.
+//	}	
+//}
 
 
 
@@ -62,7 +62,7 @@ function SaveGPSPOS {
 
 // save POS to random file
 function SaveDestRND {
-DestinationsPAGE().
+GoPage(50).
 	
 	//if EXISTS("/KOSmodore/positions/+fname")
 		
@@ -96,10 +96,8 @@ DestinationsPAGE().
 
 function ClrGPSPOS {
 	GPSPOS:clear.
-	//clearscreen.
 	if NPage = 50 {
-	   //print "No destination set." at(1,1).
-	   DestinationsPAGE().
+		GoPage(50).
 	}
 }
 
@@ -123,7 +121,7 @@ function RecGPSPOS {
 	set GeoPos to SHIP:GEOPOSITION.
    
 	if NPage = 50 {
-		DestinationsPAGE().
+		GoPage(50).
 	    //print "Set destination:" at(1,1).
 		//print round(GPSPOS[0],4) + ", " + round(GPSPOS[1],4) at(1,2).
 	}
@@ -163,6 +161,6 @@ print "Track loaded from /tracks/GPSlog.json".
 function ClearGPSLOG {
 	LoadedTrack:clear.
 	InitGPSLog().
-	TrackPAGE().
+	Gopage(30).
 }
 

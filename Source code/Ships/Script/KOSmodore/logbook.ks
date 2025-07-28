@@ -10,20 +10,20 @@ global CurrentNote to 0. // n di pagina corrente del logbook
 function showNextNote {
 	if CurrentNote < LBook:LENGTH-1 {
 		set CurrentNote to CurrentNote + 1.
-		LogBookPage().
+		GoPage(40).
 	}
 	
 }
 
 function LeaveLBook{
 	set CurrentNote to LBook:LENGTH-1.
-	MMAIN().
+	GoPage(1).
 }
 
 function showPrevNote {
 	if CurrentNote > 0 {
 		set CurrentNote to CurrentNote - 1.
-		LogBookPage().
+		GoPage(40).
 	}
 	
 }
@@ -34,7 +34,7 @@ function AddLineToLBook{
 	//print linea.
 	WRITEJSON(LBook, "/KOSmodore/logbook/logbook.json").
 	set linea to "".
-	LogBookPage1().
+	GoPage(41).
 }
 
 function LBookUp{
@@ -54,5 +54,5 @@ function LbookNewPage{
 	set stri to "Place: " + SHIP:body.
 	LBook[LBook:LENGTH-1]:add(stri).
 	set CurrentNote to LBook:LENGTH-1.
-	LogBookPage().
+	GoPage(40).
 }
