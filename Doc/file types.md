@@ -21,6 +21,24 @@ It's a JSON file with text lines serialized according to kOS rules.
 [ **.json** ]
 
 It is where the logbook is saved. It is a serialized list of lists of strings (a list of pages).
+## Position
+It is just a serialized list of two element: latitude and longitude. If you look at it with a text editor you see something like this:
+```
+{
+    "items": [
+        {
+            "value": -0.048674911418653412,
+            "$type": "kOS.Safe.Encapsulation.ScalarDoubleValue"
+        },
+        {
+            "value": -74.7260891166769,
+            "$type": "kOS.Safe.Encapsulation.ScalarDoubleValue"
+        }
+    ],
+    "$type": "kOS.Safe.Encapsulation.ListValue"
+}
+```
+All the serialized files look like this.
 ## Data log
 [ **.dat** ]
 
