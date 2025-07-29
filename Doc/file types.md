@@ -36,3 +36,11 @@ It is a serialized list of lists of numbers. The first record is a header with t
 * **22**  - ground Speed (horizontal speed)
 * **101** - latitude
 * **102** - longitude
+
+## Track
+[ **.trk** ]
+
+It is a special case of data log with only three sources:
+* **0**   - time
+* **101** - latitude
+* **102** - longitude
