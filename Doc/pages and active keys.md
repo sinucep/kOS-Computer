@@ -75,6 +75,7 @@ This file lists what the active keys do for each page (function keys are not lis
 ## 201 - Select and load kerboscript program from file
 ## 210 - Running program
 ## 211 - Ended program
+## 218 - View ks prog
 ## 220 - View basic prog
 ## 221 - Eelect and load basic prog from file
 ## 222 - View preprocessed basic prog
@@ -82,8 +83,12 @@ This file lists what the active keys do for each page (function keys are not lis
 ## 237 - Edit basic program (uppercase)
 ## 238 - Edit basic program (lowercase)
 ## 239 - Edit basic program (numbers)
-## 240 - Edit basic program (commands)
+## 240 - Edit basic program (bas commands)
 ## 243 - Save basic program (uppercase)
 ## 244 - Save basic program (lowercase)
 ## 245 - Save basic program (numbers)
+## 277 - Edit ks program (uppercase)
+## 278 - Edit ks program (lowercase)
+## 279 - Edit ks program (numbers)
+## 280 - Edit ks program (ks commands)
 
