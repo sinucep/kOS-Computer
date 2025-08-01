@@ -19,6 +19,12 @@ GOTO 25.54
 CLS
 20.54 END
 ```
+### LOCATE
+Move the cursor in a new x,y location.
+```
+LOCATE 4 8
+PRINT "Far from the edge"
+```
 ### PRINT
 Wrapping of the Kerboscript print. It has his own cursor location system (indipendent from kOSPropMonitor's one).
 ### RD
