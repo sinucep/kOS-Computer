@@ -1,8 +1,8 @@
 ## KPM interface
+Some useful information about the terminal configuration file named **kOS-ComputerTerminal** in thi mod.
 ### Terminal configuration file
-Useful information about terminal configuration file. In this mod it is named **kOS-ComputerTerminal.txt **.
 ```
-[hw]{buttonLabel0}|{buttonLabel1}|{buttonLabel2}|{buttonLabel3}|{buttonLabel4}|{buttonLabel5}|{buttonLabel6}[/hw]
+[hw]{buttonLabel0}|{buttonLabel1}|{buttonLabel2}|{buttonLabel3}|{buttonLabel4}|{buttonLabel5}|   EXIT[/hw]
 [#FF4849]{flagLabel0} {flagLabel1} {flagLabel2} {flagLabel3} {flagLabel4} {flagLabel5}
 [hw]{l1}[/hw]
 [hw]{l2}[/hw]
@@ -17,9 +17,16 @@ Useful information about terminal configuration file. In this mod it is named **
 [hw]{l11}[/hw]
 [hw]{l12}[/hw]
 [hw]{l13}[/hw]
-[hw]{l14}[/hw]
-[hw]{l15}[/hw]
-[hw]{l16}[/hw]
+{l14}[/hw]
+{l15}[/hw]
+{l16}[/hw]
 [hw]{l17}[/hw]
 [hw]{buttonLabel7}|{buttonLabel8}|{buttonLabel9}|{buttonLabel10}|{buttonLabel11}|{buttonLabel12}| {buttonLabel13}[/hw]
 ```
+* **[hw]..[/hw]**
+  
+  Half width. It allows 80x20 resolution. Widthout that you will have 40x20 resolution. Note that you can use [hw] indipendently for each line, so you can have an interesting mixed text mode resolution. The useful case is to have the key labels with a different size.
+
+* **EXIT**
+
+  This is just an arbitrary string, you can write any text here. You can even use {buttonLabel6} keyword and assign it in run time. Just know that pressing that button (the top right one) you will exit the kOSPropMonitor program (ypu can not really use that button.
