@@ -23,10 +23,16 @@ Some useful information about the terminal configuration file named **kOS-Comput
 [hw]{l17}[/hw]
 [hw]{buttonLabel7}|{buttonLabel8}|{buttonLabel9}|{buttonLabel10}|{buttonLabel11}|{buttonLabel12}| {buttonLabel13}[/hw]
 ```
-* **[hw]..[/hw]**
+* **[hw] and [/hw]**
   
-  Half width. It allows 80x20 resolution. Widthout that you will have 40x20 resolution. Note that you can use [hw] indipendently for each line, so you can have an interesting mixed text mode resolution. The useful case is to have the key labels with a different size.
+  Half width. It allows 80x20 resolution. Widthout that you will have 40x20 resolution. Note that you can use [hw] indipendently for each line, so you can have an interesting mixed text mode resolution. The useful case is to have the _active key_ labels with a different size.
 
 * **EXIT**
 
-  This is just an arbitrary string, you can write any text here. You can even use {buttonLabel6} keyword and assign it in run time. Just know that pressing that button (the top right one) you will exit the kOSPropMonitor program (ypu can not really use that button.
+  This is just an arbitrary string, you can write any text here. You can even use {buttonLabel6} keyword and assign it in run time. Just know that pressing that button (the top right one) you will exit the kOSPropMonitor program, you can not use that button for something else.
+
+* **{buttonLabel0}...{buttonLabel0}**
+
+  Active key labels. The separator "|" is arbitrary you can use any string or nothing.
+ 
+    
