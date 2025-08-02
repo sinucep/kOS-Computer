@@ -1,5 +1,5 @@
 ## KPM interface
-Some useful information about the terminal configuration file named **kOS-ComputerTerminal** in thi mod.
+**The information here are not (yet) accurate.** Some useful information about the terminal configuration file named **kOS-ComputerTerminal** in thi mod. 
 ### Terminal configuration file
 ```
 [hw]{buttonLabel0}|{buttonLabel1}|{buttonLabel2}|{buttonLabel3}|{buttonLabel4}|{buttonLabel5}|   EXIT[/hw]
@@ -25,17 +25,26 @@ Some useful information about the terminal configuration file named **kOS-Comput
 ```
 * **[hw] and [/hw]**
   
-  Half width. It allows 80x20 resolution. Widthout that you will have 40x20 resolution. Note that you can use [hw] indipendently for each line, so you can have an interesting mixed text mode resolution. The useful case is to have the _active key_ labels with a different size.  It works even without [/hw]. Possible that it doesn't exist at all.
+  Half width. It allows 80x20 resolution. Widthout that you will have 40x20 resolution. Note that you can use [hw] at any point, so you can have an interesting mixed font sizes. The useful case is to have the _active key_ labels with a different size. [/hw] turns the effect off.
 * **[dw] and [/dw]**
 
-  Double width. It works even without [/dw]. Possible that it doesn't exist at all.
+  Double width. [/dw] turns the effect off.
 * **EXIT**
 
   This is just an arbitrary string, you can write any text here. You can even use {buttonLabel6} keyword and assign it in run time. Just know that pressing that button (the top right one) you will exit the kOSPropMonitor program, you can not use that button for something else.
 
 * **{buttonLabel0}...{buttonLabel0}**
-
+  
   Active key labels. The separator "|" is arbitrary you can use any string or nothing.
+
+* **[#FF4849]**
+
+  This is a RGB color.
+
+* **[font0]...[font5]**
+
+  Different font. Some are negative (the coloured part is the background).
+  
 ## A more complex example
 ```
 [hw][#CEE3F6FF][font0]  RESOURCES ST/TOT[#ffffffff] |  [#CEE3F6FF]TARGET MENU[#ffffffff]  |  [#CEE3F6FF]LANDING MODE[#ffffffff]  | [#CEE3F6FF]CREW / FL.LOG[#ffffffff] |    [#CEE3F6FF]POD  CAMS[#ffffffff]  |   [#CEE3F6FF]EXTRA CAMS[#ffffffff]   |      
