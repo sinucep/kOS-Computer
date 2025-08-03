@@ -1,10 +1,10 @@
 //----------------------------------------------|
 //                                              |
-//  KOSmodore 64 - by Francisco Bordin          |
+//  kOS-Computer 64 - by Sinucep        |
 //                                              |
 //----------------------------------------------|
 
-wait 5. // nella speranza che sia sufficente perché si carichi tutto
+wait until ship:status <> "prelaunch" or ship:unpacked.
 
 switch to 0.
 RUNPATH( "/KOSmodore/main.ks").
