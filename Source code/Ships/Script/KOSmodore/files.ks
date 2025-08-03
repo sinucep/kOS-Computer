@@ -2,6 +2,7 @@ run once "/KOSmodore/GPS.ks".
 run once "/KOSmodore/keybT9.ks".
 run once "/KOSmodore/main.ks".
 run once "/KOSmodore/runKS.ks".
+run once "/KOSmodore/texted.ks".
 
 function saveas {
 	if (Npage = 52) or (Npage = 53) or (Npage = 54) {
@@ -19,10 +20,31 @@ function saveas {
 		set linea to "".
 		GoPage(70).
 	}
-	if (Npage = 243) or (Npage = 244) or (Npage = 245) {
-		WRITEJSON(EmptyProg, "/KOSmodore/ksp-basic/" + linea + ".bas").
+	if (Npage = 207) or (Npage = 208) or (Npage = 209) {
+		
+		if exists("/KOSmodore/kerboscript/" + linea + ".ks") {
+		deletepath("/KOSmodore/kerboscript/" + linea + ".ks").
+		}
+		for lin in emptyprog {
+			LOG lin to "/KOSmodore/kerboscript/" + linea + ".ks".
+		}
 		set linea to "".
-		GoPage(240).
+		GoPage(218).
+	}
+	if (Npage = 243) or (Npage = 244) or (Npage = 245) {
+		WRITEJSON(EmptyProg, "/KOSmodore/ksp-basic/" + linea + ".sbas").
+		set linea to "".
+		GoPage(220).
+	}
+	if (Npage = 253) or (Npage = 254) or (Npage = 255) {
+		WRITEJSON(EmptyProg, "/KOSmodore/sks/" + linea + ".sks").
+		set linea to "".
+		GoPage(218).
+	}
+	if (Npage = 263) or (Npage = 264) or (Npage = 265) {
+		WRITEJSON(preprocprog, "/KOSmodore/ksp-basic/" + linea + ".sbas").
+		set linea to "".
+		GoPage(222).
 	}
 }
 

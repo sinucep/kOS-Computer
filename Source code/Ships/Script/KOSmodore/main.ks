@@ -1,6 +1,6 @@
 //-------------------------------------------------|
 //                                                 |
-//  KOSmodore64 main - by Francisco Bordin - 2025  |
+//  kOS-Computer - by Sinucep - 2025  |
 //                                                 |
 //-------------------------------------------------|
 
@@ -18,6 +18,7 @@ run once "/KOSmodore/pages.ks".
 run once "/KOSmodore/datalog.ks".
 run once "/KOSmodore/settings.ks".
 run once "/KOSmodore/runKS.ks".
+run once "/KOSmodore/texted.ks".
 
 global fine to false. // per uscire dal programma e usare il terminale
 
@@ -29,6 +30,7 @@ global monindex to addons:kpm:getindexof(id). // If GETINDEXOF Returns -1, GUID 
 local LogStart is 0.
 local GPSLogStart is 0.
 local PosStart is 0.                      // just for to blink once POS flag
+local CuBlinkStart is 0.                   // for to blink the cursor
 
 global SensLog TO LIST().
 global LoadedTrack TO LIST().  
@@ -88,7 +90,7 @@ function goroverpos {
 		print "No destination set." at(1,1).
 	} else {	
 	
-	clearScreen.
+	//clearScreen.
 	brakes off.	
 	set endPos to LatLng(GPSPOS[0], GPSPOS[1]).
 	
@@ -152,6 +154,7 @@ function DataLogAdd {
 
 //---------------------Initialize-----------------------
 
+riempiSettings().
 DataSourcesAdded:add(4). // default source: Vessel mass
 InitSensLog().
 InitGPSLog().
@@ -160,7 +163,7 @@ brakes on.   //for rovers..
 SPage(0).
 mainsplash().
 riempisourcelist().
-riempiSettings().
+
 
 SET LBook TO READJSON("/KOSmodore/logbook/logbook.json").
 print "Logbook loaded from logbook.json".
@@ -170,6 +173,11 @@ set CurrentNote to LBook:LENGTH-1.
  myflags:setstate(0,FALSE).
   myflags:setstate(1,FALSE).
   myflags:setstate(2,FALSE).
+  
+//----------------------Starting page-------------------
+
+//GoPage(221).  
+//	set debugbas to true.
 
 //----------------------Main Loop-----------------------
 
@@ -216,4 +224,37 @@ if myflags:getstate(0) {
 		ConRovertrack(LoadedTrack).
 	}
 	
+//blinking cursor
+    if NPage = 237 or NPage = 238 or NPage = 239 or NPage = 240 or
+	   NPage = 277 or NPage = 278 or NPage = 279 or NPage = 280 {
+		if TIME:SECONDS > CuBlinkStart + .45{
+			set CuBlinkStart to TIME:SECONDS.
+			set cuVisible to not cuvisible.
+			if cuVisible {
+				Cur().
+			} else {
+				Cudel().
+			}
+		}
+	}
+
+//return to basic program
+	if backtobascase = 1 {
+		
+		if controlrover = 0 {
+			set backtobascase to 0.
+			set exodos to false.
+			runbasic(emptyprog).
+			set freezebas to false.
+		}
+	}
+
+//debug window
+	if debugbas and (Npage = 220 or Npage = 230) {
+		
+		if TIME:SECONDS > debugbasstart + 1{
+			set debugbasstart to TIME:SECONDS.
+			debugwin().
+		}
+	}
 }

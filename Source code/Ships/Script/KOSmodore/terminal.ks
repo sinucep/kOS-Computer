@@ -6,6 +6,8 @@ run once "/KOSmodore/keyT9masks.ks".
 run once "/KOSmodore/logbook.ks".
 run once "/KOSmodore/files.ks".
 run once "/KOSmodore/GPS.ks".
+run once "/KOSmodore/test.ks".
+//run once "/KOSmodore/basicflow.ks".
 
 global mybuttons to addons:kpm:buttons.
 global mylabels to addons:kpm:labels.
@@ -49,17 +51,48 @@ function InitTerminalMAIN {
 		
 		ClearTerminal(x).
 	    
-		mylabels:setlabel(0,"  Dest. ").
-		mylabels:setlabel(1," Tracks ").
-		mylabels:setlabel(2,"Data log").
-		mylabels:setlabel(3,"  Rover ").
-		mylabels:setlabel(4," Logbook").
-		mylabels:setlabel(5,"Programs").
-		mylabels:setlabel(6,"  XXXX  ").   //assegnamento coatto a EXIT
+		mylabels:setlabel(0,"    Dest.   ").
+		mylabels:setlabel(1,"  Tracks  ").
+		mylabels:setlabel(2," Data log ").
+		mylabels:setlabel(3,"   Rover  ").
 		
-		mylabels:setlabel(9," Reboot ").
-		mylabels:setlabel(10," Exit OS").
-		mylabels:setlabel(13,"Settings").
+		mylabels:setlabel(5," Programs ").
+		mylabels:setlabel(6,"            ").   //assegnamento coatto a EXIT
+		
+		mylabels:setlabel(7,"     TEST   ").
+		mylabels:setlabel(9,"  Reboot  ").
+		mylabels:setlabel(10,"  Exit OS ").
+		mylabels:setlabel(13," Settings ").
+  
+		mybuttons:setdelegate(0,GoPage@:bind(50)).
+		mybuttons:setdelegate(1,GoPage@:bind(30)).
+		mybuttons:setdelegate(2,GoPage@:bind(70)).	
+		mybuttons:setdelegate(3,GoPage@:bind(20)). //rover page
+		//mybuttons:setdelegate(4,GoPage@:bind(40)).
+		mybuttons:setdelegate(5,GoPage@:bind(200)).
+		mybuttons:setdelegate(7,GoPage@:bind(8)).
+		
+		mybuttons:setdelegate(9,MyReboot@).
+		mybuttons:setdelegate(10,exitos@).
+		mybuttons:setdelegate(13,GoPage@:bind(100)).
+		 
+		myflags:setlabel(0,"Dest.").
+		myflags:setlabel(1,"Track").	
+		myflags:setlabel(2,"D.log").  
+	}
+}
+
+function InitTermTEST {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+	    
+		mylabels:setlabel(0,"            ").
+		
+		mylabels:setlabel(6," Test ΔV    ").   //assegnamento coatto a EXIT
+		
+		
   
 		mybuttons:setdelegate(0,GoPage@:bind(50)).
 		mybuttons:setdelegate(1,GoPage@:bind(30)).
@@ -67,6 +100,7 @@ function InitTerminalMAIN {
 		mybuttons:setdelegate(3,GoPage@:bind(20)). //rover page
 		mybuttons:setdelegate(4,GoPage@:bind(40)).
 		mybuttons:setdelegate(5,GoPage@:bind(200)).
+		mybuttons:setdelegate(6,stampa@).
 		
 		mybuttons:setdelegate(9,MyReboot@).
 		mybuttons:setdelegate(10,exitos@).
@@ -87,15 +121,15 @@ function InitTerminalDestination {
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"Set Here").
-		mylabels:setlabel(1," Type D.").
+		mylabels:setlabel(0,"   Set Here ").
+		mylabels:setlabel(1,"  Type D. ").
 		
-		mylabels:setlabel(7,"Clear D.").
-		mylabels:setlabel(8,"Save D. ").
-		mylabels:setlabel(9,"QSave D.").
-		mylabels:setlabel(10," Load D.").
-		mylabels:setlabel(12," Draw D.").
-		mylabels:setlabel(13," Hide D.").
+		mylabels:setlabel(7,"   Clear D. ").
+		mylabels:setlabel(8," Save D.  ").
+		mylabels:setlabel(9," QSave D. ").
+		mylabels:setlabel(10,"  Load D. ").
+		mylabels:setlabel(12,"  Draw D. ").
+		mylabels:setlabel(13,"  Hide D.   ").
 		
 		
 		mybuttons:setdelegate(0,toggleFlag@:BIND(0)).
@@ -130,25 +164,22 @@ function InitTermTypeRealNum {
 
 // Save FIle 0 - P52 dest - p33 track - p83 Data Log - p243 bas
 function InitTermFileSave {
-
 	parameter monitors.
-	
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
 		SetBasicSymbols(x).
 	
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - + & .").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct3@).
 	
+		mybuttons:setdelegate(-1,saveas@).        //ENTER
+		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
 		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
-				
-		mybuttons:setdelegate(-2,EscSaveFile@).         //CANCEL
-		mybuttons:setdelegate(-1,saveas@).   //ENTER
 	}
 }
 
@@ -160,16 +191,16 @@ function InitTermFileSave1 {
 		ClearTerminal(x).
 		SetBasicSymbolsLower(x).
 
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - + & .").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct3@).
 	
-		mybuttons:setdelegate(-2,EscSaveFile@).         //CANCEL
+		mybuttons:setdelegate(-1,saveas@).        //ENTER
+		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
 		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
-		mybuttons:setdelegate(-1,saveas@).   //ENTER
 	}
 }
 
@@ -181,17 +212,16 @@ parameter monitors.
 		ClearTerminal(x).
 		SetBasicSymbolsNumbers(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - + & .").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct3@).
   
-		mybuttons:setdelegate(-2,EscSaveFile@).         //CANCEL
+		mybuttons:setdelegate(-1,saveas@).        //ENTER
+		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
 		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
-		mybuttons:setdelegate(-1,saveas@).   //ENTER
- 
 	}
 }
 
@@ -203,17 +233,17 @@ function InitTerminalGPS {
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-		mylabels:setlabel(0," + Here ").
-		mylabels:setlabel(1," - Last ").
-		mylabels:setlabel(2," - First").
-		mylabels:setlabel(3," View T.").
-		mylabels:setlabel(4," Log TRK").
-		mylabels:setlabel(7," CLR TRK ").
-		mylabels:setlabel(8," Save T.").
-		mylabels:setlabel(9," Load T.").
+		mylabels:setlabel(0,"    + Here  ").
+		mylabels:setlabel(1,"  - Last  ").
+		mylabels:setlabel(2,"  - First ").
+		mylabels:setlabel(3,"  View T. ").
+		mylabels:setlabel(4,"  Log TRK ").
+		mylabels:setlabel(7,"    CLR TRK ").
+		mylabels:setlabel(8,"  Save T. ").
+		mylabels:setlabel(9,"  Load T. ").
 		//mylabels:setlabel(10,"QSave T.").
-		mylabels:setlabel(12,"Draw TRK").
-		mylabels:setlabel(13,"Hide TRK").
+		mylabels:setlabel(12," Draw TRK ").
+		mylabels:setlabel(13," Hide TRK   ").
  
 	
 		mybuttons:setdelegate(0,AddHereToTrack@).
@@ -266,14 +296,14 @@ function InitTerminalSampler {
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-		mylabels:setlabel(0,"+ Sample").
-		mylabels:setlabel(1,"   Log  ").
-		mylabels:setlabel(2," Sources").
+		mylabels:setlabel(0,"   + Sample ").
+		mylabels:setlabel(1,"    Log   ").
+		mylabels:setlabel(2,"  Sources ").
+		mylabels:setlabel(4,"  View DL ").
 		
-		mylabels:setlabel(4," View DL").
-		mylabels:setlabel(7," CLR DL ").
-		mylabels:setlabel(8," Save DL").
-		mylabels:setlabel(9," Load DL").
+		mylabels:setlabel(7,"    CLR DL  ").
+		mylabels:setlabel(8,"  Save DL ").
+		mylabels:setlabel(9,"  Load DL ").
 				
 		mybuttons:setdelegate(0,DataLogAdd@).  
 		mybuttons:setdelegate(1,toggleFlag@:BIND(2)). 
@@ -301,8 +331,8 @@ function InitTerminalViewDataLog {
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(1,"< Source").
-		mylabels:setlabel(2,"Source >").
+		mylabels:setlabel(1," < Source ").
+		mylabels:setlabel(2," Source > ").
 		
 		mybuttons:setdelegate(1,PrevColumnSource@). 
 		mybuttons:setdelegate(2,NextColumnSource@).  
@@ -320,13 +350,12 @@ function InitTerminalROVER {
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(4,"Go Track").   // segui track
-		mylabels:setlabel(5," Go Dest").  // vai a dest
-		mylabels:setlabel(6,"  XXXX  ").  // assegnamento coatto a EXIT
-		mylabels:setlabel(7,"Brake on").
-		mylabels:setlabel(8," BRK off").
+		mylabels:setlabel(4," Go Track ").   // segui track
+		mylabels:setlabel(5,"  Go Dest ").  // vai a dest
+		mylabels:setlabel(7,"   Brake on ").
+		mylabels:setlabel(8,"  BRK off ").
 	
-		mylabels:setlabel(10," Reboot ").
+		mylabels:setlabel(10,"  Reboot  ").
  
 		mybuttons:setdelegate(4,gorovertrack@).
 		mybuttons:setdelegate(5,goroverpos@).
@@ -345,15 +374,17 @@ function InitTermLogBook {
 		
 		ClearTerminal(x).
   
-		mylabels:setlabel(0," + Page ").
-		mylabels:setlabel(1,"  Edit  ").
-		mylabels:setlabel(2," Previus").
-		mylabels:setlabel(3,"  Next  ").
+		mylabels:setlabel(0,"    + Page  ").
+		mylabels:setlabel(1,"   Edit   ").
+		mylabels:setlabel(2,"  Previus ").
+		mylabels:setlabel(3,"   Next   ").
+	
 
 		mybuttons:setdelegate(0,LbookNewPage@).
 		mybuttons:setdelegate(1,GoPage@:bind(41)). //Logbook write
 		mybuttons:setdelegate(2,showPrevNote@).
 		mybuttons:setdelegate(3,showNextNote@).
+	
 		
 		mybuttons:setdelegate(-2,LeaveLBook@).         //CANCEL
 		
@@ -367,9 +398,9 @@ function InitTermLogBook1 {
 		ClearTerminal(x).
 		SetBasicSymbols(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - / : ' ").
+		mylabels:setlabel(9,"  , . ! ? ").
 		 
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct1@).
@@ -392,9 +423,9 @@ function InitTermLogBook2 {
 		ClearTerminal(x).
 		SetBasicSymbolsLower(x).
 
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - / : ' ").
+		mylabels:setlabel(9,"  , . ! ? ").
 
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct1@).
@@ -416,11 +447,11 @@ function InitTermLogBook3 {
 		ClearTerminal(x).
 		SetBasicSymbolsNumbers(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - / : ' ").
+		mylabels:setlabel(9,"  , . ! ? ").
 		
-		mylabels:setlabel(13," ( ) = #").
+		mylabels:setlabel(13,"  ( ) = #   ").
 	
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct1@).
@@ -445,8 +476,8 @@ function InitTermProceedToSource{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"   OK   ").
-		mylabels:setlabel(1," Cancel ").
+		mylabels:setlabel(0,"      OK    ").
+		mylabels:setlabel(1,"  Cancel  ").
 				
 		mybuttons:setdelegate(0,GoPage@:bind(75)).
 		mybuttons:setdelegate(1,GoPage@:bind(70)).
@@ -462,8 +493,8 @@ function InitTermShowDataSources{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"+ Source").
-		mylabels:setlabel(1,"- Source").
+		mylabels:setlabel(0,"   + Source ").
+		mylabels:setlabel(1," - Source ").
 				
 		mybuttons:setdelegate(0,GoPage@:bind(76)).
 		mybuttons:setdelegate(1,GoPage@:bind(77)).
@@ -507,9 +538,9 @@ function InitTermSettings{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"Set m.t.").
-		mylabels:setlabel(1,"Set d.i.").
-		mylabels:setlabel(2,"Set t.i.").
+		mylabels:setlabel(0,"   Set m. t.").
+		mylabels:setlabel(1," Set d. i.").
+		mylabels:setlabel(2," Set t. i.").
 						
 		mybuttons:setdelegate(0,TypeRealNum@:BIND(101,"Type marker thickness: ",0, true)).
 		mybuttons:setdelegate(1,TypeRealNum@:BIND(102,"Type DL interval (s): ",0, true)).
@@ -526,14 +557,19 @@ function InitTermPrograms{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"Run prog").
-		mylabels:setlabel(1,"Crea bas").
-		mylabels:setlabel(2,"Load bas").
+		mylabels:setlabel(0,"   New .sks ").
+		mylabels:setlabel(1," New .sbas").
+		mylabels:setlabel(4,"  Run .ks ").
+		mylabels:setlabel(7,"  Load .sks ").
+		mylabels:setlabel(8,"Load .sbas").
 						
-		mybuttons:setdelegate(0,GoPage@:bind(201)).
-		mybuttons:setdelegate(1,CreateEmpty@).
-		mybuttons:setdelegate(2,GoPage@:bind(221)).
-
+	    mybuttons:setdelegate(0,NewKSFile@).
+		mybuttons:setdelegate(1,NewBasFile@).
+		mybuttons:setdelegate(4,GoPage@:bind(201)).
+		mybuttons:setdelegate(7,GoPage@:bind(205)).
+		mybuttons:setdelegate(8,GoPage@:bind(221)).
+	  
+		
 		mybuttons:setdelegate(-2,GoPage@:bind(1)).             //CANCEL
 	}
 }
@@ -554,6 +590,35 @@ function InitTermEndedProgram {
 	}
 }
 
+// PAGE 218 view ks prog
+function InitTermViewSKS {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+  
+		mylabels:setlabel(0,"  Export .ks").
+		mylabels:setlabel(2,"   Edit   ").
+		mylabels:setlabel(3," Preproc. ").
+		
+		mylabels:setlabel(7, "     Clear  ").
+		mylabels:setlabel(8, "   Save   ").
+		mylabels:setlabel(9, "   Load   ").
+				
+		mybuttons:setdelegate(0,GoPage@:bind(207)).
+		mybuttons:setdelegate(2,GoPage@:bind(277)).
+		//mybuttons:setdelegate(3,GoPage@:bind(222)).
+		
+		mybuttons:setdelegate(7,ClearKSFile@).	
+		mybuttons:setdelegate(8,GoPage@:bind(253)).	
+		mybuttons:setdelegate(9,GoPage@:bind(205)).
+		
+		
+		mybuttons:setdelegate(-2,GoPage@:bind(200)).         //CANCEL
+		
+	}
+}
+
 // PAGE 220 view basic prog
 function InitTermViewBas {
 	parameter monitors.
@@ -561,17 +626,23 @@ function InitTermViewBas {
 		
 		ClearTerminal(x).
   
-		mylabels:setlabel(0,"   Run  ").
-		mylabels:setlabel(1,"  Edit  ").
-		mylabels:setlabel(3,"Preproc.").
+		mylabels:setlabel(0, "      Run   ").
+		mylabels:setlabel(1, " Run step ").
+		mylabels:setlabel(2, "   Edit   ").
+		//mylabels:setlabel(3, "Preprocess").
+		mylabels:setlabel(4, " Debug Off").
 		
-		mylabels:setlabel(7, "  Clear ").
-		mylabels:setlabel(8, "  Save  ").
-		mylabels:setlabel(9, "  Load  ").
+		//mylabels:setlabel(5, "  Show #  ").
+		mylabels:setlabel(7, "   Clear  ").
+		mylabels:setlabel(8, "   Save   ").
+		mylabels:setlabel(9, "   Load   ").
 				
 		mybuttons:setdelegate(0,GoPage@:bind(230)).
-		mybuttons:setdelegate(1,GoPage@:bind(240)).
-		mybuttons:setdelegate(3,GoPage@:bind(222)).
+		mybuttons:setdelegate(1,runlinebas@:bind(emptyprog)).
+		mybuttons:setdelegate(2,GoPage@:bind(237)).
+		//mybuttons:setdelegate(3,GoPage@:bind(222)).
+		mybuttons:setdelegate(4,DebugToggle@:bind(x)).
+		
 		
 		mybuttons:setdelegate(7,ClearBasFile@).	
 		mybuttons:setdelegate(8,GoPage@:bind(243)).	
@@ -583,109 +654,201 @@ function InitTermViewBas {
 	}
 }
 
-// PAGE 237 edit basic prog 0
-function InitTermEditBas0 {
+// PAGE 222 view preprocessed basic prog
+function InitTermViewpreprocBas {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-        
-		SetBasicSymbols(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
-		 
-		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct1@).
-		mybuttons:setdelegate(9,punct2@).
-       		
+		mylabels:setlabel(0, "      Run   ").
+		mylabels:setlabel(8, "   Save   ").
+
+		mybuttons:setdelegate(0,GoPage@:bind(230)).
+		mybuttons:setdelegate(8,GoPage@:bind(263)).	
+
 		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
-		mybuttons:setdelegate(-3,EditLineUp@).              //UP
-		mybuttons:setdelegate(-4,EditLineDown@).            //DOWN
-		mybuttons:setdelegate(-1,InsertLineKST@).         //ENTER
 		
 	}
 }
 
-// PAGE 238 edit basic prog 1
-function InitTermEditBas1 {
+// PAGE 230 - executing basic
+function InitTermExeBas {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
         
-		SetBasicSymbolsLower(x).
+
+		//mylabels:setlabel(4,"  Abort ").
+				 
+		//mybuttons:setdelegate(4,basAbort@).
+		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
+		       				
+	}
+}
+
+// PAGE 237 - 277 edit  prog 0 cursore
+function InitTermEditBas0cu {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+        
+		SetBasicSymbolsE(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"   Canc   ").
+		mylabels:setlabel(9,"  . , ! ? ").
 		 
 		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct1@).
-		mybuttons:setdelegate(9,punct2@).
+		mybuttons:setdelegate(8,T9CancE@).
+		mybuttons:setdelegate(9,punct2e@).
        		
-		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
-		mybuttons:setdelegate(-3,EditLineUp@).              //UP
-		mybuttons:setdelegate(-4,EditLineDown@).            //DOWN
-		mybuttons:setdelegate(-1,InsertLineKST@).         //ENTER
+		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
+		mybuttons:setdelegate(-3,CuUp@).             //UP
+		mybuttons:setdelegate(-4,CuDown@).           //DOWN
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
 		
 	}
 }
 
-// PAGE 239 edit basic prog 2
-function InitTermEditBas2{
+// PAGE 238 - 278 edit prog 1 cursore
+function InitTermEditBas1cu {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
         
-		SetBasicSymbolsNumbers(x).
+		SetBasicSymbolsLowerE(x).
   
-		mylabels:setlabel(7,"  [...] ").
-		mylabels:setlabel(8," - / : '").
-		mylabels:setlabel(9," , . ! ?").
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"   Canc   ").
+		mylabels:setlabel(9,"  . , ! ? ").
+		 
+		mybuttons:setdelegate(7,cicleset@).
+		mybuttons:setdelegate(8,T9CancE@).
+		mybuttons:setdelegate(9,punct2e@).
+       		
+		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
+		mybuttons:setdelegate(-3,CuUp@).             //UP
+		mybuttons:setdelegate(-4,CuDown@).           //DOWN
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
 		
-		mylabels:setlabel(13," ( ) = #").
+	}
+}
+
+// PAGE 239 - 279 edit prog 2 cursore
+function InitTermEditBas2cu{
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+        
+		SetBasicSymbolsNumbersE(x).
+  
+		mylabels:setlabel(7,"     [...]  ").
+		mylabels:setlabel(8,"  - / : ' ").
+		mylabels:setlabel(9,"  . , ! ? ").
+		mylabels:setlabel(10,"  < > @ / ").
+		mylabels:setlabel(11,"  "" * ^ $ ").
+		
+		mylabels:setlabel(13,"  ( ) = #   ").
 	
 		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct1@).
-		mybuttons:setdelegate(9,punct2@).
+		mybuttons:setdelegate(8,punct1e@).
+		mybuttons:setdelegate(9,punct2e@).
+		mybuttons:setdelegate(10,punct5e@).
+		mybuttons:setdelegate(11,punct4e@).
 		
-		mybuttons:setdelegate(13,parentesi@).
+		mybuttons:setdelegate(13,parentesiE@).
   
-		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
-		mybuttons:setdelegate(-3,EditLineUp@).              //UP
-		mybuttons:setdelegate(-4,EditLineDown@).            //DOWN
-		mybuttons:setdelegate(-1,InsertLineKST@).         //ENTER
+		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
+		mybuttons:setdelegate(-3,CuUp@).             //UP
+		mybuttons:setdelegate(-4,CuDown@).           //DOWN
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
 		
 	}
 }
 
 
-// PAGE 240 edit basic prog 3
-function InitTermEditBas3 {
+// PAGE 240 edit basic prog 3 cursore
+function InitTermEditBas3cu {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
        
 		
-		mylabels:setlabel(0, "  PRINT ").
-		mylabels:setlabel(1, "   CLS  ").
-		mylabels:setlabel(2, "   END  ").
-		mylabels:setlabel(3, "  WAIT  ").
-		mylabels:setlabel(4, "   REM  ").
-		mylabels:setlabel(5, "Clr Line").
-		mylabels:setlabel(7,"  [...] ").
+		mylabels:setlabel(0, "     PRINT  ").
+		mylabels:setlabel(1, "    CLS   ").
+		mylabels:setlabel(2, "    END   ").
+		mylabels:setlabel(3, "   WAIT   ").
+		mylabels:setlabel(4, "    REM   ").
+		mylabels:setlabel(5, " Clr Line ").
+		mylabels:setlabel(7, "     [...]  ").
+		mylabels:setlabel(8, " PRINT """" ").
+		mylabels:setlabel(9, "   LOCATE  ").
+		mylabels:setlabel(10,"   GOTO   ").
 		 
+		mybuttons:setdelegate(0,T9strE@:bind("PRINT ")).
+		mybuttons:setdelegate(1,T9strE@:bind("CLS")).
+		mybuttons:setdelegate(2,T9strE@:bind("END")).
+		mybuttons:setdelegate(3,T9strE@:bind("WAIT ")).
+		mybuttons:setdelegate(4,T9strE@:bind("REM ")).
 		mybuttons:setdelegate(5,ClearLine@).
 		mybuttons:setdelegate(7,cicleset@).
+		mybuttons:setdelegate(8,T9strCurE@:bind("PRINT """"",7)).
+		mybuttons:setdelegate(9,T9strE@:bind("LOCATE ")).
+		mybuttons:setdelegate(10,T9strE@:bind("GOTO ")).
        		
-		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
-		mybuttons:setdelegate(-3,EditLineUp@).              //UP
-		mybuttons:setdelegate(-4,EditLineDown@).            //DOWN
-		mybuttons:setdelegate(-1,InsertLineKST@).         //ENTER
+		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
+		mybuttons:setdelegate(-3,CuUp@).             //UP
+		mybuttons:setdelegate(-4,CuDown@).           //DOWN
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
+		
+	}
+}
+
+// PAGE 280 edit ks prog 3 cursore
+function InitTermEditKS3cu {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+       
+		mylabels:setlabel(0, "     PRINT  ").
+		mylabels:setlabel(1, " FUNCTION ").
+		mylabels:setlabel(2, " CLEARS.. ").
+		mylabels:setlabel(3, "  WAIT()  ").
+		mylabels:setlabel(4, "  GLOBAL  ").
+		mylabels:setlabel(5, " Clr Line ").
+		mylabels:setlabel(7, "     [...]  ").
+		mylabels:setlabel(8, " PRINT """" ").
+		 
+		mybuttons:setdelegate(0,T9strE@:bind("PRINT")).
+		mybuttons:setdelegate(1,T9strE@:bind("FUNCTION")).
+		mybuttons:setdelegate(2,T9strE@:bind("CLEARSCREEN")).
+		mybuttons:setdelegate(3,T9strCurE@:bind("WAIT()",5)).
+		mybuttons:setdelegate(4,T9strE@:bind("GLOBAL")).
+		mybuttons:setdelegate(5,ClearLine@).
+		mybuttons:setdelegate(7,cicleset@).
+		mybuttons:setdelegate(8,T9strCurE@:bind("PRINT""""",6)).
+       		
+		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
+		mybuttons:setdelegate(-3,CuUp@).             //UP
+		mybuttons:setdelegate(-4,CuDown@).           //DOWN
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
 		
 	}
 }

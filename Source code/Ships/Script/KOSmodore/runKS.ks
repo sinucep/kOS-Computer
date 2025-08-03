@@ -3,7 +3,8 @@
 global emptyprog to list(). //it may be called "sourceprog". it contains the program as it is readed from file
 global preprocprog to list(). //it contains the program withoyt the comments and the labels. informations about the labels for the GOTO command are stored in the GOTOInf list
 global GOTOInf to list(list()). //it associate the position of GOTO line to the position where to jump
-global editedline to 0. // edited line of a text (up and down to scroll)
+//global editedline to 0. // edited line of a text (up and down to scroll)
+//noooo correggi! a fare list(list()) crei subliste vuote!
 
 function RunKS {
 	//RUNPATH( "/KOSmodore/kerboscript/001.ks", 1, 2 ). 
@@ -20,6 +21,8 @@ function CreateEmpty {
 	writejson(emptyprog, "/KOSmodore/ksp-basic/Empty.bas").
 	print "An empty 10 lines .BAS file created." at (0,0).
 }
+
+
 
 function preprocess {
 
@@ -54,34 +57,40 @@ function preprocess {
 }
 
 function ClearLine {
-	set emptyprog[lind] to "".
-	print "_                                       " at(0,lind).
-
+	set emptyprog[CuY] to "".
+	print "                                        " at(0,CuY).
+	set CuX to 0.
 }
 
 function ClearBasFile {
 	emptyprog:clear.
 	// add also the header (version ecc.)
 	emptyprog:add("").   //otherwise he doesn't know where to draw the cursor
-	set lind to 0.
-	GoPage(240).
-}
-
-function InsertLineKST {
-	set lind to lind + 1.
-	emptyprog:insert(lind,"").
 	ClsNoCur().
-		local cou to 0.
-		
-		for lin in emptyprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-	SetEditCursor(emptyprog).
-	
+	//set lind to 0.
+	//GoPage(237).
 }
 
-function runbasic {
-
+function NewBasFile {
+	ClearKSFile().
+	GoPage(237).
 }
+
+function ClearKSFile {
+	emptyprog:clear.
+	// add also the header (version ecc.)
+	emptyprog:add("").   //otherwise he doesn't know where to draw the cursor
+	ClsNoCur().
+	//set lind to 0.
+	//GoPage(277).
+}
+
+function NewKSFile {
+	ClearKSFile().
+	GoPage(277).
+}
+
+
+
+
 

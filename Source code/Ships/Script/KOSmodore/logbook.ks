@@ -1,8 +1,8 @@
 @lazyGlobal off.
 
-global LBook to list(list()). 
+global LBook to list(list()). //noooo correggi! a fare list(list()) crei subliste vuote!
 //global LBookNote to list().      //pagina corrente del logbook 
-global EditedLine to 0.  //numero della righa editata
+//global EditedLine to 0.  //numero della righa editata
 global CurrentNote to 0. // n di pagina corrente del logbook
 
 

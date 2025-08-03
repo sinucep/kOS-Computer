@@ -48,11 +48,19 @@ global PageBacks to list(
 	list(102,  100),
 	list(103,  100),
 	list(200,    1),
-	list(201,   -1), 
+	list(201,  200), 
+	list(205,  200), 
 	list(210,  200),
 	list(220,  200),
 	list(221,  200),
-	list(240,  220)
+	list(237,  220),
+	list(238,  220),
+	list(239,  220),
+	list(240,  220),
+	list(277,  218),
+	list(278,  218),
+	list(279,  218),
+	list(280,  218)
 ).
 
 // returns the back page
@@ -73,6 +81,8 @@ function PageBack {
 //  0         splash (dalla release 1 durerà un secondo e i tasti permetteranno easter egg e funzioni nascoste - per esempio visualizzare in numero di pagina. dopo quel secondo si passerà alla pagina 1)
 
 //  1         main page
+
+//  8         Test page
 
 //  20        Rover page
 
@@ -113,17 +123,34 @@ function PageBack {
 //  103       type Track sampling time interval
 
 //  200       programs
-//  201       select and load kerboscript program from file
+//  201       select and run kerboscript from file
+  //  205       select and load serializedkerboscript from file
+  //  207       export sks to ks file (ask name)
 //  210       running program
 //  211       ended program
+//  218       View ks prog
 //  220       view basic prog
 //  221       select and load basic prog from file
 //  222       view preprocessed basic prog
 //  230       running basic program
-//  240       edit basic program
+//  237       edit basic program 0
+//  238       edit basic program 1
+//  239       edit basic program 2
+//  240       edit basic program 3
 //  243       save basic program 0
 //  244       save basic program 1
 //  245       save basic program 2
+  //  253       save ks program 0
+  //  254       save ks program 1
+  //  255       save ks program 2
+  //  263       save preproc bas program 0
+  //  264       save preproc bas program 1
+  //  265       save preproc bas program 2
+
+//  277       edit ks program 0
+//  278       edit ks program 1
+//  279       edit ks program 2
+//  280       edit ks program 3
 
 function EscSaveFile {
 	if NPage = 52 or NPage = 53 or NPage = 54 {
@@ -137,6 +164,9 @@ function EscSaveFile {
 	}
 	if NPage = 243 or NPage = 244 or NPage = 245 {
 		Gopage(220).
+	}
+	if NPage = 253 or NPage = 254 or NPage = 255 {
+		Gopage(218).
 	}
 }
 
@@ -209,7 +239,7 @@ function ClsNoCur {
 function SPage{
 	parameter p.
 	ClsNoCur().
-	print "P" + p at(36,16).
+	print "P" + p at(SettingsL[3]-4,16).
 		set Npage to p.
 }
 
@@ -227,13 +257,13 @@ function SPageTile{
 	DO {
 		print " ".
 	}
-	print "P" + p at(36,16).
+	print "P" + p at(SettingsL[3]-4,16).
 	set Npage to p.
 }
 
 function SPageNoClear{
 	parameter p.
-	print "P" + p at(36,16).
+	print "P" + p at(SettingsL[3]-4,16).
 	set Npage to p.
 }
 
@@ -252,20 +282,27 @@ function ruler {
 
 function listafile {   //stampa una lista selezionalible di file
 	parameter li.
-	//global li to LIST().
 	local cou to 0.
- 
-	FOR bod in li {
-		PRINT "   " + bod:name + " " + bod:size at(0,cou).
-		set cou to cou + 1.
-	}
-	if lind > cou-1 {
+    local fileline to "".
+	if lind > li:length-1 {
 		set lind to 0.
 	}
 	if lind < 0 {
-		set lind to cou-1.
+		set lind to li:length-1.
 	}
-	print ">" at(1,lind). 
+	
+	FOR bod in li {
+		set fileline to bod:name + " (" + bod:size+" B)          ".
+		if cou = lind {
+			print " > [#FFFFFF]" + fileline at(0,lind).
+		} else {
+			PRINT "  " + fileline at(0,cou).
+		}
+		
+		set cou to cou + 1.
+	}
+	
+	 
 }
 
 // prints the cursor and changes its position in memory. it is the cursor of the 
@@ -291,6 +328,32 @@ function SetEditCursor {
 	print "_" at(li[lind]:length,lind). 
 	
 	setxy(emptyprog[lind]:length,lind).
+	//print lind at(0,8). 
+	
+}
+
+//setta il cursore per scrivere riscrivere tutta la riga (x=0)
+function SetEditCursor0 {
+	parameter li.
+	local cou to 0.
+	
+	FOR bod in li {
+		//PRINT "#" at(bod:length,cou). // when it will scroll, cut it
+		set cou to cou + 1.
+	}
+	
+	
+	
+	if lind > cou-1 {
+		set lind to cou-1.
+	}
+	if lind < 0 {
+		set lind to 0.
+	}
+	//PRINT "#" at(li[lind]:length + linea:length, lind). // when it will scroll, cut it
+	print "_" at(li[lind]:length,lind). 
+	
+	setxy(0,lind).
 	//print lind at(0,8). 
 	
 }
@@ -329,7 +392,7 @@ function ListaFileUp{
 
 function EditLineDown{
 	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
-		set emptyprog[lind] to emptyprog[lind] + linea.
+		//set emptyprog[lind] to linea.
 		PRINT " " at(emptyprog[lind]:length, lind).
 		set lind to lind +1.
 		SetEditCursor(li).
@@ -339,13 +402,17 @@ function EditLineDown{
 
 function EditLineUp{
 	//if (Npage = 10 ) or (Npage = 11) or (Npage = 51) {
-		set emptyprog[lind] to emptyprog[lind] + linea.
+		//set emptyprog[lind] to linea.
 		PRINT " " at(emptyprog[lind]:length, lind).
 		set lind to lind -1.
 		SetEditCursor(li).
 		
-		set linea to "".
-		
+		set linea to "".	
+}
+
+//save the current line. you must do it, when you change line before saving the file, before running it..
+function EditRecordLine{
+	set emptyprog[lind] to linea.
 }
 
 function ListaStrDown{
@@ -403,6 +470,11 @@ function EnterListselect{
 		GoPage(210).
 		RunKS(li[lind]).
 		GoPage(211).
+		
+	}
+	if Npage = 205 {
+		set emptyprog to readjson("/KOSmodore/sks/" + li[lind]).
+		GoPage(218).
 		
 	}
 	if Npage = 221 {

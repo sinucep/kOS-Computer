@@ -67,7 +67,7 @@ GoPage(50).
 	//if EXISTS("/KOSmodore/positions/+fname")
 		
 	if GPSPOS:length = 0 {
-		 print "No destination set. Can't save." at(1,1).
+		 print "No destination set. Can't save." at(0,0).
 	} else {
 		local fname to "".
 		FROM {local x is 8.} UNTIL x = 0 STEP {set x to x-1.} DO {

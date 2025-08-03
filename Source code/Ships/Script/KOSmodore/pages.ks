@@ -2,6 +2,8 @@ run once "/KOSmodore/logbook.ks".
 run once "/KOSmodore/keybT9.ks".
 run once "/KOSmodore/interface.ks".
 run once "/KOSmodore/datalog.ks".
+run once "/KOSmodore/texted.ks".
+run once "/KOSmodore/basicflow.ks".
 
 function GoPage {
 	parameter p.
@@ -10,6 +12,12 @@ function GoPage {
 	if p = 1 {                     
 		SPage(1).
 		InitTerminalMAIN(monitors).
+	}
+	
+	// Test
+	if p = 8 {                     
+		SPage(8).
+		InitTermTEST(monitors).
 	}
 	
 	// Rover
@@ -318,7 +326,7 @@ function GoPage {
 		InitTermPrograms(monitors).
 	}
 	
-	// Select program file
+	// select and load kerboscript from file
 	if p = 201 {
 		SPage(201).	
 		InitTermFileLoad(monitors).
@@ -328,6 +336,48 @@ function GoPage {
 		cd("..").
 		cd("..").
 		listafile(li).
+	}
+	
+	// select and load serializedkerboscript from file
+	if p = 205 {
+		SPage(205).	
+		InitTermFileLoad(monitors).
+		cd("KOSmodore").
+		cd("sks").
+		LIST FILES IN li.
+		cd("..").
+		cd("..").
+		listafile(li).
+	}
+	
+	// export sks to ks file (ask name) 0
+	if p = 207 {
+		SPage(207).
+		resetcicleset().
+		InitTermFileSave(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	// export sks to ks file (ask name) 1
+	if p = 208 {
+		SPage(208).
+		resetcicleset().
+		InitTermFileSave1(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	// export sks to ks file (ask name) 2
+	if p = 209 {
+		SPage(209).
+		resetcicleset().
+		InitTermFileSave2(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
 	}
 	
 	// Running kerboscript program page
@@ -342,10 +392,12 @@ function GoPage {
 		InitTermEndedProgram(monitors).
 	}
 	
-	// View basic prog
-	if p = 220 {
-		SPage(220).
-		InitTermViewBas(monitors).	
+	// View sks prog
+	if p = 218 {
+		SPage(218).
+		InitTermViewSKS(monitors).	
+		CuReset().
+		
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -355,6 +407,24 @@ function GoPage {
 			set cou to cou + 1.
 		}
 	}
+	
+	// View basic prog
+	if p = 220 {
+		SPage(220).
+		InitTermViewBas(monitors).	
+		CuReset().
+		
+		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
+		
+		local cou to 0.
+		
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+	}
+	
+	
 	
 	// Select basic program file
 	if p = 221 {
@@ -366,6 +436,7 @@ function GoPage {
 		cd("..").
 		cd("..").
 		listafile(li).
+		set lind to 0.
 	}
 	
 
@@ -374,13 +445,12 @@ function GoPage {
 
 	if p = 222 {
 		SPage(222).
-		InitTermViewBas(monitors).	
+		InitTermViewpreprocBas(monitors).	
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
-		local prrog to list().
-		set prrog to preprocess(emptyprog).
-		for lin in prrog {
+		set preprocprog to preprocess(emptyprog).
+		for lin in preprocprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
@@ -389,43 +459,22 @@ function GoPage {
 // Running basic program page
 	if p = 230 {
 		SPageNoCLear(230).	
-		ClearTerminal(monitors).
-		local cou to 0.
-		local prrog to list().
-		local auxi to 0.
+		InitTermExeBas(monitors).
+		ClsNoCur().
+		//reclinumbers(emptyprog).
+		runbasic(emptyprog).
+		//reclinumbers(emptyprog).
+		//removelinumber("10 cane").
 		
-		set prrog to preprocess(emptyprog).
-		clearscreen.
-		for lin in prrog {
-			//print lin at(0,cou).
-			set auxi to lin:FIND(" ").
-			if auxi = -1 {
-				if lin:TOUPPER = "CLS" {          //non va non so perchè
-					clearscreen.
-					print "CLEARRRRRRRRRRRR".
-				} 
-			} else {
-				//print "("+ lin:REMOVE(auxi,(lin:length-auxi)) + ")" at (0,cou+5).
-				if lin:REMOVE(auxi,(lin:length-auxi)):TOUPPER = "PRINT" {
-					//Print "PRINT " + lin:REMOVE(0,auxi+1) at (0,7+cou).
-					
-					//misteriosamente se uso sempre lo stesso nome per il file runpath
-					//esegue sempre il primo che ha eseguito. per cui metto nomi diversi 
-					log "PRINT " + lin:REMOVE(0,auxi+1) + "." to "print" + cou + ".ks".
-					RUNPATH("print" + cou + ".ks").
-					DELETEPATH("print" + cou + ".ks").
-				}
-			}
-			wait 1.
-			set cou to cou + 1.
-		}
+		
+		
 	}
-	
-// Edit basic prog 0
+
+// Edit basic prog 0 con cursore
 	if p = 237 {
 		SPage(237).
-		InitTermEditBas0(monitors).	
-		set EditedLine to emptyprog:Length.
+		InitTermEditBas0cu(monitors).	
+		//set EditedLine to emptyprog:Length.
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -435,16 +484,15 @@ function GoPage {
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		set lind to emptyprog:length.
-		SetEditCursor(emptyprog).
+		//Cur().
 		
 	}
 	
-// Edit basic prog 1
+	// Edit basic prog 1 con cursore
 	if p = 238 {
 		SPage(238).
-		InitTermEditBas1(monitors).	
-		set EditedLine to emptyprog:Length.
+		InitTermEditBas1cu(monitors).	
+		//set EditedLine to emptyprog:Length.
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -454,16 +502,15 @@ function GoPage {
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		set lind to emptyprog:length.
-		SetEditCursor(emptyprog).
+		//Cur().
 		
 	}
-
-// Edit basic prog 2
+	
+	// Edit basic prog 2 con cursore
 	if p = 239 {
 		SPage(239).
-		InitTermEditBas2(monitors).	
-		set EditedLine to emptyprog:Length.
+		InitTermEditBas2cu(monitors).	
+		//set EditedLine to emptyprog:Length.
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -473,16 +520,16 @@ function GoPage {
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		set lind to emptyprog:length.
-		SetEditCursor(emptyprog).
+		//Cur().
 		
 	}
-
-// Edit basic prog 3
+	
+	// Edit basic prog 3 con cursore
 	if p = 240 {
 		SPage(240).
-		InitTermEditBas3(monitors).	
-		set EditedLine to emptyprog:Length.
+		(monitors).
+		InitTermEditBas3cu(monitors).	
+		//set EditedLine to emptyprog:Length.
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -492,13 +539,11 @@ function GoPage {
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		set lind to emptyprog:length.
-		SetEditCursor(emptyprog).
+		//Cur().
 		
 	}
-
 	
-// T9 save BAS pages
+	// T9 save BAS pages
 	if p = 243 {
 		SPage(243).
 		resetcicleset().
@@ -524,9 +569,131 @@ function GoPage {
 		setxy(0,1).
 	}
 	
-
+	// T9 save BAS pages
+	if p = 253 {
+		SPage(253).
+		resetcicleset().
+		InitTermFileSave(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	if p = 254 {
+		SPage(254).	
+		InitTermFileSave1(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	if p = 255 {
+		SPage(255).	
+		InitTermFileSave2(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	// T9 save preprocessed BAS pages
+	if p = 263 {
+		SPage(263).
+		resetcicleset().
+		InitTermFileSave(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	if p = 264 {
+		SPage(264).	
+		InitTermFileSave1(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	if p = 265 {
+		SPage(265).	
+		InitTermFileSave2(monitors).
+		Print "Type file name: " at(0,0).	
+		print linea + "_" at(0,1).
+		setxy(0,1).
+	}
+	
+	// Edit ks prog 0 con cursore
+	if p = 277 {
+		SPage(277).
+		InitTermEditBas0cu(monitors).	
+		//set EditedLine to emptyprog:Length.
+		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
+		
+		local cou to 0.
+		
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+		//Cur().
+		
+	}
+	
+	// Edit basic prog 1 con cursore
+	if p = 278 {
+		SPage(278).
+		InitTermEditBas1cu(monitors).	
+		//set EditedLine to emptyprog:Length.
+		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
+		
+		local cou to 0.
+		
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+		//Cur().
+		
+	}
+	
+	// Edit basic prog 2 con cursore
+	if p = 279 {
+		SPage(279).
+		InitTermEditBas2cu(monitors).	
+		//set EditedLine to emptyprog:Length.
+		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
+		
+		local cou to 0.
+		
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+		//Cur().
+		
+	}
+	
+	// Edit basic prog 3 con cursore
+	if p = 280 {
+		SPage(280).
+		InitTermEditKS3cu(monitors).	
+		//set EditedLine to emptyprog:Length.
+		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
+		
+		local cou to 0.
+		
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+		//Cur().
+		
+	}
+	
 }
-
 
 // INF. HERE
 function InfHerePAGE {
