@@ -47,8 +47,9 @@ You can record a track and set an autopilot to reach it.
 You can visualize markers for destinations and tracks.
 You can edit the tracks adding and removing spots.
 You can save to and load from file the tracks.
+you can automatically deploy probes with a rover designed for the purpose.
 ### Logbook
-You can record notes in a logbook. They will be automatically saved on file.
+Temporarily unavailable.
 ### Data logging
 You can log data from the following data sources:
 * Light exposition of the solar panels 
@@ -68,3 +69,4 @@ You can save to and load from file the data logs.
 You can load from file and run kerboscript programs in kOS-Computer.
 ### KSP-Basic integrated environment
 You can write programs in IVA in a Kerbal-tailored Basic-like language, even in VR. You can write, execute, debug, save and load the programs using the kOSPropMonitor.
+KSP-Basic can read files, activate Action Groups and much more.
