@@ -1,4 +1,4 @@
-# kOS-Computer - Version 1.0.2
+# kOS-Computer - Version 1.1.0
 
 kOS-Computer is a programmable flight management system (or guidance computer) designed to fully work with VR. But **you don't need VR** for this mod!
 
@@ -66,3 +66,5 @@ You can select one or more data sources.
 You can save to and load from file the data logs.
 ### Run user programs
 You can load from file and run kerboscript programs in kOS-Computer.
+### KSP-Basic integrated environment
+You can write programs in IVA in a Kerbal-tailored Basic-like language, even in VR. You can write, execute, debug, save and load the programs using the kOSPropMonitor.
