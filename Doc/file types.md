@@ -12,7 +12,22 @@ There are various types of files that kOS can read and/or create:
 ## KerboScritp
 [ **.ks** ]
 
-It is a text file, the same type produced and read by kOS
+It is a text file, the same type produced and read by kOS. You can export it from a **.sks** file.
+
+## Serialized KerboScritp
+[ **.sks** ]
+
+It is a kerboscript, but serialized so that kOS can read it.
+## KSP-Basic program
+[ **.bas** ]
+
+It is a text file with a KSP-Basic program. You can export it from a **.sbas** file.
+
+## Serialized KSP-Basic program
+[ **.sbas** ]
+
+It is a KSP-Basic program, but serialized so that kOS can read it.
+
 ## kOS serialized text
 [ **.kst** ]
 
