@@ -29,6 +29,10 @@
 * **[dw] and [/dw]**
 
   Double width. [/dw] turns the effect off.
+* **[sup], [/sup], [sub] and [/sub]**
+ 
+  Superscript and subscript small characters. 
+
 * **EXIT**
 
   This is just an arbitrary string, you can write any text here. You can even use {buttonLabel6} keyword and assign it in run time. Just know that pressing that button (the top right one) you will exit the kOSPropMonitor program, you can not use that button for something else.
