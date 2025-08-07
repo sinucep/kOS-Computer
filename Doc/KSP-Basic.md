@@ -1,3 +1,17 @@
+## KSP-BASIC releases
+* kOS-Computer v1.0.0-alpha
+  
+  KSP-BASIC: None
+* kOS-Computer v1.0.1
+  
+  KSP-BASIC: None
+* kOS-Computer v1.0.2
+
+  KSP-BASIC: None
+* kOS-Computer v1.1.0
+  
+  KSP-BASIC: v0.0.0-alpha
+
 ## KSP-Basic commands
 KSP-Basic is not casesensitive.
 ### AG1, AG2, ... AG10
