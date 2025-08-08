@@ -9,7 +9,7 @@ v1.1.0                 v0.0.0-alpha
 v1.1.1                 v0.0.0-alpha
 ```
 ## KSP-BASIC commands
-KSP-BASIC is not casesensitive.
+KSP-BASIC is not case sensitive.
 ### AG1, AG2, ... AG10
 Toggles the boolean state of the Action Groups. No parameters.
 ### CLS
