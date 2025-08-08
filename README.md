@@ -1,4 +1,4 @@
-# kOS-Computer - Version 1.1.0
+# kOS-Computer - Version 1.1.1
 
 kOS-Computer is a programmable flight management system (or guidance computer) designed to fully work with VR. But **you don't need VR** for this mod!
 
