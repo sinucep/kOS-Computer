@@ -12,17 +12,6 @@ function RunKS {
 	RUNPATH( "/KOSmodore/kerboscript/" + fname). 
 }
 
-// temporary utility to create an empty KSP-Basic file
-function CreateEmpty {
-	emptyprog:clear().
-	FROM {local x is 0.} UNTIL x = 10 STEP {set x to x+1.} DO {
-		emptyprog:add("").
-	}
-	writejson(emptyprog, "/KOSmodore/ksp-basic/Empty.bas").
-	print "An empty 10 lines .BAS file created." at (0,0).
-}
-
-
 
 function preprocess {
 
@@ -62,17 +51,18 @@ function ClearLine {
 	set CuX to 0.
 }
 
-function ClearBasFile {
+function initstextvar {
 	emptyprog:clear.
-	// add also the header (version ecc.)
 	emptyprog:add("").   //otherwise he doesn't know where to draw the cursor
 	ClsNoCur().
-	//set lind to 0.
-	//GoPage(237).
+	
 }
 
 function NewBasFile {
 	ClearKSFile().
+	set cuy to 0.  //would be better run it once
+	//set offsy to 1. //
+	set cux to 0.
 	GoPage(237).
 }
 
@@ -87,6 +77,9 @@ function ClearKSFile {
 
 function NewKSFile {
 	ClearKSFile().
+	set cuy to 0.  //would be better run it once
+	//set offsy to 1. //
+	set cux to 0.
 	GoPage(277).
 }
 

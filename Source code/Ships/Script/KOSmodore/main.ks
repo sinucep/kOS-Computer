@@ -161,9 +161,10 @@ InitGPSLog().
 switch to 0. //con questa riga i file vengono salvati fisicamente (in archivio)
 brakes on.   //for rovers..
 SPage(0).
-mainsplash().
-riempisourcelist().
 
+riempisourcelist().
+initstextvar().
+mainsplash().
 
 SET LBook TO READJSON("/KOSmodore/logbook/logbook.json").
 print "Logbook loaded from logbook.json".
@@ -176,7 +177,9 @@ set CurrentNote to LBook:LENGTH-1.
   
 //----------------------Starting page-------------------
 
-//GoPage(221).  
+
+//GoPage(8).
+//GoPage(220).  
 //	set debugbas to true.
 
 //----------------------Main Loop-----------------------
@@ -226,7 +229,15 @@ if myflags:getstate(0) {
 	
 //blinking cursor
     if NPage = 237 or NPage = 238 or NPage = 239 or NPage = 240 or
-	   NPage = 277 or NPage = 278 or NPage = 279 or NPage = 280 {
+	   NPage = 277 or NPage = 278 or NPage = 279 or NPage = 280 or
+	   NPage = 243 or NPage = 244 or NPage = 245 or
+	   NPage = 253 or NPage = 254 or NPage = 255 or	   
+	   NPage = 52 or NPage = 53 or NPage = 54 or
+	   NPage = 55 or NPage = 56 or
+	   NPage = 33 or NPage = 34 or NPage = 35 or
+	   NPage = 83 or NPage = 84 or NPage = 85 or
+	   NPage = 101 or NPage = 102 or NPage = 103 or
+	   NPage = 207 or NPage = 208 or NPage = 209{
 		if TIME:SECONDS > CuBlinkStart + .45{
 			set CuBlinkStart to TIME:SECONDS.
 			set cuVisible to not cuvisible.

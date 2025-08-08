@@ -18,6 +18,10 @@ function GoPage {
 	if p = 8 {                     
 		SPage(8).
 		InitTermTEST(monitors).
+		clearscreen.
+		
+		
+		
 	}
 	
 	// Rover
@@ -40,6 +44,7 @@ function GoPage {
 	// Select track file
 	if p = 31 {
 		SPage(31).	
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("tracks").
@@ -78,10 +83,16 @@ function GoPage {
 		}
 		else {
 			SPage(33).
+			
+			set cuy to 0.  //would be better run it once
+			set offsy to 1. //
+			set cux to 0.
+			set emptyprog[0] to "".
+			
 			resetcicleset().
 			InitTermFileSave(monitors).
 			Print "Type file name: " at(0,0).	
-			print linea + "_" at(0,1).
+			print emptyprog[0] at(0,1).
 			setxy(0,1).
 		}
 	}
@@ -90,7 +101,7 @@ function GoPage {
 		SPage(34).	
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -98,7 +109,7 @@ function GoPage {
 		SPage(35).	
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 		
@@ -171,6 +182,7 @@ function GoPage {
 
 	if p = 51 {
 		SPage(51).	
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("positions").
@@ -183,14 +195,20 @@ function GoPage {
 	// T9 save destination pages
 	if p = 52 {
 		if GPSPOS:length = 0 {
-			 print "No destination set. Can't save." at(0,0).
+			print "No destination set. Can't save." at(0,0).
 		}
 		else {
 			SPage(52).
+			
+			set cuy to 0.  //would be better run it once
+			set offsy to 1. //
+			set cux to 0.
+			set emptyprog[0] to "".
+			
 			resetcicleset().
 			InitTermFileSave(monitors).
 			Print "Type file name: " at(0,0).	
-			print linea + "_" at(0,1).
+			print emptyprog[0] at(0,1).
 			setxy(0,1).
 		}
 	}
@@ -199,7 +217,7 @@ function GoPage {
 		SPage(53).	
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -207,7 +225,7 @@ function GoPage {
 		SPage(54).	
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -227,6 +245,7 @@ function GoPage {
     // Select datalog file
 	if p = 71 {
 		SPage(71).	
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("sampling").
@@ -269,6 +288,7 @@ function GoPage {
 	// Add data source from list
 	if p = 76	{
 		SPage(76).	
+		set lind to 0.
 		InitTermSelectDataSourcesAdd(monitors).
 		ListaStr(DSnames(DataSources)).
 	}
@@ -276,6 +296,7 @@ function GoPage {
 	// Delete data source from list
 	if p = 77 {
 		SPage(77).	
+		set lind to 0.
 		InitTermSelectDataSourcesSub(monitors).
 		ListaStr(DSnames(DataSourcesAdded)).
 	}
@@ -286,11 +307,17 @@ function GoPage {
 			 print "No data log set. Can't save." at(0,0).
 		}
 		else {
+			
+			set cuy to 0.  //would be better run it once
+			set offsy to 1. //
+			set cux to 0.
+			set emptyprog[0] to "".
+			
 			SPage(83).
 			resetcicleset().
 			InitTermFileSave(monitors).
 			Print "Type file name: " at(0,0).	
-			print linea + "_" at(0,1).
+			print emptyprog[0] at(0,1).
 			setxy(0,1).
 		}
 	}
@@ -299,7 +326,7 @@ function GoPage {
 		SPage(84).	
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -307,7 +334,7 @@ function GoPage {
 		SPage(85).	
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -329,6 +356,7 @@ function GoPage {
 	// select and load kerboscript from file
 	if p = 201 {
 		SPage(201).	
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("kerboscript").
@@ -341,6 +369,7 @@ function GoPage {
 	// select and load serializedkerboscript from file
 	if p = 205 {
 		SPage(205).	
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("sks").
@@ -353,10 +382,14 @@ function GoPage {
 	// export sks to ks file (ask name) 0
 	if p = 207 {
 		SPage(207).
+		
+		set cuy to 0.  //would be better run it once
+		set offsy to 1. //
+				
 		resetcicleset().
 		InitTermFileSave(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -366,7 +399,7 @@ function GoPage {
 		resetcicleset().
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -376,7 +409,7 @@ function GoPage {
 		resetcicleset().
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
@@ -413,7 +446,6 @@ function GoPage {
 		SPage(220).
 		InitTermViewBas(monitors).	
 		CuReset().
-		
 		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
 		
 		local cou to 0.
@@ -428,7 +460,8 @@ function GoPage {
 	
 	// Select basic program file
 	if p = 221 {
-		SPage(221).	
+		SPage(221).
+		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
 		cd("ksp-basic").
@@ -546,32 +579,39 @@ function GoPage {
 	// T9 save BAS pages
 	if p = 243 {
 		SPage(243).
-		resetcicleset().
+		
+		
+		
 		InitTermFileSave(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
 	if p = 244 {
 		SPage(244).	
+		
+		
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
 	if p = 245 {
 		SPage(245).	
+		
+		
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
+		print emptyprog[0] at(0,1).
 		setxy(0,1).
 	}
 	
-	// T9 save BAS pages
+	// T9 save ks pages
 	if p = 253 {
 		SPage(253).
+	
 		resetcicleset().
 		InitTermFileSave(monitors).
 		Print "Type file name: " at(0,0).	
@@ -581,6 +621,7 @@ function GoPage {
 	
 	if p = 254 {
 		SPage(254).	
+		
 		InitTermFileSave1(monitors).
 		Print "Type file name: " at(0,0).	
 		print linea + "_" at(0,1).
@@ -589,6 +630,7 @@ function GoPage {
 	
 	if p = 255 {
 		SPage(255).	
+		
 		InitTermFileSave2(monitors).
 		Print "Type file name: " at(0,0).	
 		print linea + "_" at(0,1).
@@ -596,30 +638,9 @@ function GoPage {
 	}
 	
 	// T9 save preprocessed BAS pages
-	if p = 263 {
-		SPage(263).
-		resetcicleset().
-		InitTermFileSave(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 264 {
-		SPage(264).	
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 265 {
-		SPage(265).	
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
+	//if p = 263 {	}	
+	//if p = 264 {	}	
+	//if p = 265 {	}
 	
 	// Edit ks prog 0 con cursore
 	if p = 277 {
@@ -710,10 +731,15 @@ function TypeRealNum {                       //type latitude
 		} else {
 			SPageNoClear(page).
 		}
+				
 		resetcicleset().
 		InitTermTypeRealNum(monitors).
+		
+		set emptyprog[0] to "". 
+		set cuy to 0.
+		set cux to 0.
 		Print label at(0,y).	
-		print linea + "_" at(0,y+1).
+		set offsy to y+1.
 		setxy(0,y+1).
 }
 

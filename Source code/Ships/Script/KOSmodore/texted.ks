@@ -1,15 +1,31 @@
 @lazyglobal off.
 
 run once "/KOSmodore/runKS.ks".
-run once "/KOSmodore/texted.ks".
+//run once "/KOSmodore/texted.ks".
 
 global CuX to 0.
 global CuY to 0.
 global Cuc to "_".
 global CuVisible to true.
 
+global STextAux to list(). //used to temporary stock the serialized text before saving
+
+global offsy to 0. //how much up or down to print the text
+
+function copyvarsave { //
+	parameter Pag.
+	resetcicleset().
+	set stextaux to emptyprog:copy.
+	emptyprog:clear.
+	emptyprog:add("").
+	set cuy to 0.
+	set offsy to 1.
+		
+	GoPage(Pag).
+}
+
 function Cur {
-	print Cuc at(Cux, Cuy).
+	print Cuc at(Cux, Cuy+offsy).
 }
 
 //buffer state function (when you have to do something just once)
@@ -23,6 +39,9 @@ function CuReset {
 	set Cuy to 0.
 }
 	
+function cuBlank {
+	print " " at(cux,cuy+offsy).
+}
 
 function CuDel {   //what char there is in (x,y). Behind the cursor
 	
@@ -32,7 +51,7 @@ function CuDel {   //what char there is in (x,y). Behind the cursor
 	} else {
 		set cha to " ".
 	}
-	print cha at(cux,cuy).
+	print cha at(cux,cuy+offsy).
 }
 
 function CuRight {

@@ -59,7 +59,7 @@ function InitTerminalMAIN {
 		mylabels:setlabel(5," Programs ").
 		mylabels:setlabel(6,"            ").   //assegnamento coatto a EXIT
 		
-		mylabels:setlabel(7,"     TEST   ").
+		//mylabels:setlabel(7,"     TEST   ").
 		mylabels:setlabel(9,"  Reboot  ").
 		mylabels:setlabel(10,"  Exit OS ").
 		mylabels:setlabel(13," Settings ").
@@ -70,7 +70,7 @@ function InitTerminalMAIN {
 		mybuttons:setdelegate(3,GoPage@:bind(20)). //rover page
 		//mybuttons:setdelegate(4,GoPage@:bind(40)).
 		mybuttons:setdelegate(5,GoPage@:bind(200)).
-		mybuttons:setdelegate(7,GoPage@:bind(8)).
+		//mybuttons:setdelegate(7,GoPage@:bind(8)).
 		
 		mybuttons:setdelegate(9,MyReboot@).
 		mybuttons:setdelegate(10,exitos@).
@@ -150,14 +150,20 @@ function InitTerminalDestination {
 
 
 
-// Type RealNum Accept - P55 (latitude) - p56 (lng)
+// Type RealNum Accept - P55 (latitude) - p56 (lng) - 101 - 102 - 103
 function InitTermTypeRealNum {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		ClearTerminal(x).
-		SetNumbersOnly(x).
+		
+		SetNumbersOnlyE(x).
 	
-	    mybuttons:setdelegate(-2,TypeRealNumCancel@).         //CANCEL
+	
+		
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+	
+	    mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
 	}
 }
 
@@ -168,18 +174,19 @@ function InitTermFileSave {
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-		SetBasicSymbols(x).
+		SetBasicSymbolsE(x).
 	
 		mylabels:setlabel(7,"     [...]  ").
 		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct3@).
+		mybuttons:setdelegate(8,punct3e@).
 	
 		mybuttons:setdelegate(-1,saveas@).        //ENTER
 		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
-		mybuttons:setdelegate(-6,T9space@).       //RIGHT
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
+		
 	}
 }
 
@@ -189,18 +196,18 @@ function InitTermFileSave1 {
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-		SetBasicSymbolsLower(x).
+		SetBasicSymbolsLowerE(x).
 
 		mylabels:setlabel(7,"     [...]  ").
 		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct3@).
+		mybuttons:setdelegate(8,punct3e@).
 	
 		mybuttons:setdelegate(-1,saveas@).        //ENTER
 		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
-		mybuttons:setdelegate(-6,T9space@).       //RIGHT
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
 	}
 }
 
@@ -210,18 +217,18 @@ parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-		SetBasicSymbolsNumbers(x).
+		SetBasicSymbolsNumbersE(x).
   
 		mylabels:setlabel(7,"     [...]  ").
 		mylabels:setlabel(8,"  - + & . ").
 		
 		mybuttons:setdelegate(7,cicleset@).
-		mybuttons:setdelegate(8,punct3@).
+		mybuttons:setdelegate(8,punct3e@).
   
 		mybuttons:setdelegate(-1,saveas@).        //ENTER
 		mybuttons:setdelegate(-2,EscSaveFile@).   //CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
-		mybuttons:setdelegate(-6,T9space@).       //RIGHT
+		mybuttons:setdelegate(-5,CuLeft@).           //LEFT
+		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
 	}
 }
 
@@ -270,6 +277,11 @@ function InitTermFileLoad {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		ClearTerminal(x).
+		
+		mylabels:setlabel(3,"  Delete  ").
+		
+		mybuttons:setdelegate(3,delFileList@).    
+		
 		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())).  //CANCEL
 		mybuttons:setdelegate(-1,EnterListselect@).          //ENTER
 		mybuttons:setdelegate(-3,listaFileUp@).              //UP
@@ -407,7 +419,7 @@ function InitTermLogBook1 {
 		mybuttons:setdelegate(9,punct2@).
 			
 		mybuttons:setdelegate(-2,LeaveLBook@).         //CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
+		//mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
 		mybuttons:setdelegate(-1,AddLineToLBook@).   //ENTER
 		mybuttons:setdelegate(-3,LBookUp@).          //UP
@@ -432,7 +444,7 @@ function InitTermLogBook2 {
 		mybuttons:setdelegate(9,punct2@).
 	
 		mybuttons:setdelegate(-2,GoPage@:bind(1)).//CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
+		//mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
 		mybuttons:setdelegate(-1,AddLineToLBook@).   //ENTER
 		mybuttons:setdelegate(-3,LBookUp@).          //UP
@@ -460,7 +472,7 @@ function InitTermLogBook3 {
 		mybuttons:setdelegate(13,parentesi@).
   
 		mybuttons:setdelegate(-2,GoPage@:bind(1)).         //CANCEL
-		mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
+		//mybuttons:setdelegate(-5,T9LEFT@).        //LEFT
 		mybuttons:setdelegate(-6,T9space@).       //RIGHT
 		mybuttons:setdelegate(-1,AddLineToLBook@).   //ENTER
 		mybuttons:setdelegate(-3,LBookUp@).          //UP
@@ -557,11 +569,13 @@ function InitTermPrograms{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"   New .sks ").
-		mylabels:setlabel(1," New .sbas").
+
+		mylabels:setlabel(0,"   New KS   ").
+		mylabels:setlabel(1,"New BASIC ").
+		
 		mylabels:setlabel(4,"  Run .ks ").
-		mylabels:setlabel(7,"  Load .sks ").
-		mylabels:setlabel(8,"Load .sbas").
+		mylabels:setlabel(7,"  Load KS ").
+		mylabels:setlabel(8,"Load BASIC").
 						
 	    mybuttons:setdelegate(0,NewKSFile@).
 		mybuttons:setdelegate(1,NewBasFile@).
@@ -605,12 +619,12 @@ function InitTermViewSKS {
 		mylabels:setlabel(8, "   Save   ").
 		mylabels:setlabel(9, "   Load   ").
 				
-		mybuttons:setdelegate(0,GoPage@:bind(207)).
+		mybuttons:setdelegate(0,copyvarsave@:bind(207)).
 		mybuttons:setdelegate(2,GoPage@:bind(277)).
 		//mybuttons:setdelegate(3,GoPage@:bind(222)).
 		
 		mybuttons:setdelegate(7,ClearKSFile@).	
-		mybuttons:setdelegate(8,GoPage@:bind(253)).	
+		mybuttons:setdelegate(8,copyvarsave@:bind(253)).	
 		mybuttons:setdelegate(9,GoPage@:bind(205)).
 		
 		
@@ -644,8 +658,8 @@ function InitTermViewBas {
 		mybuttons:setdelegate(4,DebugToggle@:bind(x)).
 		
 		
-		mybuttons:setdelegate(7,ClearBasFile@).	
-		mybuttons:setdelegate(8,GoPage@:bind(243)).	
+		mybuttons:setdelegate(7,initstextvar@).	
+		mybuttons:setdelegate(8,copyvarsave@:bind(243)).
 		mybuttons:setdelegate(9,GoPage@:bind(221)).
 		
 		

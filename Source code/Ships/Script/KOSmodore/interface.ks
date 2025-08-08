@@ -1,6 +1,7 @@
 @lazyglobal off.
 
 run once "/KOSmodore/globals.ks".
+run once "/KOSmodore/texted.ks".
 
  
 global lind to 0.           // selezione della lista di cose
@@ -62,6 +63,7 @@ global PageBacks to list(
 	list(279,  218),
 	list(280,  218)
 ).
+
 
 // returns the back page
 function PageBack {
@@ -125,10 +127,12 @@ function PageBack {
 //  200       programs
 //  201       select and run kerboscript from file
   //  205       select and load serializedkerboscript from file
-  //  207       export sks to ks file (ask name)
+  //  207       export sks to ks file 0 (ask name)
+  //  208       export sks to ks file 1 (ask name)
+  //  209       export sks to ks file 2 (ask name)
 //  210       running program
 //  211       ended program
-//  218       View ks prog
+//  218       View sks prog
 //  220       view basic prog
 //  221       select and load basic prog from file
 //  222       view preprocessed basic prog
@@ -140,87 +144,86 @@ function PageBack {
 //  243       save basic program 0
 //  244       save basic program 1
 //  245       save basic program 2
-  //  253       save ks program 0
-  //  254       save ks program 1
-  //  255       save ks program 2
-  //  263       save preproc bas program 0
-  //  264       save preproc bas program 1
-  //  265       save preproc bas program 2
+  //  253       save sks program 0
+  //  254       save sks program 1
+  //  255       save sks program 2
 
-//  277       edit ks program 0
-//  278       edit ks program 1
-//  279       edit ks program 2
-//  280       edit ks program 3
+//  277       edit sks program 0
+//  278       edit sks program 1
+//  279       edit sks program 2
+//  280       edit sks program 3
 
 function EscSaveFile {
 	if NPage = 52 or NPage = 53 or NPage = 54 {
+		set offsy to 0.
+		set cuY to 0.
 		GoPage(50).
 	}
 	if NPage = 33 or NPage = 34 or NPage = 35 {
+		set offsy to 0.
+		set cuY to 0.
 		Gopage(30).
 	}
 	if NPage = 83 or NPage = 84 or NPage = 85 {
+		set offsy to 0.
+		set cuY to 0.
 		Gopage(70).
 	}
+	if NPage = 207 or NPage = 208 or NPage = 209 {
+		set emptyprog to STextAux:copy.
+		STextAux:clear.
+		set offsy to 0.
+		set cuY to 0.
+		Gopage(218).
+	}
 	if NPage = 243 or NPage = 244 or NPage = 245 {
+		set emptyprog to STextAux:copy.
+		STextAux:clear.
+		set offsy to 0.
+		set cuY to 0.
 		Gopage(220).
 	}
 	if NPage = 253 or NPage = 254 or NPage = 255 {
+		set emptyprog to STextAux:copy.
+		STextAux:clear.
+		set offsy to 0.
+		set cuY to 0.
 		Gopage(218).
 	}
 }
 
-function TypeRealNumAccept {     //tipico caso in cui l'ordine degli if conta
-	if Npage = 56 {
-		set INPstr2 to linea.
-		set linea to "".       
+function TypeRealNumAccept {    
+	if Npage = 56 { //tipico caso in cui l'ordine degli if conta
+		set INPstr2 to emptyprog[0].   
 		GPSPOS:clear.
 		GPSPOS:add(INPstr1:tonumber(-9999)). //se non è un numero valido 	restituisce -9999
 		GPSPOS:add(INPstr2:tonumber(-9999)).		
 		GoPage(50).
     }
 	if Npage = 55 {
-		set INPstr1 to linea.
-		set linea to "".
+		set INPstr1 to emptyprog[0].
+		cuBlank().  //Blanken the cursor
 		TypeRealNum(56,"Type longitude: ",2, false).
+		
 	}
 	if Npage = 101 {
-		set INPstr1 to linea.
-		set linea to "".
+		set INPstr1 to emptyprog[0].
 		set SettingsL[0] to INPstr1:tonumber(-9999).
 		GoPage(100).
 	}
 	if Npage = 102 {
-		set INPstr1 to linea.
-		set linea to "".
+		set INPstr1 to emptyprog[0].
 		set SettingsL[1] to INPstr1:tonumber(-9999).
 		GoPage(100).
 	}
 	if Npage = 103 {
-		set INPstr1 to linea.
-		set linea to "".
+		set INPstr1 to emptyprog[0].
 		set SettingsL[2] to INPstr1:tonumber(-9999).
 		GoPage(100).
 	}
 }
 
-function TypeRealNumCancel {     //tipico caso in cui l'ordine degli if conta
-	if Npage = 55 {
-		GoPage(50).
-    }
-	if Npage = 56 {
-		GoPage(50).
-	}
-	if Npage = 101 {
-		GoPage(100).
-	}
-	if Npage = 102 {
-		GoPage(100).
-	}
-	if Npage = 103 {
-		GoPage(100).
-	}
-}
+
 
 // cancella la pagina facendo sparire il cursore
 function ClsNoCur {
@@ -298,7 +301,6 @@ function listafile {   //stampa una lista selezionalible di file
 		} else {
 			PRINT "  " + fileline at(0,cou).
 		}
-		
 		set cou to cou + 1.
 	}
 	
@@ -432,6 +434,8 @@ function ListaStrUp{
 
 // sistema deprecato: fare una funzionae per ogni if
 function EnterListselect{
+	
+	
 	if Npage = 51 {
 		set GPSPOS TO READJSON("/KOSmodore/positions/" + li[lind]).
 		GoPage(50).

@@ -47,37 +47,7 @@ function ClearTerminal {
  
 }
 
-function SetBasicSymbols {
-	parameter x.//monitors.
-	//FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
-  
-		set mybuttons:currentmonitor to x. 
-		set mylabels:currentmonitor to x.
-		set myflags:currentmonitor to x.   
-  
-		mylabels:setlabel(0,"     A B C  ").
-		mylabels:setlabel(1,"   D E F  ").
-		mylabels:setlabel(2,"   G H I  ").
-		mylabels:setlabel(3,"   J K L  ").
-		mylabels:setlabel(4,"  [SPACE] ").
 
-		mylabels:setlabel(10,"   M N O  ").
-		mylabels:setlabel(11,"  P Q R S ").
-		mylabels:setlabel(12,"   T U V  ").
-		mylabels:setlabel(13,"  W X Y Z   ").
-  
-		mybuttons:setdelegate(0,T9ABC@). 
-		mybuttons:setdelegate(1,T9DEF@). 
-		mybuttons:setdelegate(2,T9GHI@).
-		mybuttons:setdelegate(3,T9JKL@).  
-		mybuttons:setdelegate(4,T9space@).
-	
-		mybuttons:setdelegate(10,T9MNO@).
-		mybuttons:setdelegate(11,T9PQRS@).
-		mybuttons:setdelegate(12,T9TUV@).
-		mybuttons:setdelegate(13,T9WXYZ@).
-	//}
-}
 
 function SetBasicSymbolsE {
 	parameter x.//monitors.
@@ -116,36 +86,7 @@ function SetBasicSymbolsE {
 
 
 
-function SetBasicSymbolsLower {
-	parameter x.//monitors.
-	//FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
-  
-		set mybuttons:currentmonitor to x. 
-		set mylabels:currentmonitor to x.
-		set myflags:currentmonitor to x.   
-  
-		mylabels:setlabel(0,"     a b c  ").
-		mylabels:setlabel(1,"   d e f  ").
-		mylabels:setlabel(2,"   g h i  ").
-		mylabels:setlabel(3,"   j k l  ").
-		mylabels:setlabel(4,"   Space  ").
-		
-		mylabels:setlabel(10,"   m n o  ").
-		mylabels:setlabel(11,"  p q r s ").
-		mylabels:setlabel(12,"   t u v  ").
-		mylabels:setlabel(13,"  w x y z   ").
-  
-		mybuttons:setdelegate(0,T9ABCl@). 
-		mybuttons:setdelegate(1,T9DEFl@). 
-		mybuttons:setdelegate(2,T9GHIl@).
-		mybuttons:setdelegate(3,T9JKLl@).  
-		mybuttons:setdelegate(4,T9space@).
-		
-		mybuttons:setdelegate(10,T9MNOl@).
-		mybuttons:setdelegate(11,T9PQRSl@).
-		mybuttons:setdelegate(12,T9TUVl@).
-		mybuttons:setdelegate(13,T9WXYZl@).
-}
+
 
 function SetBasicSymbolsLowerE {
 	parameter x.//monitors.
@@ -181,26 +122,7 @@ function SetBasicSymbolsLowerE {
 		mybuttons:setdelegate(13,T9WXYZle@).
 }
 
-function SetBasicSymbolsNumbers {
-	parameter x.//monitors.
-	//FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
-  
-		set mybuttons:currentmonitor to x. 
-		set mylabels:currentmonitor to x.
-		set myflags:currentmonitor to x.   
-		
-		mylabels:setlabel(0,"     1 2 3  ").
-		mylabels:setlabel(1,"   4 5 6  ").
-		mylabels:setlabel(2,"   7 8 9  ").
-		mylabels:setlabel(3,"   0 + -  ").
-		mylabels:setlabel(4,"  [SPACE] ").
-	
-		mybuttons:setdelegate(0,T9123@). 
-		mybuttons:setdelegate(1,T9456@). 
-		mybuttons:setdelegate(2,T9789@).
-		mybuttons:setdelegate(3,T90signs@).  
-		mybuttons:setdelegate(4,T9space@).
-}
+
 
 function SetBasicSymbolsNumbersE {
 	parameter x.//monitors.
@@ -226,44 +148,7 @@ function SetBasicSymbolsNumbersE {
 		mybuttons:setdelegate(5,T9backsE@).
 }
 
-function SetNumbersOnly {
-	parameter x.//monitors.
-	//FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
-  
-		set mybuttons:currentmonitor to x. 
-		set mylabels:currentmonitor to x.
-		set myflags:currentmonitor to x.   
-		
-		mylabels:setlabel(0,"       1    ").
-		mylabels:setlabel(1,"     2    ").
-		mylabels:setlabel(2,"     3    ").
-		mylabels:setlabel(3,"     4    ").
-		mylabels:setlabel(4,"     5    ").
-		mylabels:setlabel(7,"       6    ").
-		mylabels:setlabel(8,"     7    ").
-		mylabels:setlabel(9,"     8    ").
-		mylabels:setlabel(10,"     9    ").
-		mylabels:setlabel(11,"     0    ").
-		mylabels:setlabel(12,"     .    ").
-		mylabels:setlabel(13,"     -      ").
-		
-		mybuttons:setdelegate(0,T91@). 
-		mybuttons:setdelegate(1,T92@). 
-		mybuttons:setdelegate(2,T93@).
-		mybuttons:setdelegate(3,T94@).  
-		mybuttons:setdelegate(4,T95@).
-		mybuttons:setdelegate(7,T96@).
-		mybuttons:setdelegate(8,T97@).
-		mybuttons:setdelegate(9,T98@).
-		mybuttons:setdelegate(10,T99@).
-		mybuttons:setdelegate(11,T90@).
-		mybuttons:setdelegate(12,T9dot@).
-		mybuttons:setdelegate(13,T9minus@).
-		
-		mybuttons:setdelegate(-1, TypeRealNumAccept@).   //ENTER
-		//mybuttons:setdelegate(-2, MMAIN@).               //CANCEL
-		mybuttons:setdelegate(-5, T9LEFT@).              //LEFT
-}
+
 
 function SetNumbersOnlyE {
 	parameter x.//monitors.
@@ -278,6 +163,7 @@ function SetNumbersOnlyE {
 		mylabels:setlabel(2,"     3    ").
 		mylabels:setlabel(3,"     4    ").
 		mylabels:setlabel(4,"     5    ").
+		mylabels:setlabel(5,"Back Space").
 		mylabels:setlabel(7,"       6    ").
 		mylabels:setlabel(8,"     7    ").
 		mylabels:setlabel(9,"     8    ").
@@ -291,6 +177,7 @@ function SetNumbersOnlyE {
 		mybuttons:setdelegate(2,T93e@).
 		mybuttons:setdelegate(3,T94e@).  
 		mybuttons:setdelegate(4,T95e@).
+		mybuttons:setdelegate(5,T9backsE@).
 		mybuttons:setdelegate(7,T96e@).
 		mybuttons:setdelegate(8,T97e@).
 		mybuttons:setdelegate(9,T98e@).
