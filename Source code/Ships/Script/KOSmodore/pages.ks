@@ -19,9 +19,6 @@ function GoPage {
 		SPage(8).
 		InitTermTEST(monitors).
 		clearscreen.
-		
-		
-		
 	}
 	
 	// Rover
@@ -77,96 +74,78 @@ function GoPage {
 	}
 		
 	// T9 save track pages
-	if p = 33 {
-		if LoadedTrack:LENGTH < 2 {
-			print "No track set. Can't save." at(0,0).
-		}
-		else {
-			SPage(33).
-			
-			set cuy to 0.  //would be better run it once
-			set offsy to 1. //
-			set cux to 0.
-			set emptyprog[0] to "".
-			
-			resetcicleset().
-			InitTermFileSave(monitors).
-			Print "Type file name: " at(0,0).	
-			print emptyprog[0] at(0,1).
-			setxy(0,1).
-		}
-	}
+	if p = 33 {InitTermFileSave(monitors).}
+	if p = 34 {InitTermFileSave1(monitors).}
+	if p = 35 {InitTermFileSave2(monitors).}
 	
-	if p = 34 {
-		SPage(34).	
+// rename track
+	if p = 37 {
+		SPageNoClear(37).	
+		InitTermFileSave(monitors).
+	}
+	if p = 38 {
+		SPageNoClear(38).	
 		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
+	}
+	if p = 39 {
+		SPageNoClear(39).	
+		InitTermFileSave2(monitors).
 	}
 	
-	if p = 35 {
-		SPage(35).	
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-		
 	// Logbook
-	if p = 40 {
-		SPage(40).
-		InitTermLogBook(monitors).	
-		local cou to 0.
-		for lin in LBook[CurrentNote] {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-	}
+	//if p = 40 {
+//		SPage(40).
+		//InitTermLogBook(monitors).	
+		//local cou to 0.
+		//for lin in LBook[CurrentNote] {
+//			print lin at(0,cou).
+			//set cou to cou + 1.
+		//}
+	//}
 	
 	// Logbook write pages
-	if p = 41 {
-		local cou to 0.
-		resetcicleset().
-		SPage(41).
-		InitTermLogBook1(monitors).	
-		for lin in LBook[CurrentNote] {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-		setxy(0,LBook[CurrentNote]:LENGTH).
-		print "_" at(0,LBook[CurrentNote]:LENGTH).
-		//2 righe magiche che editano l'ultima riga del diario:
-		//print "_"at(LBook[LBook:LENGTH-1]:LENGTH+1,LBook:LENGTH).
-		//set linea to LBook[LBook:LENGTH-1][LBook[LBook:LENGTH-1]:LENGTH-1].
-		print linea + "_" at(0,cou).
-	}
+	//if p = 41 {
+		//local cou to 0.
+		//resetcicleset().
+		//SPage(41).
+		//InitTermLogBook1(monitors).	
+		//for lin in LBook[CurrentNote] {
+//			print lin at(0,cou).
+			//set cou to cou + 1.
+		//}
+		//setxy(0,LBook[CurrentNote]:LENGTH).
+		//print "_" at(0,LBook[CurrentNote]:LENGTH).
+		////2 righe magiche che editano l'ultima riga del diario:
+		////print "_"at(LBook[LBook:LENGTH-1]:LENGTH+1,LBook:LENGTH).
+		////set linea to LBook[LBook:LENGTH-1][LBook[LBook:LENGTH-1]:LENGTH-1].
+		//print linea + "_" at(0,cou).
+	//}
 	
-	if p = 42 {
-		local cou to 0.
-		SPage(42).
-		InitTermLogBook2(monitors).
-		for lin in LBook[CurrentNote] {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-		setxy(0,LBook[CurrentNote]:LENGTH).
-		print "_"at(0,LBook[CurrentNote]:LENGTH).
-		print linea + "_" at(0,cou).
-	}
+	//if p = 42 {
+//		local cou to 0.
+		//SPage(42).
+		//InitTermLogBook2(monitors).
+		//for lin in LBook[CurrentNote] {
+//			print lin at(0,cou).
+			//set cou to cou + 1.
+		//}
+		//setxy(0,LBook[CurrentNote]:LENGTH).
+		//print "_"at(0,LBook[CurrentNote]:LENGTH).
+		//print linea + "_" at(0,cou).
+	//}
 	
-	if p = 43 {
-		local cou to 0.
-		SPage(43).
-		InitTermLogBook3(monitors).
-		for lin in LBook[CurrentNote] {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-		setxy(0,LBook[CurrentNote]:LENGTH).
-		print "_"at(0,LBook[CurrentNote]:LENGTH).
-		print linea + "_" at(0,cou).
-	}
+//	if p = 43 {
+		//local cou to 0.
+		//SPage(43).
+		//InitTermLogBook3(monitors).
+		//for lin in LBook[CurrentNote] {
+//			print lin at(0,cou).
+			//set cou to cou + 1.
+		//}
+		//setxy(0,LBook[CurrentNote]:LENGTH).
+		//print "_"at(0,LBook[CurrentNote]:LENGTH).
+		//print linea + "_" at(0,cou).
+	//}
 	
 	//Destinations
 	if p = 50 {
@@ -192,42 +171,15 @@ function GoPage {
 		listafile(li).
 	}		
 
-	// T9 save destination pages
-	if p = 52 {
-		if GPSPOS:length = 0 {
-			print "No destination set. Can't save." at(0,0).
-		}
-		else {
-			SPage(52).
-			
-			set cuy to 0.  //would be better run it once
-			set offsy to 1. //
-			set cux to 0.
-			set emptyprog[0] to "".
-			
-			resetcicleset().
-			InitTermFileSave(monitors).
-			Print "Type file name: " at(0,0).	
-			print emptyprog[0] at(0,1).
-			setxy(0,1).
-		}
-	}
+	// save destination
+	if p = 52 {InitTermFileSave(monitors).}
+	if p = 53 {InitTermFileSave1(monitors).}
+	if p = 54 {InitTermFileSave2(monitors).}
 	
-	if p = 53 {
-		SPage(53).	
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 54 {
-		SPage(54).	
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
+	// rename destination
+	if p = 57 {InitTermFileSave(monitors).}
+	if p = 58 {InitTermFileSave1(monitors).}
+	if p = 59 {InitTermFileSave2(monitors).}
 	
 	// Datalog
 	if p = 70 {
@@ -301,42 +253,15 @@ function GoPage {
 		ListaStr(DSnames(DataSourcesAdded)).
 	}
 	
-	// T9 save data log pages
-	if p = 83 {
-		if SensLog:LENGTH < 2 {
-			 print "No data log set. Can't save." at(0,0).
-		}
-		else {
-			
-			set cuy to 0.  //would be better run it once
-			set offsy to 1. //
-			set cux to 0.
-			set emptyprog[0] to "".
-			
-			SPage(83).
-			resetcicleset().
-			InitTermFileSave(monitors).
-			Print "Type file name: " at(0,0).	
-			print emptyprog[0] at(0,1).
-			setxy(0,1).
-		}
-	}
+	// save data log
+	if p = 83 {InitTermFileSave(monitors).}
+	if p = 84 {InitTermFileSave1(monitors).}
+	if p = 85 {InitTermFileSave2(monitors).}
 	
-	if p = 84 {
-		SPage(84).	
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 85 {
-		SPage(85).	
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
+	// rename datalog
+	if p = 87 {InitTermFileSave(monitors).}
+	if p = 88 {InitTermFileSave1(monitors).}
+	if p = 89 {InitTermFileSave2(monitors).}
 	
 	// Settings
 	if p = 100 {
@@ -345,6 +270,33 @@ function GoPage {
 		print "Marker thickness: " + SettingsL[0] at(0,0).
 		print "Data log sampling interval (s): " + SettingsL[1] at(0,1).
 		print "Track sampling interval (s): " + SettingsL[2] at(0,2).
+	}
+	
+	// rename ks
+	if p = 187 {
+		SPageNoClear(187).	
+		InitTermFileSave(monitors).
+	}
+	if p = 188 {
+		SPageNoClear(188).	
+		InitTermFileSave1(monitors).
+	}
+	if p = 189 {
+		SPageNoClear(189).	
+		InitTermFileSave2(monitors).
+	}
+	// rename sks
+	if p = 197 {
+		SPageNoClear(197).	
+		InitTermFileSave(monitors).
+	}
+	if p = 198 {
+		SPageNoClear(198).	
+		InitTermFileSave1(monitors).
+	}
+	if p = 199 {
+		SPageNoClear(199).	
+		InitTermFileSave2(monitors).
 	}
 	
 	// Programs
@@ -379,39 +331,10 @@ function GoPage {
 		listafile(li).
 	}
 	
-	// export sks to ks file (ask name) 0
-	if p = 207 {
-		SPage(207).
-		
-		set cuy to 0.  //would be better run it once
-		set offsy to 1. //
-				
-		resetcicleset().
-		InitTermFileSave(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	// export sks to ks file (ask name) 1
-	if p = 208 {
-		SPage(208).
-		resetcicleset().
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	// export sks to ks file (ask name) 2
-	if p = 209 {
-		SPage(209).
-		resetcicleset().
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
+	// export sks to ks file
+	if p = 207 {InitTermFileSave(monitors).}
+	if p = 208 {InitTermFileSave1(monitors).}
+	if p = 209 {InitTermFileSave2(monitors).}
 	
 	// Running kerboscript program page
 	if p = 210 {
@@ -430,11 +353,7 @@ function GoPage {
 		SPage(218).
 		InitTermViewSKS(monitors).	
 		CuReset().
-		
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
@@ -446,17 +365,12 @@ function GoPage {
 		SPage(220).
 		InitTermViewBas(monitors).	
 		CuReset().
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 	}
-	
-	
 	
 	// Select basic program file
 	if p = 221 {
@@ -472,89 +386,59 @@ function GoPage {
 		set lind to 0.
 	}
 	
-
-
-// View preprocessed basic prog
-
-	if p = 222 {
-		SPage(222).
-		InitTermViewpreprocBas(monitors).	
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
-		local cou to 0.
-		set preprocprog to preprocess(emptyprog).
-		for lin in preprocprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
-	}
+	// rename sbas
+	if p = 227 {InitTermFileSave(monitors).}
+	if p = 228 {InitTermFileSave1(monitors).}
+	if p = 229 {InitTermFileSave2(monitors).}
 	
 // Running basic program page
 	if p = 230 {
-		SPageNoCLear(230).	
+		SPage(230).	
 		InitTermExeBas(monitors).
-		ClsNoCur().
+		//ClsNoCur().
 		//reclinumbers(emptyprog).
 		runbasic(emptyprog).
 		//reclinumbers(emptyprog).
-		//removelinumber("10 cane").
-		
-		
-		
+		//removelinumber("10 cane").		
 	}
 
 // Edit basic prog 0 con cursore
 	if p = 237 {
 		SPage(237).
 		InitTermEditBas0cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
+		set cuy to 0.
+		set cux to 0.
+		set offsy to 0.
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		//Cur().
-		
 	}
 	
 	// Edit basic prog 1 con cursore
 	if p = 238 {
 		SPage(238).
 		InitTermEditBas1cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		//Cur().
-		
 	}
 	
 	// Edit basic prog 2 con cursore
 	if p = 239 {
 		SPage(239).
 		InitTermEditBas2cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
-		set li to emptyprog.
-		//Cur().
-		
+		set li to emptyprog.		
 	}
 	
 	// Edit basic prog 3 con cursore
@@ -562,156 +446,77 @@ function GoPage {
 		SPage(240).
 		(monitors).
 		InitTermEditBas3cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
-		//Cur().
-		
 	}
 	
 	// T9 save BAS pages
-	if p = 243 {
-		SPage(243).
-		
-		
-		
-		InitTermFileSave(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 244 {
-		SPage(244).	
-		
-		
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 245 {
-		SPage(245).	
-		
-		
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print emptyprog[0] at(0,1).
-		setxy(0,1).
-	}
+	if p = 243 {InitTermFileSave(monitors).}
+	if p = 244 {InitTermFileSave1(monitors).}
+	if p = 245 {InitTermFileSave2(monitors).}
 	
 	// T9 save ks pages
-	if p = 253 {
-		SPage(253).
+	if p = 253 {InitTermFileSave(monitors).}
+	if p = 254 {InitTermFileSave1(monitors).}
+	if p = 255 {InitTermFileSave2(monitors).}
 	
-		resetcicleset().
-		InitTermFileSave(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 254 {
-		SPage(254).	
-		
-		InitTermFileSave1(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
-	
-	if p = 255 {
-		SPage(255).	
-		
-		InitTermFileSave2(monitors).
-		Print "Type file name: " at(0,0).	
-		print linea + "_" at(0,1).
-		setxy(0,1).
-	}
-	
-	// T9 save preprocessed BAS pages
-	//if p = 263 {	}	
-	//if p = 264 {	}	
-	//if p = 265 {	}
-	
-	// Edit ks prog 0 con cursore
+	// Edit sks prog 0 con cursore
 	if p = 277 {
 		SPage(277).
 		InitTermEditBas0cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
+		set cuy to 0.
+		set cux to 0.
+		set offsy to 0.
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
 		//Cur().
-		
 	}
 	
-	// Edit basic prog 1 con cursore
+	// Edit sks prog 1 con cursore
 	if p = 278 {
 		SPage(278).
 		InitTermEditBas1cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
 		//Cur().
-		
 	}
 	
-	// Edit basic prog 2 con cursore
+	// Edit sks prog 2 con cursore
 	if p = 279 {
 		SPage(279).
 		InitTermEditBas2cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
 		//Cur().
-		
 	}
 	
-	// Edit basic prog 3 con cursore
+	// Edit sks prog 3 con cursore
 	if p = 280 {
 		SPage(280).
 		InitTermEditKS3cu(monitors).	
-		//set EditedLine to emptyprog:Length.
-		//set emptyprog to readjson("/KOSmodore/ksp-basic/Empty.bas").
-		
 		local cou to 0.
-		
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
 		}
 		set li to emptyprog.
 		//Cur().
-		
 	}
 	
 }
@@ -725,16 +530,15 @@ function InfHerePAGE {
 }
 
 function TypeRealNum {                       //type latitude
-		parameter page,label, y, cls. 
+		//Types: 1=real, 2=string
+		parameter page, label, y, cls. 
 		if cls {
 			SPage(page).
 		} else {
 			SPageNoClear(page).
 		}
-				
 		resetcicleset().
 		InitTermTypeRealNum(monitors).
-		
 		set emptyprog[0] to "". 
 		set cuy to 0.
 		set cux to 0.
@@ -742,5 +546,26 @@ function TypeRealNum {                       //type latitude
 		set offsy to y+1.
 		setxy(0,y+1).
 }
+
+ //you can incorporate thi funtion to the first page like save
+function TypeString {
+	
+		parameter page, label, y, cls. 
+		if cls {
+			SPage(page).
+		} else {
+			SPageNoClear(page).
+		}
+		resetcicleset().
+		InitTermFileSave(monitors).
+		set emptyprog[0] to "". 
+		set cuy to 0.
+		set cux to 0.
+		Print label at(0,y).	
+		set offsy to y+1.
+		setxy(0,y+1).
+}
+
+
 
 

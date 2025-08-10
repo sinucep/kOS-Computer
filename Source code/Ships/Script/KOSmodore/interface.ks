@@ -94,11 +94,14 @@ function PageBack {
 //  33        save track 0
 //  34        save track 1
 //  35        save track 2
+  //  37        reaname track 0
+  //  38        reaname track 1
+  //  39        reaname track 2
 
-//  40        Logbook 
-//  41        Logbook write 1
-//  42        Logbook write 2
-//  43        Logbook write 3
+//  -40        Logbook 
+//  -41        Logbook write 1
+//  -42        Logbook write 2
+//  -43        Logbook write 3
 
 //  50        Destination
 //  51        selezione e carica destinazione da file
@@ -107,6 +110,9 @@ function PageBack {
 //  54        save destination 2
 //  55        type d. latitude
 //  56        type d. longitude
+  //  57        reaname dest 0
+  //  58        reaname dest 1
+  //  59        reaname dest 2
 
 //  70        datalog page
 //  71        select e carica datalog da file
@@ -118,12 +124,20 @@ function PageBack {
 //  83        save datalog 0
 //  84        save datalog 1
 //  85        save datalog 2
+  //  87        reaname datalog 0
+  //  88        reaname datalog 1
+  //  89        reaname datalog 2
 
 //  100       Settings
 //  101       type marker thickness
 //  102       type Data sampling time interval
 //  103       type Track sampling time interval
-
+  //  187        reaname ks prog 0
+  //  188        reaname ks prog 1
+  //  189        reaname ks prog 2
+  //  197        reaname sks prog 0
+  //  198        reaname sks prog 1
+  //  199        reaname sks prog 2
 //  200       programs
 //  201       select and run kerboscript from file
   //  205       select and load serializedkerboscript from file
@@ -135,7 +149,9 @@ function PageBack {
 //  218       View sks prog
 //  220       view basic prog
 //  221       select and load basic prog from file
-//  222       view preprocessed basic prog
+  //  227        reaname basic prog 0
+  //  228        reaname basic prog 1
+  //  229        reaname basic prog 2
 //  230       running basic program
 //  237       edit basic program 0
 //  238       edit basic program 1
@@ -159,6 +175,39 @@ function EscSaveFile {
 		set cuY to 0.
 		GoPage(50).
 	}
+	
+	 // file rename
+	if NPage = 37 or NPage = 38 or NPage = 39 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(31).
+	}
+	if NPage = 57 or NPage = 58 or NPage = 59 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(51).
+	}
+	if NPage = 87 or NPage = 88 or NPage = 89 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(71).
+	}
+	if NPage = 187 or NPage = 188 or NPage = 189 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(201).
+	}
+	if NPage = 197 or NPage = 198 or NPage = 199 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(205).
+	}
+	if NPage = 227 or NPage = 228 or NPage = 229 {
+		set offsy to 0.
+		set cuY to 0.
+		GoPage(221).
+	}
+	
 	if NPage = 33 or NPage = 34 or NPage = 35 {
 		set offsy to 0.
 		set cuY to 0.
@@ -206,6 +255,7 @@ function TypeRealNumAccept {
 		TypeRealNum(56,"Type longitude: ",2, false).
 		
 	}
+
 	if Npage = 101 {
 		set INPstr1 to emptyprog[0].
 		set SettingsL[0] to INPstr1:tonumber(-9999).
@@ -312,26 +362,14 @@ function listafile {   //stampa una lista selezionalible di file
 function SetEditCursor {
 	parameter li.
 	local cou to 0.
-	
 	FOR bod in li {
 		//PRINT "#" at(bod:length,cou). // when it will scroll, cut it
 		set cou to cou + 1.
 	}
-	
-	
-	
-	if lind > cou-1 {
-		set lind to cou-1.
-	}
-	if lind < 0 {
-		set lind to 0.
-	}
-	//PRINT "#" at(li[lind]:length + linea:length, lind). // when it will scroll, cut it
+	if lind > cou-1 {set lind to cou-1.}
+	if lind < 0 {set lind to 0.}
 	print "_" at(li[lind]:length,lind). 
-	
-	setxy(emptyprog[lind]:length,lind).
-	//print lind at(0,8). 
-	
+	setxy(emptyprog[lind]:length,lind).	
 }
 
 //setta il cursore per scrivere riscrivere tutta la riga (x=0)
@@ -343,8 +381,6 @@ function SetEditCursor0 {
 		//PRINT "#" at(bod:length,cou). // when it will scroll, cut it
 		set cou to cou + 1.
 	}
-	
-	
 	
 	if lind > cou-1 {
 		set lind to cou-1.
@@ -392,30 +428,30 @@ function ListaFileUp{
 		listafile(li).
 }
 
-function EditLineDown{
-	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
-		//set emptyprog[lind] to linea.
-		PRINT " " at(emptyprog[lind]:length, lind).
-		set lind to lind +1.
-		SetEditCursor(li).
-		
-		set linea to "".
-}
+//function EditLineDown{
+//	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
+//		//set emptyprog[lind] to linea.
+//		PRINT " " at(emptyprog[lind]:length, lind).
+//		set lind to lind +1.
+//		SetEditCursor(li).
+//		
+//		set linea to "".
+//}
 
-function EditLineUp{
-	//if (Npage = 10 ) or (Npage = 11) or (Npage = 51) {
-		//set emptyprog[lind] to linea.
-		PRINT " " at(emptyprog[lind]:length, lind).
-		set lind to lind -1.
-		SetEditCursor(li).
-		
-		set linea to "".	
-}
+//function EditLineUp{
+//	//if (Npage = 10 ) or (Npage = 11) or (Npage = 51) {
+//		//set emptyprog[lind] to linea.
+//		PRINT " " at(emptyprog[lind]:length, lind).
+//		set lind to lind -1.
+//		SetEditCursor(li).
+//		
+//		set linea to "".	
+//}
 
 //save the current line. you must do it, when you change line before saving the file, before running it..
-function EditRecordLine{
-	set emptyprog[lind] to linea.
-}
+//function EditRecordLine{
+//	set emptyprog[lind] to linea.
+//}
 
 function ListaStrDown{
 	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {

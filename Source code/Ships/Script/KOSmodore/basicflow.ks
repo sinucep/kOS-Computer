@@ -39,8 +39,8 @@ function debugToggle{
 	
 	set mylabels:currentmonitor to x.
 	
-	if debugbas {mylabels:setlabel(4, " Debug On ").}
-	else {mylabels:setlabel(4, " Debug Off").}
+	if debugbas {mylabels:setlabel(4, " Debug([#00FF00]on[#FFFFFF])").}
+	else {mylabels:setlabel(4, "Debug([#BFBFBF]off[#FFFFFF])").}
 	
 	if Npage = 220{
 		ClsNoCur().
@@ -335,13 +335,10 @@ function runlinebas {
 	
 	if not exodos {
 		local LiNoN to "". //line without number
-		
-			
 		//print co + ": " + prog[co] at(0,co+4).	
 	
 		set co to co + 1.
 		set cco to cco + 1.
-		
 		set LiNoN to removelinumber(pro[co]).
 		
 		coCLS(LiNoN).
@@ -355,20 +352,12 @@ function runlinebas {
 		coWR(LiNoN).
 		coLOCATE(LiNoN).
 		
-		if coEND(removelinumber(pro[co])) {
-			set exodos to true.
-		}
-		
-		if (co+1 > pro:length-1) {
-			set exodos to true.						
-		}
+		if coEND(removelinumber(pro[co])) {set exodos to true.}
+		if (co+1 > pro:length-1) {set exodos to true.}
 		
 		//print "co:" + co at(11,11).
 		//if (co > prog:length-1) {set exodos to true.}
-		
-		
 	}
-
 }
 
 function runbasic {
@@ -376,9 +365,7 @@ function runbasic {
 	
 	reclinumbers(prog).
 	
-	until exodos {
-		runlinebas(prog).
-	}
+	until exodos {runlinebas(prog).}
 	
 	if not freezebas {resetbasicstate().}
 	

@@ -7,7 +7,7 @@ local conta to 0.
 local symset to 0.
 local tastopreced to 0. //quando premo un tasto diverso il contatore deve 
 						//azzerarsi e l'unico modo per saperlo e memorizzarlo
-global linea to "".    
+//global linea to "".    
 //global editline to "".   // global linea da distruggere, sarà sostituito da editline
 
 local x to 0.
@@ -44,6 +44,44 @@ function cicleset {
 		if symset = 1 {	GoPage(34).	}
 		if symset = 2 {	GoPage(35).	}
 	}
+	//rename
+	if NPage = 37 or NPage = 38 or NPage = 39 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(37). }
+		if symset = 1 {	GoPage(38).	}
+		if symset = 2 {	GoPage(39).	}
+	}
+	if NPage = 57 or NPage = 58 or NPage = 59 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(57). }
+		if symset = 1 {	GoPage(58).	}
+		if symset = 2 {	GoPage(59).	}
+	}
+	if NPage = 87 or NPage = 88 or NPage = 89 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(87). }
+		if symset = 1 {	GoPage(88).	}
+		if symset = 2 {	GoPage(89).	}
+	}
+	if NPage = 187 or NPage = 188 or NPage = 189 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(187). }
+		if symset = 1 {	GoPage(188).	}
+		if symset = 2 {	GoPage(189).	}
+	}
+	if NPage = 197 or NPage = 198 or NPage = 199 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(197). }
+		if symset = 1 {	GoPage(198).	}
+		if symset = 2 {	GoPage(199).	}
+	}
+	if NPage = 227 or NPage = 228 or NPage = 229 {
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(227). }
+		if symset = 1 {	GoPage(228).	}
+		if symset = 2 {	GoPage(229).	}
+	}
+	
 	if NPage = 83 or NPage = 84 or NPage = 85 {
 		if symset > 2 { set symset to 0. }
 		if symset = 0 {	GoPage(83). }
@@ -62,12 +100,18 @@ function cicleset {
 		if symset = 1 {	GoPage(244).	}
 		if symset = 2 {	GoPage(245).	}
 	}
-	if NPage = 263 or NPage = 264 or NPage = 265 {
+	if NPage = 253 or NPage = 254 or NPage = 255 {
 		if symset > 2 { set symset to 0. }
-		if symset = 0 {	GoPage(263). }
-		if symset = 1 {	GoPage(264).	}
-		if symset = 2 {	GoPage(265).	}
+		if symset = 0 {	GoPage(253). }
+		if symset = 1 {	GoPage(254).	}
+		if symset = 2 {	GoPage(255).	}
 	}
+	//if NPage = 263 or NPage = 264 or NPage = 265 {
+	//	if symset > 2 { set symset to 0. }
+	//	if symset = 0 {	GoPage(263). }
+	//	if symset = 1 {	GoPage(264).	}
+	//	if symset = 2 {	GoPage(265).	}
+	//}
 	if NPage = 237 or NPage = 238 or NPage = 239 or NPage = 240{
 		if symset > 3 { set symset to 0. }
 		if symset = 0 {	GoPage(237). }

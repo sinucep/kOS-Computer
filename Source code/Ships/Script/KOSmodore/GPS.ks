@@ -36,22 +36,6 @@ function InitGPSLog {
 		LoadedTrack[LoadedTrack:LENGTH-1]:add(102). //longitude 
 }
 
-// old view track
-//function ViewTrackold {
-//	clearscreen.
-//	local x to 0.
-//	local y to 0.
-//	FOR S IN LoadedTrack {
-//		FOR SS IN S {
-//			print round(SS,2) at (X,Y).
-//			set x to x+9.
-//		}		
-//		set y to y+1.
-//		set x to 0.
-//	}	
-//}
-
-
 
 // SAVE GPS POS
 function SaveGPSPOS {
@@ -96,65 +80,15 @@ GoPage(50).
 
 function ClrGPSPOS {
 	GPSPOS:clear.
-	if NPage = 50 {
-		GoPage(50).
-	}
+	if NPage = 50 {GoPage(50).}
 }
 
-//function RecTypedLat {      //registra la lat appena typed
-	//set INPstr1 to linea.
-	//GPSPOS:clear.
-	//GPSPOS:add(linea:tonumber(-9999)). //se non è un numero valido restituisce -9999
-//}
-
-//function RecTypeLng {      //registra la lng appena typed
-	//set INPstr2 to linea.
-	//GPSPOS:add(linea:tonumber(-9999)).
-	//DestinationsPAGE().
-//}
-
 function RecGPSPOS {
-
 	GPSPOS:clear.
 	GPSPOS:add(SHIP:GEOPOSITION:LAT).
 	GPSPOS:add(SHIP:GEOPOSITION:LNG).
 	set GeoPos to SHIP:GEOPOSITION.
-   
-	if NPage = 50 {
-		GoPage(50).
-	    //print "Set destination:" at(1,1).
-		//print round(GPSPOS[0],4) + ", " + round(GPSPOS[1],4) at(1,2).
-	}
-}
-
-
-
-
-// SAVE GPS LOG
-function SaveGPSLOG {
-clearscreen.
-WRITEJSON(LoadedTrack, "/KOSmodore/tracks/GPSlog.json").
-
-// decommentare se si vuole anche un file di testo
-//DELETEPATH("/KOSmodore/tracks/GPSlog.txt").
-//FOR S IN GPSLog {
-//		FOR SS IN S {
-//			LOG SS to "/KOSmodore/tracks/GPSlog.txt".
-//		}		
-//		LOG "" to "/KOSmodore/tracks/GPSlog.txt".
-//	}
-
-print "Saved to " + PATH() + "/KOSmodore/tracks/x".
-
-//print "Saved to " + PATH() + "/KOSmodore/tracks/GPSlog.txt".
-
-}
-
-///////////////////////////////////// Load GPS LOG - DISUSO
-function LoadGPSLOG {
-clearscreen.
-SET LoadedTrack TO READJSON("/KOSmodore/tracks/GPSlog.json").
-print "Track loaded from /tracks/GPSlog.json".
+	if NPage = 50 {GoPage(50).}
 }
 
 // Clear GPS LOG

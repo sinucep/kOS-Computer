@@ -234,6 +234,14 @@ if myflags:getstate(0) {
 	   NPage = 253 or NPage = 254 or NPage = 255 or	   
 	   NPage = 52 or NPage = 53 or NPage = 54 or
 	   NPage = 55 or NPage = 56 or
+	   // file rename
+	   NPage = 37 or NPage = 38 or NPage = 39 or
+	   NPage = 57 or NPage = 58 or NPage = 59 or
+	   NPage = 87 or NPage = 88 or NPage = 89 or
+	   NPage = 187 or NPage = 188 or NPage = 189 or
+	   NPage = 197 or NPage = 198 or NPage = 199 or
+	   NPage = 227 or NPage = 228 or NPage = 229 or
+	   
 	   NPage = 33 or NPage = 34 or NPage = 35 or
 	   NPage = 83 or NPage = 84 or NPage = 85 or
 	   NPage = 101 or NPage = 102 or NPage = 103 or

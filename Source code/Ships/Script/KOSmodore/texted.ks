@@ -13,15 +13,16 @@ global STextAux to list(). //used to temporary stock the serialized text before 
 global offsy to 0. //how much up or down to print the text
 
 function copyvarsave { //
-	parameter Pag.
-	resetcicleset().
+	parameter Pag,mult. //mult is a id needed if more strings are asked from the same page
+	//resetcicleset().
 	set stextaux to emptyprog:copy.
 	emptyprog:clear.
 	emptyprog:add("").
-	set cuy to 0.
-	set offsy to 1.
+	//set cuy to 0.
+	//set offsy to 1.
 		
-	GoPage(Pag).
+	//GoPage(Pag).
+	Savefilelist(mult).
 }
 
 function Cur {
