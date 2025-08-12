@@ -88,7 +88,7 @@ PRINT Var + 5
 PRINT "Hello" + Var
 PRINT "Hello " + Str:TOUPPER
 ```
-
+**Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The CO command without parameters restores the line to its original length.
 ### RD
 Starts a rover journey to the set destination. No parameters.
 ### REM
