@@ -1,4 +1,4 @@
-## KPM interface
+## Notes about kOSPropMonitor
 **The information here are not (yet) accurate.** Some useful information about the terminal configuration. Here the file named **kOS-ComputerTerminal.txt** used in this mod. 
 ### Terminal configuration file
 ```
@@ -83,7 +83,15 @@
 [#FF0000FF]                                   [#FF0000FF][@y-285][font0][dw]{4:BAR=,1,0.00,0.05}[/dw]  [#FF0000FF][dw]{0:BAR=,1,0.00,0.05}[/dw] [dw]{1:BAR=,1,0.00,0.05}[/dw]  [dw]{2:BAR=,1,0.00,0.05}[/dw] [dw]{3:BAR=,1,0.00,0.05}[/dw]  [dw][#FF0000FF]{5:BAR=,1,0.00,0.05}[/dw]  [dw][#FF0000FF]{6:BAR=,1,0.00,0.05} $&$SYSR_LIQUIDFUELSTAGEPERCENT SYSR_LIQUIDFUELPERCENT SYSR_OXIDIZERSTAGEPERCENT SYSR_OXIDIZERPERCENT SYSR_ELECTRICCHARGEPERCENT SYSR_MONOPROPELLANTPERCENT SYSR_SOLIDFUELPERCENT 
 [#8cd8ffFF]                                  [#8cd8ffFF][hw] [@y-285][font3] CHRG [font0]  [font3][#ff9900FF] FUEL [font0][font3][#0099FFFF] OXID [font0]  [font3][#ffcd8cFF] FUEL [font0][font3][#8ccdffFF] OXID [font0]  [font3][#FFFFFFFF] MONO [font0] [font3][#FF6600FF] SOLID [font0]
 [@y-32][hw][#CEE3F6FF][font0] ORBIT+ORBITDISPLAY[#ffffffff]|[font2][#98cdf9FF] ORBIT+MAP[font0][#CEE3F6FF]/MAP[#ffffffff] |    [#CEE3F6FF]DOCKING[#ffffffff]     |               |               |                                                             
-```                                                                        
+```
+### Buttons
+#### Scripts can not use those buttons:
+**Next:** kOS Processor Selector
+**Prev:** kOS Processor Selector
+**STBY:** Toggle Processor Power
+**O:** Connect Keyboard to Processor
+
+All Other Buttons: Scripts can use every single other button on the device!
 
 
     
