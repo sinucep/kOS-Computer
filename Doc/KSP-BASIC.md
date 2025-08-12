@@ -88,9 +88,9 @@ PRINT Var + 5
 PRINT "Hello" + Var
 PRINT "Hello " + Str:TOUPPER
 ```
-**Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
+* **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
 
-**Warning!** While it is possible to use at(x,y) as in Kerboscript, it is not recommended. Use the LOCATE command instead, which uses the cursor handling of the KSP BASIC environment, to avoid graphical glitches.
+* **Warning!** While it is possible to use at(x,y) as in Kerboscript, it is not recommended. Use the LOCATE command instead, which uses the cursor handling of the KSP BASIC environment, to avoid graphical glitches.
 ### RD
 Starts a rover journey to the set destination. No parameters.
 ### REM
