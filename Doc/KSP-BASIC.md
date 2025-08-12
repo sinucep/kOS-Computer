@@ -36,10 +36,9 @@ CO Y
 PRINT "Yellow"
 CO
 PRINT "Color reset to default"
-
+```
 * **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
 
-```
 The allowed parameters are:
 ```
 Parameter    Color     HEX
