@@ -28,7 +28,7 @@ It is equivalent to:
 #TOGGLE AG1.
 ```
 ### CLS
-Wrapping of the Kerboscript _CLEARSCREEN_. It set the KSP-BASIC cursor to 0,0 position.
+Wrapping of the Kerboscript _CLEARSCREEN_. It sets the KSP-BASIC cursor to (0,0) position.
 ### CO
 Set a permanent color. Command **PRINT** is affected.
 ```
