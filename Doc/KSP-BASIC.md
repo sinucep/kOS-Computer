@@ -21,9 +21,9 @@ PRINT Var
 ### AG1, AG2, ... AG10
 Toggles the boolean state of the Action Groups. No parameters.
 ```
-AG1.
+AG1
 ```
-is equivalent to:
+It is equivalent to:
 ```
 #TOGGLE AG1.
 ```
