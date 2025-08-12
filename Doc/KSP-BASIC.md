@@ -28,9 +28,9 @@ It is equivalent to:
 #TOGGLE AG1.
 ```
 ### CLS
-Wrapping of the Kerboscrpt clearscreen. It set the KSP-BASIC cursor to 0,0 position.
+Wrapping of the Kerboscript _CLEARSCREEN_. It set the KSP-BASIC cursor to 0,0 position.
 ### CO
-Set a permanent color. Command print is affected.
+Set a permanent color. Command **PRINT** is affected.
 ```
 CO Y
 PRINT "Yellow"
@@ -72,14 +72,14 @@ CLS
 20.54 END
 ```
 ### LOCATE
-Move the cursor in a new x,y location.
+Move the cursor in a new (X,Y) location.
 ```
 LOCATE 4 8
 PRINT "Far from the edge"
 ```
-Any PRINT call increases the Y-coordinate and resets the X-coordinate to zero.
+Any **PRINT** call increases the Y-coordinate and resets the X-coordinate to zero.
 ### PRINT
-Wrapping of the Kerboscript print. It has his own cursor location system (indipendent from kOSPropMonitor's one).
+Wrapping of the Kerboscript _PRINT_. It has his own cursor location system (indipendent from kOSPropMonitor's one).
 You can use colors with command **CO**.
 ```
 #GLOBAL Var to 15.
@@ -88,7 +88,9 @@ PRINT Var + 5
 PRINT "Hello" + Var
 PRINT "Hello " + Str:TOUPPER
 ```
-**Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The CO command without parameters restores the line to its original length.
+**Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
+
+**Warning!** While it is possible to use at(x,y) as in Kerboscript, it is not recommended. Use the LOCATE command instead, which uses the cursor handling of the KSP BASIC environment, to avoid graphical glitches.
 ### RD
 Starts a rover journey to the set destination. No parameters.
 ### REM
@@ -101,7 +103,7 @@ SD 45.23434 -73.00123
 ### WR
 Wait for the rover to stop before executing other commands. No paramenters.
 ### WAIT
-Wrapping of the Kerboscript WAIT. One parameter: seconds.
+Wrapping of the Kerboscript _WAIT_. One parameter: seconds.
 ```
 WAIT 3.5
 ```
