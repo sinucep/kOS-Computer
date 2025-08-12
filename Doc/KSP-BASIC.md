@@ -35,21 +35,25 @@ Set a permanent color. Command print is affected.
 CO Y
 PRINT "Yellow"
 ```
-the allowed parameter are:
-R: Red [#FF0000]
-G: Green [#00FF00]
-B: Blue [#0000FF]
-Y: Yellow [#FFFF00]
-C: Cyan [#FFFF00]
-W: White [#FFFFFF]
-O: Orange [#FF8000]
-P: Pink [#FF8080]
-M: Magenta [#FF00FF]
-V: Violet [#9933FF]
-BLACK: [#9933FF]
-GRAY: [#909090]
-BROWN :[#663300]
+```
+The allowed parameters are:
 
+Parameter    Color     HEX
+
+R            Red       [#FF0000]
+G            Green     [#00FF00]
+B            Blue      [#0000FF]
+Y            Yellow    [#FFFF00]
+C            Cyan      [#FFFF00]
+W            White     [#FFFFFF]
+O            Orange    [#FF8000]
+P            Pink      [#FF8080]
+M            Magenta   [#FF00FF]
+V            Violet    [#9933FF]
+BLACK                  [#9933FF]
+GRAY                   [#909090]
+BROWN                  [#663300]
+```
 ### END
 Ends the program, even before the last command.
 ### GOTO
