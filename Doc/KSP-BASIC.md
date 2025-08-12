@@ -34,11 +34,14 @@ Set a permanent color. Command print is affected.
 ```
 CO Y
 PRINT "Yellow"
+CO
+PRINT "Color reset to default"
 ```
 The allowed parameters are:
 ```
 Parameter    Color     HEX
 
+[none]       Default
 R            Red       [#FF0000]
 G            Green     [#00FF00]
 B            Blue      [#0000FF]
@@ -49,7 +52,7 @@ O            Orange    [#FF8000]
 P            Pink      [#FF8080]
 M            Magenta   [#FF00FF]
 V            Violet    [#9933FF]
-BLACK                  [#9933FF]
+BLACK                  [#000000]
 GRAY                   [#909090]
 BROWN                  [#663300]
 ```
