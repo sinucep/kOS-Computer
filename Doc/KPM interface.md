@@ -86,12 +86,133 @@
 ```
 ### Buttons
 #### Scripts can not use those buttons:
-**Next:** kOS Processor Selector
-**Prev:** kOS Processor Selector
-**STBY:** Toggle Processor Power
-**O:** Connect Keyboard to Processor
+* **Next:** kOS Processor Selector
+* **Prev:** kOS Processor Selector
+* **STBY:** Toggle Processor Power
+* **O:** Connect Keyboard to Processor
 
-All Other Buttons: Scripts can use every single other button on the device!
+Scripts can use every other button.
+
+### API Examples (Out Of Date for 1.6.1.37413+):
+```
+//Set Shortcuts
+set buttons to addons:kpm:buttons.
+set flags to addons:kpm:flags.
+
+//Get Monitor Count
+set monitors to addons:kpm:getmonitorcount().
+
+//Set Current Monitor - Separare for Buttons and Flags
+set buttons:currentmonitor to 0.
+set flags:currentmonitor to 0.
+
+//Get Monitor GUID
+set id to addons:kpm:getguid(0). // OR set id to addons:kpm:getguidshort(0).
+
+//Get Monitor Index From GUID - Works for Whole GUID and Short GUID
+set monindex to addons:kpm:getindexof(id). //If GETINDEXOF Returns -1, GUID Not Found.
+
+//Get Button State
+buttons:getstate(0).
+//Set Button State
+buttons:setstate(0, false).
+// -1 is enterButtonState
+// -2 is cancelButtonState
+// -3 is upButtonState
+// -4 is downButtonState
+// -5 is leftButtonState
+// -6 is rightButtonState
+// 0+ is Other Buttons
+
+//Get Button Label
+buttons:getlabel(0).
+//Set Button Label
+buttons:setlabel(0, "BUTTN").
+// Only 0+ is Valid
+
+//Get Flag State
+flags:getstate(0).
+//Set Flag State
+flags:setstate(0, false).
+// Only 0+ is Valid
+
+//Get Flag Label
+flags:getlabel(0).
+//Set Flag Label
+flags:setlabel(0, "ABRT").
+// Only 0+ is Valid
+```
+
+### Config Node Fields
+```
+//Buttons
+[KSPField]
+public int processorSelectorUpButton = 7;
+[KSPField]
+public int processorSelectorDownButton = 8;
+[KSPField]
+public int connectButton = 4;
+[KSPField]
+public int toggleProcessorPowerButton = 9;
+[KSPField]
+public string multiFunctionButtons = "17,18,19,20,21,22,23,10,11,12,13,14,15,16";
+
+//Directional Buttons
+[KSPField]
+public int upButton = 0;
+[KSPField]
+public int downButton = 1;
+[KSPField]
+public int leftButton = 6;
+[KSPField]
+public int rightButton = 5;
+
+//Enter and Cancel
+[KSPField]
+public int enterButton = 2;
+[KSPField]
+public int cancelButton = 3;
+
+//Terminal Fields
+[KSPField]
+public int flagCount = 14;
+[KSPField]
+public string template = "";
+[KSPField]
+public string buttonSide = "##########";
+[KSPField]
+public string buttonSideSmall = "#";
+[KSPField]
+public string buttonEmptyLabel = "        ";
+[KSPField]
+public string flagSide = "##########";
+[KSPField]
+public string flagSideSmall = "#";
+[KSPField]
+public string flagEmptyLabel = "        ";
+[KSPField]
+public string textTint = "[#009900ff]";
+[KSPField]
+public string textTintUnpowered = "[#ffffff3e]";
+[KSPField]
+public string textTintButtonOn = "[#009900ff]";
+[KSPField]
+public string textTintButtonOff = "[#ffffffff]";
+[KSPField]
+public string textTintFlagOn = "[#009900ff]";
+[KSPField]
+public string textTintFlagOff = "[#000000]";
+[KSPField]
+public string keyboardActiveLabel = "KBRD";
+[KSPField]
+public string keyboardActiveTint = "[#FFF72B]";
+[KSPField]
+public string keyboardInactiveTint = "[#000000]";
+[KSPField]
+public int consoleWidth = 40;
+[KSPField]
+public int consoleHeight = 20;
+```
 
 
     
