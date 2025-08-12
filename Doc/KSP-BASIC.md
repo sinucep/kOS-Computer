@@ -28,7 +28,7 @@ It is equivalent to:
 #TOGGLE AG1.
 ```
 ### CLS
-Wrapping of the Kerboscrpt clearscreen. Tt set the cursor to 0,0 position.
+Wrapping of the Kerboscrpt clearscreen. It set the KSP-BASIC cursor to 0,0 position.
 ### CO
 Set a permanent color. Command print is affected.
 ```
@@ -77,6 +77,7 @@ Move the cursor in a new x,y location.
 LOCATE 4 8
 PRINT "Far from the edge"
 ```
+Any PRINT call increases the Y-coordinate and resets the X-coordinate to zero.
 ### PRINT
 Wrapping of the Kerboscript print. It has his own cursor location system (indipendent from kOSPropMonitor's one).
 You can use colors with command **CO**.
