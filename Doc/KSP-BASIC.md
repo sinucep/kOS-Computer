@@ -35,9 +35,8 @@ Set a permanent color. Command print is affected.
 CO Y
 PRINT "Yellow"
 ```
-```
 The allowed parameters are:
-
+```
 Parameter    Color     HEX
 
 R            Red       [#FF0000]
