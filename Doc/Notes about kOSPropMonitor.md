@@ -1,5 +1,5 @@
 ## Notes about kOSPropMonitor
-**The information here are not (yet) accurate.** Some useful information about the terminal configuration. Here the file named **kOS-ComputerTerminal.txt** used in this mod. 
+**The information here are not (yet) accurate.** Here the file named **kOS-ComputerTerminal.txt** used in kOS-Computer mod. 
 ### Terminal configuration file
 ```
 [hw]{buttonLabel0}|{buttonLabel1}|{buttonLabel2}|{buttonLabel3}|{buttonLabel4}|{buttonLabel5}|   EXIT[/hw]
