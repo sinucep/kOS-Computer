@@ -7,13 +7,49 @@ v1.0.1                 None
 v1.0.2                 None
 v1.1.0                 v0.0.0-alpha
 v1.1.1                 v0.0.0-alpha
+v1.1.2                 v0.0.0-alpha
 ```
 ## KSP-BASIC commands
 KSP-BASIC is not case sensitive.
+
+### #[Kerboscript line]
+After # you can insert any one-line kerboscript code.
+```
+#GLOBAL Var to 15.
+PRINT Var
+```
 ### AG1, AG2, ... AG10
 Toggles the boolean state of the Action Groups. No parameters.
+```
+AG1.
+```
+is equivalent to:
+```
+#TOGGLE AG1.
+```
 ### CLS
-Wrapping of the Kerboscrpt clearscreen. it set the cursor to 0,0 position.
+Wrapping of the Kerboscrpt clearscreen. Tt set the cursor to 0,0 position.
+### CO
+Set a permanent color. Command print is affected.
+```
+CO Y
+PRINT "Yellow"
+```
+the allowed parameter are:
+R: Red [#FF0000]
+G: Green [#00FF00]
+B: Blue [#0000FF]
+Y: Yellow [#FFFF00]
+C: Cyan [#FFFF00]
+W: White [#FFFFFF]
+O: Orange [#FF8000]
+P: Pink [#FF8080]
+M: Magenta [#FF00FF]
+V: Violet [#9933FF]
+BLACK: [#9933FF]
+GRAY: [#909090]
+BROWN :[#663300]
+
 ### END
 Ends the program, even before the last command.
 ### GOTO
@@ -37,6 +73,15 @@ PRINT "Far from the edge"
 ```
 ### PRINT
 Wrapping of the Kerboscript print. It has his own cursor location system (indipendent from kOSPropMonitor's one).
+You can use colors with command **CO**.
+```
+#GLOBAL Var to 15.
+#GLOBAL Str to "world".
+PRINT Var + 5
+PRINT "Hello" + Var
+PRINT "Hello " + Str:TOUPPER
+```
+
 ### RD
 Starts a rover journey to the set destination. No parameters.
 ### REM
