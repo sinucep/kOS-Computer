@@ -8,6 +8,8 @@ run once "/KOSmodore/basicflow.ks".
 function GoPage {
 	parameter p.
 	
+	set NPage to p.
+	
 	// Main
 	if p = 1 {                     
 		SPage(1).
@@ -366,8 +368,11 @@ function GoPage {
 		InitTermViewBas(monitors).	
 		CuReset().
 		local cou to 0.
+		
+		if debugbas {debugwinframe().}
+		
 		for lin in emptyprog {
-			print lin at(0,cou).
+			print lin at(0 + debugoffset, cou).
 			set cou to cou + 1.
 		}
 	}
@@ -392,23 +397,44 @@ function GoPage {
 	if p = 229 {InitTermFileSave2(monitors).}
 	
 // Running basic program page
+//	if p = 230 {
+//		SPage(230).	
+//		InitTermExeBas(monitors).
+//		//ClsNoCur().
+//		//reclinumbers(emptyprog).
+//		runbasic(emptyprog).
+//		//reclinumbers(emptyprog).
+//		//removelinumber("10 cane").		
+//	}
+	
+// Running basic program 
 	if p = 230 {
-		SPage(230).	
-		InitTermExeBas(monitors).
-		//ClsNoCur().
-		//reclinumbers(emptyprog).
-		runbasic(emptyprog).
-		//reclinumbers(emptyprog).
-		//removelinumber("10 cane").		
+		set BASICrun to true.
+		set stepmode to false.
+		if co = -1 {SPage(230).}
+		if debugbas {debugwinframe().}
+		//if not stepmode {SPage(230).}
+		
+		InitTermExeBas(monitors).		
+		//print time:seconds at(40,15).
+	}
+	
+// Step running basic program
+	if p = 231 {
+		set BASICrun to true.
+		//print "time:second" at(10,8).
+		//SPagenoclear(231).
+		//if not stepmode {SPage(230).}
+		
+		InitTermstepExeBas(monitors).		
+		//print time:seconds at(40,15).
 	}
 
 // Edit basic prog 0 con cursore
 	if p = 237 {
 		SPage(237).
 		InitTermEditBas0cu(monitors).	
-		set cuy to 0.
-		set cux to 0.
-		set offsy to 0.
+		
 		local cou to 0.
 		for lin in emptyprog {
 			print lin at(0,cou).
@@ -468,9 +494,6 @@ function GoPage {
 	if p = 277 {
 		SPage(277).
 		InitTermEditBas0cu(monitors).	
-		set cuy to 0.
-		set cux to 0.
-		set offsy to 0.
 		local cou to 0.
 		for lin in emptyprog {
 			print lin at(0,cou).

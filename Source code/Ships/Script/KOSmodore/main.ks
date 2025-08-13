@@ -19,6 +19,7 @@ run once "/KOSmodore/datalog.ks".
 run once "/KOSmodore/settings.ks".
 run once "/KOSmodore/runKS.ks".
 run once "/KOSmodore/texted.ks".
+//run once "/KOSmodore/basicflow.ks".
 
 global fine to false. // per uscire dal programma e usare il terminale
 
@@ -87,7 +88,7 @@ function MyREBOOT {
 function goroverpos {
 
 	if GPSPOS:Length = 0 {
-		print "No destination set." at(1,1).
+		print "No destination set." at(0 + debugoffset,1).
 	} else {	
 	
 	//clearScreen.
@@ -179,8 +180,9 @@ set CurrentNote to LBook:LENGTH-1.
 
 
 //GoPage(8).
-//GoPage(220).  
-//	set debugbas to true.
+//GoPage(237).   //new basic
+//GoPage(221).   //open basic
+//set debugbas to true.
 
 //----------------------Main Loop-----------------------
 
@@ -257,21 +259,33 @@ if myflags:getstate(0) {
 		}
 	}
 
-//return to basic program
-	if backtobascase = 1 {
+
+// BASIC
+
+if (BASICrun) {RunBASICline().} 
+
+// return to basic program (v1.1.1)
+
+if backtobascase = 2 {
+	if TIME:SECONDS > basWStart + basWtime {
+		//set exodos to false.
+		set backtobascase to 0.
+		set BASICrun to true.
+	}
+}
 		
+	
+
+	if backtobascase = 1 {		
 		if controlrover = 0 {
 			set backtobascase to 0.
-			set exodos to false.
-			runbasic(emptyprog).
-			set freezebas to false.
+			set BASICrun to true.
 		}
 	}
 
 //debug window
-	if debugbas and (Npage = 220 or Npage = 230) {
-		
-		if TIME:SECONDS > debugbasstart + 1{
+	if debugbas and (Npage = 220 or Npage = 230 or NPage = 231) {
+		if TIME:SECONDS > debugbasstart + .5{
 			set debugbasstart to TIME:SECONDS.
 			debugwin().
 		}

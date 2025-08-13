@@ -13,7 +13,7 @@ global controlrover to 0.      // 0 = nessun rover da conrollare
 // stati del rover che va verso una posizione
 
 global roverstate to 0.        // 0 = stato di nulla
-							   // 1 = stato di puntaqmento iniziale lento
+							   // 1 = stato di puntamento iniziale lento
 							   // 2 = dritto per due metri per raddrizzare le ruote
 							   // 3 = veloce fino a 30 metri dall'arrivo
 							   // 4 = frenata in caso di sbandamento che riconduce a 1

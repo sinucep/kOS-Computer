@@ -538,3 +538,11 @@ function NextColumn {
 	}
 }
 
+function GoPageResettingCur {
+	parameter p.
+	set cuy to 0.
+	set cux to 0.
+	set offsy to 0.
+	GoPage(p).
+}
+

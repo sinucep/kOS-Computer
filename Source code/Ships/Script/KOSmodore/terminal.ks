@@ -7,6 +7,7 @@ run once "/KOSmodore/logbook.ks".
 run once "/KOSmodore/files.ks".
 run once "/KOSmodore/GPS.ks".
 run once "/KOSmodore/test.ks".
+run once "/KOSmodore/hovering.ks".
 //run once "/KOSmodore/basicflow.ks".
 
 global mybuttons to addons:kpm:buttons.
@@ -82,33 +83,23 @@ function InitTerminalMAIN {
 	}
 }
 
+
+// TEST - 8
 function InitTermTEST {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
 	    
-		mylabels:setlabel(0,"            ").
+		mylabels:setlabel(0,"   Hover    ").
+		mylabels:setlabel(5,"  Test ΔV ").   //assegnamento coatto a EXIT
 		
-		mylabels:setlabel(6," Test ΔV    ").   //assegnamento coatto a EXIT
+		mybuttons:setdelegate(0,hovertest@).
+		mybuttons:setdelegate(5,stampa@).
+		
+		mybuttons:setdelegate(-2,GoPage@:bind(1)).      //CANCEL>main
 		
 		
-  
-		mybuttons:setdelegate(0,GoPage@:bind(50)).
-		mybuttons:setdelegate(1,GoPage@:bind(30)).
-		mybuttons:setdelegate(2,GoPage@:bind(70)).	
-		mybuttons:setdelegate(3,GoPage@:bind(20)). //rover page
-		mybuttons:setdelegate(4,GoPage@:bind(40)).
-		mybuttons:setdelegate(5,GoPage@:bind(200)).
-		mybuttons:setdelegate(6,stampa@).
-		
-		mybuttons:setdelegate(9,MyReboot@).
-		mybuttons:setdelegate(10,exitos@).
-		mybuttons:setdelegate(13,GoPage@:bind(100)).
-		 
-		myflags:setlabel(0,"Dest.").
-		myflags:setlabel(1,"Track").	
-		myflags:setlabel(2,"D.log").  
 	}
 }
 
@@ -540,7 +531,7 @@ function InitTermViewSKS {
 		mylabels:setlabel(9, "   Load   ").
 				
 		mybuttons:setdelegate(0,copyvarsave@:bind(207,1)).
-		mybuttons:setdelegate(2,GoPage@:bind(277)).
+		mybuttons:setdelegate(2,GoPageResettingCur@:bind(277)).
 		//mybuttons:setdelegate(3,GoPage@:bind(222)).
 		
 		mybuttons:setdelegate(7,ClearKSFile@).	
@@ -560,24 +551,35 @@ function InitTermViewBas {
 		
 		ClearTerminal(x).
   
-		mylabels:setlabel(0, "      Run   ").
-		mylabels:setlabel(1, " Run step ").
-		mylabels:setlabel(2, "   Edit   ").
-		mylabels:setlabel(4, "Debug([#BFBFBF]off[#FFFFFF])").
+		if debugbas {mylabels:setlabel(0, "  Debug([#00FF00]on[#FFFFFF]) ").}
+		else {mylabels:setlabel(0, " Debug([#FFA050]off[#FFFFFF]) ").}
+		
+		mylabels:setlabel(1, "    Run   ").
+		mylabels:setlabel(2, " Step run ").
+		mylabels:setlabel(3, "   Reset  ").
+		
+		
+		mylabels:setlabel(4, "    Edit  ").
 		
 		//mylabels:setlabel(5, "  Show #  ").
 		mylabels:setlabel(7, "   Clear  ").
 		mylabels:setlabel(8, "   Save   ").
 		mylabels:setlabel(9, "   Load   ").
+		//mylabels:setlabel(11, "  GOTO-id ").
 				
-		mybuttons:setdelegate(0,GoPage@:bind(230)).
-		mybuttons:setdelegate(1,runlinebas@:bind(emptyprog)).
-		mybuttons:setdelegate(2,GoPage@:bind(237)).
-		mybuttons:setdelegate(4,DebugToggle@:bind(x)).
+		//mybuttons:setdelegate(0,DebugToggle@:bind(x)).
+		mybuttons:setdelegate(0,toggledebug@:bind(x)).
+	
+		//mybuttons:setdelegate(1,runlinebas@:bind(emptyprog)).
+		mybuttons:setdelegate(1,GoPage@:bind(230)).
+		mybuttons:setdelegate(2,steprun@).
+		mybuttons:setdelegate(3,resetbasicstate@).
+		mybuttons:setdelegate(4,GoPageResettingCur@:bind(237)).
 		
 		mybuttons:setdelegate(7,initstextvar@).	
 		mybuttons:setdelegate(8,copyvarsave@:bind(243,0)).
 		mybuttons:setdelegate(9,GoPage@:bind(221)).
+		//mybuttons:setdelegate(11,PrintGotoid@).
 		
 		mybuttons:setdelegate(-2,GoPage@:bind(200)).         //CANCEL
 		
@@ -591,11 +593,30 @@ function InitTermExeBas {
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-        
-
-		//mylabels:setlabel(4,"  Abort ").
+        mylabels:setlabel(4,"   Abort  ").
 				 
-		//mybuttons:setdelegate(4,basAbort@).
+		mybuttons:setdelegate(4,basAbort@).
+		
+		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
+		       				
+	}
+}
+
+// PAGE 231 - executing step run basic
+function InitTermstepExeBas {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+        mylabels:setlabel(1," Continue ").
+		mylabels:setlabel(2," Next step").
+		mylabels:setlabel(3, "   Reset  ").
+		
+		
+				 
+		mybuttons:setdelegate(1,GoPage@:bind(230)).
+		mybuttons:setdelegate(2,steprun@).
+		mybuttons:setdelegate(3,resetbasicstate@).
 		mybuttons:setdelegate(-2,GoPage@:bind(220)).         //CANCEL
 		       				
 	}
