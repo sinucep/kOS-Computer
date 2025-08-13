@@ -8,7 +8,7 @@ v1.0.2                 None
 v1.1.0                 v0.0.0-alpha      experimental
 v1.1.1                 v0.0.0-alpha      
 v1.1.2                 v0.0.0-alpha
-v1.1.3                 v0.0.1-alpha      fixed a problem with GOTO Command
+v1.1.3                 v0.0.1-alpha      fixed a problem with GOTO command
 ```
 ## KSP-BASIC commands
 KSP-BASIC is not case sensitive.
