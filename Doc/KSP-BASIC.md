@@ -1,14 +1,14 @@
 ## KSP-BASIC release history
 ```
-kOS-Computer           KSP-BASIC         NOTES
+kOS-Computer           KSP-BASIC
 
 v1.0.0-alpha           None                  
 v1.0.1                 None               
 v1.0.2                 None               
-v1.1.0                 v0.0.0-alpha      experimental
+v1.1.0                 v0.0.0-alpha
 v1.1.1                 v0.0.0-alpha      
 v1.1.2                 v0.0.0-alpha
-v1.1.3                 v0.0.1-alpha      fixed a problem with GOTO command
+v1.1.3                 v0.0.1-alpha
 ```
 ## KSP-BASIC commands
 KSP-BASIC is not case sensitive.
