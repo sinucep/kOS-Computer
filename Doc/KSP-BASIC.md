@@ -125,7 +125,7 @@ Starts a rover journey to the set destination. No parameters.
 ### REM
 Makes the line a comment line. The line will be not executed at all.
 ### RUNKS
-Executes a .sk file (kerboscript). One parameter: the name of the file without _.ks_file extension.
+Executes a _.sk_ file (kerboscript). One parameter: the name of the file without _.ks_ file extension.
 ### SD
 Set the destination with latidude and longitude parameters.
 ```
