@@ -49,7 +49,7 @@ The allowed parameters are:
 ```
 Parameter      Color / effect     HEX
 
-[none]         restores the standard color
+[none]         default color
 RED            [#FF0000]
 GREEN          [#00FF00]
 BLUE           [#0000FF]
