@@ -47,7 +47,7 @@ PRINT "This text is no longer highlighted"
 
 The allowed parameters are:
 ```
-Parameter      Color / effect     HEX
+Parameter      Color[HEX] / effect
 
 [none]         default color
 RED            [#FF0000]
