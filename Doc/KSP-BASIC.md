@@ -30,17 +30,44 @@ It is equivalent to:
 ```
 ### CLS
 Wrapping of the Kerboscript _CLEARSCREEN_. It sets the KSP-BASIC cursor to (0,0) position.
-### CO
-Set a permanent color. Command **PRINT** is affected.
+### COLOR
+
+Set permanently a color and the highlighting. Command **PRINT** is affected.
 ```
-CO Y
-PRINT "Yellow"
-CO
+COLOR YELLOW
+PRINT "This text is Yellow"
+COLOR
 PRINT "Color reset to default"
+COLOR BACKGROUND
+PRINT "This text is highlighted"
+COLOR FOREGRIUND
+PRINT "This text is no longer highlighted"
 ```
-* **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
+* **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length. Also **COLOR BACKGROUND** shortens the line length, by 7 characters. **COLOR FOREGROUND**  restores the line to its original length.
 
 The allowed parameters are:
+```
+Parameter      Color / effect     HEX
+
+[none]         restores the standard color
+RED            [#FF0000]
+GREEN          [#00FF00]
+BLUE           [#0000FF]
+YELLOW         [#FFFF00]
+CYAN           [#FFFF00]
+WHITE          [#FFFFFF]
+ORANGE         [#FF8000]
+PINK           [#FF8080]
+MAGENTA        [#FF00FF]
+VIOLET         [#9933FF]
+BLACK          [#000000]
+GRAY           [#909090]
+BROWN          [#663300]
+BACKGROUND     set the highlighting
+FOREGROUND     disable the highlighting
+```
+#### History
+Up until version 1.1.3 there there were the **CO** command:
 ```
 Parameter    Color     HEX
 
