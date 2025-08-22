@@ -67,7 +67,7 @@ BACKGROUND     set the highlighting
 FOREGROUND     disable the highlighting
 ```
 #### History
-Up until version 1.1.3 there there were the **CO** command:
+Up until version 1.1.3 there there was the **CO** command instead:
 ```
 Parameter    Color     HEX
 
