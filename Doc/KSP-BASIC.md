@@ -40,7 +40,7 @@ COLOR
 PRINT "Color reset to default"
 COLOR BACKGROUND
 PRINT "This text is highlighted"
-COLOR FOREGRIUND
+COLOR FOREGROUND
 PRINT "This text is no longer highlighted"
 ```
 * **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length. Also **COLOR BACKGROUND** shortens the line length, by 7 characters. **COLOR FOREGROUND**  restores the line to its original length.
