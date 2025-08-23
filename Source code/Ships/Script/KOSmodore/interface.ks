@@ -48,6 +48,10 @@ global PageBacks to list(
 	list(101,  100),
 	list(102,  100),
 	list(103,  100),
+	list(104,  100),
+	list(105,  100),
+	list(106,  100),
+	list(107,  100),
 	list(200,    1),
 	list(201,  200), 
 	list(205,  200), 
@@ -61,7 +65,10 @@ global PageBacks to list(
 	list(277,  218),
 	list(278,  218),
 	list(279,  218),
-	list(280,  218)
+	list(280,  218),
+	list(290,  220),
+	list(291,  220),
+	list(292,  220)
 ).
 
 
@@ -132,6 +139,7 @@ function PageBack {
 //  101       type marker thickness
 //  102       type Data sampling time interval
 //  103       type Track sampling time interval
+//  104       type X text resolution
   //  187        reaname ks prog 0
   //  188        reaname ks prog 1
   //  189        reaname ks prog 2
@@ -169,6 +177,10 @@ function PageBack {
 //  279       edit sks program 2
 //  280       edit sks program 3
 
+  // 290         multi edit basic program 0
+  // 291         multi edit basic program 1
+
+  // 300         multimonmitor wizard
 function EscSaveFile {
 	if NPage = 52 or NPage = 53 or NPage = 54 {
 		set offsy to 0.
@@ -269,6 +281,26 @@ function TypeRealNumAccept {
 	if Npage = 103 {
 		set INPstr1 to emptyprog[0].
 		set SettingsL[2] to INPstr1:tonumber(-9999).
+		GoPage(100).
+	}
+	if Npage = 104 {
+		set INPstr1 to emptyprog[0].
+		set SettingsL[3] to INPstr1:tonumber(-9999).
+		GoPage(100).
+	}
+	if Npage = 105 {
+		set INPstr1 to emptyprog[0].
+		set SettingsL[4] to INPstr1:tonumber(-9999).
+		GoPage(100).
+	}
+	if Npage = 106 {
+		set INPstr1 to emptyprog[0].
+		set SettingsL[5] to INPstr1:tonumber(-9999).
+		GoPage(100).
+	}
+	if Npage = 107 {
+		set INPstr1 to emptyprog[0].
+		set SettingsL[6] to INPstr1:tonumber(-9999).
 		GoPage(100).
 	}
 }
@@ -399,12 +431,12 @@ function SetEditCursor0 {
 
 
 function listastr {   //stampa una lista selezionalible di stringhe
-	parameter lis.
+	parameter lis, oy is 0.
 	//global li to LIST().
 	local cou to 0.
  
 	FOR bod in lis {
-		PRINT "  " + bod at(0,cou).
+		PRINT "  " + bod at(0,cou+oy).
 		set cou to cou + 1.
 	}
 	if lind > cou-1 {
@@ -413,7 +445,7 @@ function listastr {   //stampa una lista selezionalible di stringhe
 	if lind < 0 {
 		set lind to cou-1.
 	}
-	print ">" at(1,lind). 
+	print ">" at(1,lind+oy). 
 }
 
 function ListaFileDown{
@@ -455,16 +487,16 @@ function ListaFileUp{
 
 function ListaStrDown{
 	//if (Npage = 10) or (Npage = 11) or (Npage = 51) {
-		parameter li.
+		parameter li, oy is 0.
 		set lind to lind +1.
-		listaStr(li).
+		listaStr(li, oy).
 }
 
 function ListaStrUp{
 	//if (Npage = 10 ) or (Npage = 11) or (Npage = 51) {
-		parameter li.
+		parameter li, oy is 0.
 		set lind to lind -1.
-		listaStr(li).
+		listaStr(li, oy).
 }
 
 
@@ -506,6 +538,9 @@ function EnterListselect{
 		set DataSourcesAdded to SubItem(DataSourcesAdded,DataSourcesAdded[lind]).
 		GoPage(75).
 	}
+	if Npage = 100 {
+		SetCFGElement(lind).
+	}
 	if Npage = 201 {
 		GoPage(210).
 		RunKS(li[lind]).
@@ -521,6 +556,16 @@ function EnterListselect{
 		set emptyprog to readjson("/KOSmodore/ksp-basic/" + li[lind]).
 		GoPage(220).
 		
+	}
+	
+	// do not change the order of the following:
+	if Npage = 301 {
+		set SettingsL[6] to lind.
+      GoPage(1).	
+	}
+	if Npage = 300 {
+		set SettingsL[5] to lind.
+		GoPage(301).	
 	}
 }
 

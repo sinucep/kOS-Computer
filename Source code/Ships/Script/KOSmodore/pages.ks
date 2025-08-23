@@ -4,6 +4,8 @@ run once "/KOSmodore/interface.ks".
 run once "/KOSmodore/datalog.ks".
 run once "/KOSmodore/texted.ks".
 run once "/KOSmodore/basicflow.ks".
+run once "/KOSmodore/proc2/terminal2.ks".
+run once "/KOSmodore/settings.ks".
 
 function GoPage {
 	parameter p.
@@ -269,9 +271,8 @@ function GoPage {
 	if p = 100 {
 		SPage(100).	
 		InitTermSettings(monitors).
-		print "Marker thickness: " + SettingsL[0] at(0,0).
-		print "Data log sampling interval (s): " + SettingsL[1] at(0,1).
-		print "Track sampling interval (s): " + SettingsL[2] at(0,2).
+        set lind to 0.
+		ListaStr(CFGnamesandvals).
 	}
 	
 	// rename ks
@@ -541,6 +542,90 @@ function GoPage {
 		set li to emptyprog.
 		//Cur().
 	}
+	
+	// Multi Edit basic prog 0
+	if p = 290 {
+		SPage(290).
+		InitTermMultiType0(SettingsL[5], SettingsL[6]).	
+		
+		local cou to 0.
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+	}
+	if p = 291 {
+		SPage(291).
+		InitTermMultiType1(SettingsL[5], SettingsL[6]).	
+		
+		local cou to 0.
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+	}
+	if p = 292 {
+		SPage(292).
+		InitTermMultiType2(SettingsL[5], SettingsL[6]).	
+		
+		local cou to 0.
+		for lin in emptyprog {
+			print lin at(0,cou).
+			set cou to cou + 1.
+		}
+		set li to emptyprog.
+	}
+	//  multimonmitor wizard
+	if p = 300 {
+		SPage(300).
+		InitTermMonNum(monitors, 7).	
+		set lind to 0.
+		
+		monlist:clear.
+		FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+			monlist:add("Monitor " + x).
+		}
+		Print "· Switch to kOSPropMonitor the two monitors you want to use"at(0,0).
+		Print "  (pressing repeatedly the button in the top-right corner)"at(0,1).
+		Print "· Switch each monitor to a different processor by NEXT/PREV buttons"at(0,2).
+		Print "  (usually the second procesor is set on the left)"at(0,3).
+		Print "· Choose the number of the monitor you want on the right"at(0,4).
+		Print "  (You can see the monitor number in the top-left corners):."at(0,5).
+		
+		ListaStr(monlist,7).
+		
+		
+	}
+	if p = 301 {
+		SPage(301).
+		InitTermMonNum(monitors, 3).	
+		set lind to 0.
+		
+		monlist:clear.
+		FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+			monlist:add("Monitor " + x).
+		}
+		Print "· Choose the number of the monitor you want on the left:"at(0,0).
+		Print "  (You can see the monitor number in the top-left corners):."at(0,1).
+		
+		ListaStr(monlist,3).
+		
+		
+	}
+	if p = 305 {
+		SPage(305).
+		InitTermCheckDualMon(monitors).	
+		set lind to 0.
+		
+		Print "You haven't configured dual-monitor mode."at(0,0).
+		Print "Do you want to do that?"at(0,1).
+		
+		
+		
+	}
+	
 	
 }
 

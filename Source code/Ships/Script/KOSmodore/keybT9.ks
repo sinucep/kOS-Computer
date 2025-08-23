@@ -1,6 +1,7 @@
 @lazyGlobal off.
 
 run once "/KOSmodore/texted.ks".
+run once "/KOSmodore/strings.ks".
 
 local tpress to 0.
 local conta to 0.
@@ -119,6 +120,12 @@ function cicleset {
 		if symset = 2 {	GoPage(239).	}
 		if symset = 3 {	GoPage(240).	}
 	}
+	if NPage = 290 or NPage = 291 or NPage = 292{
+		if symset > 2 { set symset to 0. }
+		if symset = 0 {	GoPage(290). }
+		if symset = 1 {	GoPage(291).	}
+		if symset = 2 {	GoPage(292).	}
+	}
 	if NPage = 277 or NPage = 278 or NPage = 279 or NPage = 280{
 		if symset > 3 { set symset to 0. }
 		if symset = 0 {	GoPage(277). }
@@ -128,12 +135,24 @@ function cicleset {
 	}
 }
 
+// send a message to the sec processor
+function MesSec {
+	parameter EdLine,Cux.
+	if Npage = 290 or Npage = 291 or Npage = 292 {
+		local MESSAGE TO strLastWordBeforCur(EdLine,Cux).
+		local P TO PROCESSOR("second").
+		P:CONNECTION:SENDMESSAGE(MESSAGE).
+	}
+}
+
 function T9bu1parE {
 	parameter sa, EdLine.
 	
 	set EdLine to EdLine:insert(cuX,sa).
 	set CuX to Cux + 1.
 	print EdLine at(0,Cuy+offsy).
+	
+	MesSec(EdLine,Cux).
 	
 	return EdLine.
 }
@@ -145,6 +164,9 @@ function T9backspaceE {         //back space
 		set EdLine to EdLine:remove(CuX, 1).
 		print EdLine + "  " at(0,Cuy+offsy). //duoble space for there is also the cursor to delete
 	}
+	
+	MesSec(EdLine,Cux).
+	
 	return EdLine.
 }
 
@@ -155,6 +177,75 @@ function T9cancelE {         //canc
 		print EdLine + " " at(0,Cuy+offsy).
 	}
 	return EdLine.
+}
+
+
+function T9bu2parE {
+	parameter sa, sb, id, EdLine.
+    
+	if (tpress > TIME:SECONDS - 0.6) {
+		if not (tastopreced = id) {set conta to 0.}		
+	}
+	else {		
+		set conta to 0.
+	}
+	set tastopreced to id.
+	if (tpress > TIME:SECONDS - 0.6) and (conta = 2) {
+		set conta to 0.
+		set cux to cux - 1.
+			set EdLine to EdLine:remove(cuX, 1).
+	}
+	if (tpress > TIME:SECONDS - 0.6) and (conta = 1) {
+		set conta to conta + 1.
+		set cux to cux - 1.
+			set EdLine to EdLine:remove(cuX, 1).
+			set EdLine to EdLine:insert(cuX, sb).
+		set cux to cux + 1.
+		print EdLine at(0,cuy+offsy).
+	}
+	if (conta = 0) {
+			set EdLine to EdLine:insert(cuX,sa).
+		set cux to cux + 1.
+		set conta to conta + 1.
+		print EdLine at(0,cuy+offsy).
+	}
+	set tpress to TIME:SECONDS.
+	return EdLine.
+}
+
+function EndHome {
+	parameter id.
+    
+	if (tpress > TIME:SECONDS - 0.6) {
+		if not (tastopreced = id) {set conta to 0.}		
+	}
+	else {		
+		set conta to 0.
+	}
+	set tastopreced to id.
+	if (tpress > TIME:SECONDS - 0.6) and (conta = 2) {
+		set conta to 0.
+		//set cux to cux - 1.
+			//set EdLine to EdLine:remove(cuX, 1).
+	}
+	if (tpress > TIME:SECONDS - 0.6) and (conta = 1) {
+		set conta to conta + 1.
+		//set cux to cux - 1.
+		//	set EdLine to EdLine:remove(cuX, 1).
+		//	set EdLine to EdLine:insert(cuX, sb).
+		//set cux to cux + 1.
+		//print EdLine at(0,cuy+offsy).
+		cuHome().
+	}
+	if (conta = 0) {
+			//set EdLine to EdLine:insert(cuX,sa).
+		//set cux to cux + 1.
+		set conta to conta + 1.
+		//print EdLine at(0,cuy+offsy).
+		cuend().
+	}
+	set tpress to TIME:SECONDS.
+	//return EdLine.
 }
 
 function T9bu3parE {
@@ -279,9 +370,77 @@ parameter stri,offset.
 	set cux to cux + offset-1.
 }
 
-function T9spaceE {
-	set emptyprog[CuY] to T9bu1parE(" ", emptyprog[Cuy]).
-}
+function T9spaceE {set emptyprog[CuY] to T9bu1parE(" ", emptyprog[Cuy]).}
+
+function tyA {set emptyprog[CuY] to T9bu1parE("A", emptyprog[Cuy]).}
+function tyB {set emptyprog[CuY] to T9bu1parE("B", emptyprog[Cuy]).}
+function tyC {set emptyprog[CuY] to T9bu1parE("C", emptyprog[Cuy]).}
+function tyD {set emptyprog[CuY] to T9bu1parE("D", emptyprog[Cuy]).}
+function tyE {set emptyprog[CuY] to T9bu1parE("E", emptyprog[Cuy]).}
+function tyF {set emptyprog[CuY] to T9bu1parE("F", emptyprog[Cuy]).}
+function tyG {set emptyprog[CuY] to T9bu1parE("G", emptyprog[Cuy]).}
+function tyH {set emptyprog[CuY] to T9bu1parE("H", emptyprog[Cuy]).}
+function tyI {set emptyprog[CuY] to T9bu1parE("I", emptyprog[Cuy]).}
+function tyJ {set emptyprog[CuY] to T9bu1parE("J", emptyprog[Cuy]).}
+function tyK {set emptyprog[CuY] to T9bu1parE("K", emptyprog[Cuy]).}
+function tyL {set emptyprog[CuY] to T9bu1parE("L", emptyprog[Cuy]).}
+function tyM {set emptyprog[CuY] to T9bu1parE("M", emptyprog[Cuy]).}
+function tyN {set emptyprog[CuY] to T9bu1parE("N", emptyprog[Cuy]).}
+function tyO {set emptyprog[CuY] to T9bu1parE("O", emptyprog[Cuy]).}
+function tyP {set emptyprog[CuY] to T9bu1parE("P", emptyprog[Cuy]).}
+function tyQ {set emptyprog[CuY] to T9bu1parE("Q", emptyprog[Cuy]).}
+function tyR {set emptyprog[CuY] to T9bu1parE("R", emptyprog[Cuy]).}
+function tyS {set emptyprog[CuY] to T9bu1parE("S", emptyprog[Cuy]).}
+function tyT {set emptyprog[CuY] to T9bu1parE("T", emptyprog[Cuy]).}
+function tyU {set emptyprog[CuY] to T9bu1parE("U", emptyprog[Cuy]).}
+function tyV {set emptyprog[CuY] to T9bu1parE("V", emptyprog[Cuy]).}
+function tyW {set emptyprog[CuY] to T9bu1parE("W", emptyprog[Cuy]).}
+function tyX {set emptyprog[CuY] to T9bu1parE("X", emptyprog[Cuy]).}
+function tyY {set emptyprog[CuY] to T9bu1parE("Y", emptyprog[Cuy]).}
+function tyZ {set emptyprog[CuY] to T9bu1parE("Z", emptyprog[Cuy]).}
+
+function tyal {set emptyprog[CuY] to T9bu1parE("a", emptyprog[Cuy]).}
+function tybl {set emptyprog[CuY] to T9bu1parE("b", emptyprog[Cuy]).}
+function tycl {set emptyprog[CuY] to T9bu1parE("c", emptyprog[Cuy]).}
+function tydl {set emptyprog[CuY] to T9bu1parE("d", emptyprog[Cuy]).}
+function tyel {set emptyprog[CuY] to T9bu1parE("e", emptyprog[Cuy]).}
+function tyfl {set emptyprog[CuY] to T9bu1parE("f", emptyprog[Cuy]).}
+function tygl {set emptyprog[CuY] to T9bu1parE("g", emptyprog[Cuy]).}
+function tyhl {set emptyprog[CuY] to T9bu1parE("h", emptyprog[Cuy]).}
+function tyil {set emptyprog[CuY] to T9bu1parE("i", emptyprog[Cuy]).}
+function tyjl {set emptyprog[CuY] to T9bu1parE("j", emptyprog[Cuy]).}
+function tykl {set emptyprog[CuY] to T9bu1parE("k", emptyprog[Cuy]).}
+function tyll {set emptyprog[CuY] to T9bu1parE("l", emptyprog[Cuy]).}
+function tyml {set emptyprog[CuY] to T9bu1parE("m", emptyprog[Cuy]).}
+function tynl {set emptyprog[CuY] to T9bu1parE("n", emptyprog[Cuy]).}
+function tyol {set emptyprog[CuY] to T9bu1parE("o", emptyprog[Cuy]).}
+function typl {set emptyprog[CuY] to T9bu1parE("p", emptyprog[Cuy]).}
+function tyql {set emptyprog[CuY] to T9bu1parE("q", emptyprog[Cuy]).}
+function tyrl {set emptyprog[CuY] to T9bu1parE("r", emptyprog[Cuy]).}
+function tysl {set emptyprog[CuY] to T9bu1parE("s", emptyprog[Cuy]).}
+function tytl {set emptyprog[CuY] to T9bu1parE("t", emptyprog[Cuy]).}
+function tyul {set emptyprog[CuY] to T9bu1parE("u", emptyprog[Cuy]).}
+function tyvl {set emptyprog[CuY] to T9bu1parE("v", emptyprog[Cuy]).}
+function tywl {set emptyprog[CuY] to T9bu1parE("w", emptyprog[Cuy]).}
+function tyxl {set emptyprog[CuY] to T9bu1parE("x", emptyprog[Cuy]).}
+function tyyl {set emptyprog[CuY] to T9bu1parE("y", emptyprog[Cuy]).}
+function tyzl {set emptyprog[CuY] to T9bu1parE("z", emptyprog[Cuy]).}
+
+function ty1 {set emptyprog[CuY] to T9bu1parE("1", emptyprog[Cuy]).}
+function ty2 {set emptyprog[CuY] to T9bu1parE("2", emptyprog[Cuy]).}
+function ty3 {set emptyprog[CuY] to T9bu1parE("3", emptyprog[Cuy]).}
+function ty4 {set emptyprog[CuY] to T9bu1parE("4", emptyprog[Cuy]).}
+function ty5 {set emptyprog[CuY] to T9bu1parE("5", emptyprog[Cuy]).}
+function ty6 {set emptyprog[CuY] to T9bu1parE("6", emptyprog[Cuy]).}
+function ty7 {set emptyprog[CuY] to T9bu1parE("7", emptyprog[Cuy]).}
+function ty8 {set emptyprog[CuY] to T9bu1parE("8", emptyprog[Cuy]).}
+function ty9 {set emptyprog[CuY] to T9bu1parE("9", emptyprog[Cuy]).}
+function ty0 {set emptyprog[CuY] to T9bu1parE("0", emptyprog[Cuy]).}
+
+function tyAB { set emptyprog[cuY] to T9bu2parE("A","B",97, emptyprog[cuY]). }
+
+
+
 
 function T9CancE {
 	
@@ -338,9 +497,12 @@ function InsertLineKST {
 		for lin in emptyprog {
 			print lin at(0,cou).
 			set cou to cou + 1.
-		}	
+		}
+//MesSec(emptyprog[Cuy],Cux).		
+sendmsg("").
 }
 
+//da sostituire con ty...
 function T91e {set emptyprog[cuY] to T9bu1parE("1", emptyprog[cuY]).}
 function T92e {set emptyprog[cuY] to T9bu1parE("2", emptyprog[cuY]).}
 function T93e {set emptyprog[cuY] to T9bu1parE("3", emptyprog[cuY]).}
@@ -379,3 +541,11 @@ function punct2e { set emptyprog[cuY] to T9bu4parE(".",",","!","?",23, emptyprog
 function punct3e { set emptyprog[cuY] to T9bu4parE("-","+","&",".",24, emptyprog[cuY]).}
 function punct4e { set emptyprog[cuY] to T9bu4parE("""","*","^","$",25, emptyprog[cuY]). }
 function punct5e { set emptyprog[cuY] to T9bu4parE("<",">","@","/",26, emptyprog[cuY]). }
+
+function addhint {
+	parameter hint, curx.
+	set emptyprog[cuY] to  emptyprog[cuY]:INSERT(Cux, hint).
+	print emptyprog[cuY] at(0,Cuy+offsy).
+	//set cux to cux + (curx:tonumber).
+	set cux to cux + (hint:length).
+}

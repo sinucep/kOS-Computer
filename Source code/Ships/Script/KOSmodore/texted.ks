@@ -56,13 +56,14 @@ function CuDel {   //what char there is in (x,y). Behind the cursor
 }
 
 function CuRight {
-	if cuX < 40 {
+	if cuX < 80 {
 		if cux < emptyprog[Cuy]:length {
 			CuDel().
 			set cuX to cuX + 1.
 			//Cur().
 		}
 	}
+	MesSec(emptyprog[Cuy],Cux).
 }
 
 function CuLeft {
@@ -70,7 +71,19 @@ function CuLeft {
 		CuDel().
 		set cuX to cuX - 1.
 		//Cur().
+		MesSec(emptyprog[Cuy],Cux).
 	}
+}
+
+function CuEnd {
+		CuDel().
+		set CuX to emptyprog[Cuy]:length.
+		MesSec(emptyprog[Cuy],Cux).
+}
+
+function CuHome {
+		CuDel().
+		set CuX to 0.
 }
 
 function CuDown {
@@ -86,6 +99,7 @@ function CuDown {
 			//Cur().
 		}
 	}
+	MesSec(emptyprog[Cuy],Cux).
 }
 
 function CuUp {
@@ -97,5 +111,6 @@ function CuUp {
 		}
 		//Cur().
 	}
+	MesSec(emptyprog[Cuy],Cux).
 }
 

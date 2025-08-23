@@ -8,6 +8,10 @@ run once "/KOSmodore/files.ks".
 run once "/KOSmodore/GPS.ks".
 run once "/KOSmodore/test.ks".
 run once "/KOSmodore/hovering.ks".
+run once "/KOSmodore/multimonitor.ks".
+run once "/KOSmodore/settings.ks".
+
+
 //run once "/KOSmodore/basicflow.ks".
 
 global mybuttons to addons:kpm:buttons.
@@ -46,6 +50,8 @@ function MSetFlag{
 function MNOP{
 }
 
+
+
 function InitTerminalMAIN {
 	parameter monitors.
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
@@ -60,7 +66,7 @@ function InitTerminalMAIN {
 		mylabels:setlabel(5," Programs ").
 		mylabels:setlabel(6,"            ").   //assegnamento coatto a EXIT
 		
-		//mylabels:setlabel(7,"     TEST   ").
+		mylabels:setlabel(7,"     TEST   ").
 		mylabels:setlabel(9,"  Reboot  ").
 		mylabels:setlabel(10,"  Exit OS ").
 		mylabels:setlabel(13," Settings ").
@@ -71,7 +77,7 @@ function InitTerminalMAIN {
 		mybuttons:setdelegate(3,GoPage@:bind(20)). //rover page
 		//mybuttons:setdelegate(4,GoPage@:bind(40)).
 		mybuttons:setdelegate(5,GoPage@:bind(200)).
-		//mybuttons:setdelegate(7,GoPage@:bind(8)).
+		mybuttons:setdelegate(7,GoPage@:bind(8)).
 		
 		mybuttons:setdelegate(9,MyReboot@).
 		mybuttons:setdelegate(10,exitos@).
@@ -91,10 +97,19 @@ function InitTermTEST {
 		
 		ClearTerminal(x).
 	    
-		mylabels:setlabel(0,"   Hover    ").
+		mylabels:setlabel(0,"  Hover .ks ").
+		
+		mylabels:setlabel(1," Dual-KPM ").
+		mylabels:setlabel(2," msg proc2").
+		mylabels:setlabel(3," Hover").
+		//mylabels:setlabel(3,strlastword("m sdf98 sg pgroc2  ")).
 		mylabels:setlabel(5,"  Test ΔV ").   //assegnamento coatto a EXIT
 		
+		
 		mybuttons:setdelegate(0,hovertest@).
+		mybuttons:setdelegate(1, GoPage@:bind(300)).
+		mybuttons:setdelegate(2, msgproc2@).
+		mybuttons:setdelegate(3,hovertest2@).
 		mybuttons:setdelegate(5,stampa@).
 		
 		mybuttons:setdelegate(-2,GoPage@:bind(1)).      //CANCEL>main
@@ -462,15 +477,14 @@ function InitTermSettings{
 		
 		ClearTerminal(x).
 		
-		mylabels:setlabel(0,"   Set m. t.").
-		mylabels:setlabel(1," Set d. i.").
-		mylabels:setlabel(2," Set t. i.").
-						
-		mybuttons:setdelegate(0,TypeRealNum@:BIND(101,"Type marker thickness: ",0, true)).
-		mybuttons:setdelegate(1,TypeRealNum@:BIND(102,"Type DL interval (s): ",0, true)).
-		mybuttons:setdelegate(2,TypeRealNum@:BIND(103,"Type TRK interval (s): ",0, true)).
-
+		mylabels:setlabel(8, " Save&Exit").
+		
+		mybuttons:setdelegate(8,Savesettings@).
+		
 		mybuttons:setdelegate(-2,GoPage@:bind(1)).             //CANCEL
+		mybuttons:setdelegate(-1,EnterListselect@).   //ENTER
+		mybuttons:setdelegate(-3,listaStrUp@:bind(CFGnames)). //UP
+		mybuttons:setdelegate(-4,listaStrDown@:bind(CFGnames)). //DOWN
 	}
 }
 
@@ -560,6 +574,7 @@ function InitTermViewBas {
 		
 		
 		mylabels:setlabel(4, "    Edit  ").
+		mylabels:setlabel(5, " Dual-edit").
 		
 		//mylabels:setlabel(5, "  Show #  ").
 		mylabels:setlabel(7, "   Clear  ").
@@ -575,6 +590,7 @@ function InitTermViewBas {
 		mybuttons:setdelegate(2,steprun@).
 		mybuttons:setdelegate(3,resetbasicstate@).
 		mybuttons:setdelegate(4,GoPageResettingCur@:bind(237)).
+		mybuttons:setdelegate(5,checkmultimon@).
 		
 		mybuttons:setdelegate(7,initstextvar@).	
 		mybuttons:setdelegate(8,copyvarsave@:bind(243,0)).
@@ -784,5 +800,38 @@ function InitTermEditKS3cu {
 		mybuttons:setdelegate(-6,CuRight@).          //RIGHT
 		mybuttons:setdelegate(-1,InsertLineKST@).  //ENTER
 		
+	}
+}
+
+// PAGE 300 - shows the monitor number
+function InitTermMonNum {
+	parameter monitors, oy.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+		
+		mylabels:setlabel(0," [#FF7755][/hw]"+x+"[hw][#FFFFFF] |       ").
+		
+		mybuttons:setdelegate(-2,GoPage@:bind(1)).             //CANCEL
+		mybuttons:setdelegate(-1,EnterListselect@).   //ENTER
+		mybuttons:setdelegate(-3,listaStrUp@:bind(monlist,oy)). //UP
+		mybuttons:setdelegate(-4,listaStrDown@:bind(monlist,oy)). //DOWN
+		
+	}
+}
+
+//  Check DualMon settings - 305
+function InitTermCheckDualMon {
+	parameter monitors.
+	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
+		
+		ClearTerminal(x).
+		mylabels:setlabel(0,"      OK    ").
+		mylabels:setlabel(1,"  Cancel  ").
+				
+		mybuttons:setdelegate(0,GoPage@:bind(300)).
+		mybuttons:setdelegate(1,GoPage@:bind(220)).
+		
+		mybuttons:setdelegate(-2,GoPage@:bind(220)).      //CANCEL>main
 	}
 }

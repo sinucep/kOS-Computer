@@ -19,19 +19,22 @@ run once "/KOSmodore/datalog.ks".
 run once "/KOSmodore/settings.ks".
 run once "/KOSmodore/runKS.ks".
 run once "/KOSmodore/texted.ks".
+run once "/KOSmodore/test.ks".
 //run once "/KOSmodore/basicflow.ks".
 
 global fine to false. // per uscire dal programma e usare il terminale
 
 //Addon KOSProp Monitor
 global monitors to addons:kpm:getmonitorcount().
-global id to addons:kpm:getguidshort(0).      // OR set id to addons:kpm:getguid(0).
-global monindex to addons:kpm:getindexof(id). // If GETINDEXOF Returns -1, GUID Not Found. Works for Whole GUID and Short GUID
+//global id to addons:kpm:getguidshort(0).      // OR set id to addons:kpm:getguid(0).
+//global monindex to addons:kpm:getindexof(id). // If GETINDEXOF Returns -1, GUID Not Found. Works for Whole GUID and Short GUID
 
 local LogStart is 0.
 local GPSLogStart is 0.
 local PosStart is 0.                      // just for to blink once POS flag
 local CuBlinkStart is 0.                   // for to blink the cursor
+
+global msgRECEIVED to "".
 
 global SensLog TO LIST().
 global LoadedTrack TO LIST().  
@@ -179,10 +182,13 @@ set CurrentNote to LBook:LENGTH-1.
 //----------------------Starting page-------------------
 
 
-//GoPage(8).
+//GoPage(8). //test
 //GoPage(237).   //new basic
 //GoPage(221).   //open basic
+
+
 //set debugbas to true.
+//GoPage(100).   //settings
 
 //----------------------Main Loop-----------------------
 
@@ -231,6 +237,7 @@ if myflags:getstate(0) {
 	
 //blinking cursor
     if NPage = 237 or NPage = 238 or NPage = 239 or NPage = 240 or
+	   NPage = 290 or NPage = 291 or NPage = 292 or
 	   NPage = 277 or NPage = 278 or NPage = 279 or NPage = 280 or
 	   NPage = 243 or NPage = 244 or NPage = 245 or
 	   NPage = 253 or NPage = 254 or NPage = 255 or	   
@@ -290,4 +297,13 @@ if backtobascase = 2 {
 			debugwin().
 		}
 	}
+	
+// messages
+	if not CORE:MESSAGES:EMPTY {
+		set msgRECEIVED TO CORE:MESSAGES:POP.
+		//addhint(msgRECEIVED:CONTENT[0],msgRECEIVED:CONTENT[1]).
+		addhint(msgRECEIVED:CONTENT,-9999).
+	}
+    //IF msgRECEIVED:CONTENT = "undock" {clearscreen.	}
+	
 }

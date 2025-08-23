@@ -16,6 +16,7 @@ local cco to -1. //so it starts from 0. tsk!
 local linumbers to list(). 
 
 local txtcolor to "".
+local background to "".
 
 global stepmode to false.
 
@@ -241,7 +242,7 @@ function coPRINT {
 				set lxx to (lx + debugoffset).
 				set uniq to random().
 				//print "lxx:"+lxx+" do:"+debugoffset at (44,ly).
-				log "PRINT " + txtcolor + l:REMOVE(0,sepi+1) +
+				log "PRINT " + txtcolor + BackGround + l:REMOVE(0,sepi+1) +
 				" at(" + (lxx*1) + "," + ly +")." to // string to number.. tsk!
 				"/KOSmodore/temp/print" + uniq + ".ks".
 				RUNPATH("/KOSmodore/temp/print" + uniq + ".ks").
@@ -278,25 +279,30 @@ function coCOLOR {
 	local color to "".
 	local sepi to l:FIND(" ").
 	
-	if l = "CO" {set Txtcolor to "".}
+	if l = "COLOR" {
+		set Txtcolor to "".
+		set BACKGROUND to "".
+	}
 	else
 		if sepi > -1 {
-			if (l:REMOVE(sepi,(l:length-sepi)) = "CO"){
+			if (l:REMOVE(sepi,(l:length-sepi)) = "COLOR"){
 				set color to l:REMOVE(0,sepi+1).
 			
-				if color = "R" {set Txtcolor to """[#FF0000]""+".}
-				if color = "G" {set Txtcolor to """[#00FF00]""+".}
-				if color = "B" {set Txtcolor to """[#0000FF]""+".}
-				if color = "Y" {set Txtcolor to """[#FFFF00]""+".}
-				if color = "C" {set Txtcolor to """[#FFFF00]""+".}
-				if color = "W" {set Txtcolor to """[#FFFFFF]""+".}
-				if color = "O" {set Txtcolor to """[#FF8000]""+".}
-				if color = "P" {set Txtcolor to """[#FF8080]""+".}
-				if color = "M" {set Txtcolor to """[#FF00FF]""+".}
-				if color = "V" {set Txtcolor to """[#9933FF]""+".}
-				if color = "BLACK" {set Txtcolor to """[#9933FF]""+".}
+				if color = "RED" {set Txtcolor to """[#FF0000]""+".}
+				if color = "GREEN" {set Txtcolor to """[#00FF00]""+".}
+				if color = "BLUE" {set Txtcolor to """[#0000FF]""+".}
+				if color = "YELLOW" {set Txtcolor to """[#FFFF00]""+".}
+				if color = "CYAN" {set Txtcolor to """[#FFFF00]""+".}
+				if color = "WHITE" {set Txtcolor to """[#FFFFFF]""+".}
+				if color = "ORANGE" {set Txtcolor to """[#FF8000]""+".}
+				if color = "PINK" {set Txtcolor to """[#FF8080]""+".}
+				if color = "MAGENTA" {set Txtcolor to """[#FF00FF]""+".}
+				if color = "VIOLET" {set Txtcolor to """[#9933FF]""+".}
+				if color = "BLACK" {set Txtcolor to """[#000000]""+".}
 				if color = "GRAY" {set Txtcolor to """[#909090]""+".}
-				if color = "BROWN" {set Txtcolor to """[#663300]""+".}		
+				if color = "BROWN" {set Txtcolor to """[#663300]""+".}
+				if color = "BACKGROUND" {set BACKGROUND to """[font2]""+".}
+				if color = "FOREGROUND" {set BACKGROUND to "".}
 			}
 		}
 }
@@ -427,6 +433,21 @@ function coGOTO {
 	}
 }
 
+function coRUNKS {
+	parameter li.
+	local l to li:trim:toupper.
+	
+	local sepi to l:FIND(" ").
+	if sepi > -1 {
+		
+		if (l:REMOVE(sepi,(l:length-sepi)) = "RUNKS") {
+			local ksfile to l:REMOVE(0,sepi+1).
+			runks(ksfile + ".ks").
+			
+		}
+	}
+}
+
 function coShipSys {
 	parameter li.
 	if li:trim:toupper = "AG1" {toggle AG1.}
@@ -506,7 +527,8 @@ function RunBASICline {
         //coW(LiNoN).
 		coWR(LiNoN).
 		coKSLine(LiNoN).	
-		coCOLOR(LiNoN).			
+		coCOLOR(LiNoN).
+		coRUNKS(LiNoN).		
 		coGOTO(LiNoN).
 		
 		if coEND(LiNoN) {set exodos to true.}
