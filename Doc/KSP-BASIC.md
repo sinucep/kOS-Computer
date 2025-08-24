@@ -43,7 +43,7 @@ PRINT "This text is highlighted"
 COLOR FOREGROUND
 PRINT "This text is no longer highlighted"
 ```
-* **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length. Also **COLOR BACKGROUND** shortens the line length, by 7 characters. **COLOR FOREGROUND**  restores the line to its original length.
+* **Warning!** Due to the nature of kOSPropMonitor's color system, each colored line will be shortened by 9 characters. Each color change will reduce the line length by another 9 characters. Use colors sparingly. The **CO** command without parameters restores the line to its original length.
 
 The allowed parameters are:
 ```
@@ -63,11 +63,9 @@ VIOLET         [#9933FF]
 BLACK          [#000000]
 GRAY           [#909090]
 BROWN          [#663300]
-BACKGROUND     set the highlighting
-FOREGROUND     disable the highlighting
 ```
 #### History
-Up until version 1.1.3 there there was the **CO** command instead:
+Up until kOS-Computer version 1.1.3 there there was the **CO** command instead:
 ```
 Parameter    Color     HEX
 
@@ -131,6 +129,16 @@ Set the destination with latidude and longitude parameters.
 ```
 SD 45.23434 -73.00123
 ```
+### TEXT
+
+```
+BACKGROUND     set the highlighting
+FOREGROUND     disable the highlighting
+SMALL          set a small width for the caracters (80 columns)
+MEDIUM         set a medium width for the caracters (40 columns)
+LARGE          set a large width for the caracters (20 columns)
+```
+Like **COLOR**, also **TEXT** shortens the line length. **TEXT MEDIUM** shortens by 5 characters, **TEXT LARGE** by 4 characters. **TEXT** sets che character width to small and restores the line to its original length.
 ### WR
 Wait for the rover to stop before executing other commands. No paramenters.
 ### WAIT
