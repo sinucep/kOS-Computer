@@ -73,6 +73,6 @@ You can load from file and run kerboscript programs in kOS-Computer.
 You can write programs in IVA in a Kerbal-tailored Basic-like language, even in VR. You can write, execute, debug, save and load the programs using the kOSPropMonitor.
 KSP-Basic can read files, activate Action Groups and much more.
 ### Dual processor
-Full keyboard (no more T), dual monitor.
+Full keyboard (no T9), dual monitor.
 ### Settings save
 Setting saved in the craft.
