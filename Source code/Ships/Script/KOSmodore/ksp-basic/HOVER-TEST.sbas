@@ -1,0 +1,13 @@
+{
+    "items": [
+        {
+            "value": "RUNKS COUNTDOWN3",
+            "$type": "kOS.Safe.Encapsulation.StringValue"
+        },
+        {
+            "value": "RUNKS HOVERBAS",
+            "$type": "kOS.Safe.Encapsulation.StringValue"
+        }
+    ],
+    "$type": "kOS.Safe.Encapsulation.ListValue"
+}

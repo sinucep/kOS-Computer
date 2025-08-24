@@ -13,7 +13,7 @@
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
-            "value": "TEXT BACKGROUND",
+            "value": "TEXT MEDIUM",
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
@@ -33,7 +33,7 @@
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
-            "value": "TEXT FOREGROUND",
+            "value": "TEXT BACKGROUND",
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
@@ -53,7 +53,7 @@
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
-            "value": "TEXT BACKGROUND",
+            "value": "TEXT",
             "$type": "kOS.Safe.Encapsulation.StringValue"
         },
         {
