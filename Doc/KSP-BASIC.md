@@ -132,6 +132,9 @@ SD 45.23434 -73.00123
 ### TEXT
 
 ```
+Parameter      Effect
+
+[none]         reset all the changes
 BACKGROUND     set the highlighting
 FOREGROUND     disable the highlighting
 SMALL          set a small width for the caracters (80 columns)
