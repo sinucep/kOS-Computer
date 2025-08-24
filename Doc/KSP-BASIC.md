@@ -106,6 +106,19 @@ LOCATE 4 8
 PRINT "Far from the edge"
 ```
 Any **PRINT** call increases the Y-coordinate and resets the X-coordinate to zero.
+
+### MESSAGESEC
+Send a message to the second processor. The only parameter is the message itself.
+
+The following code activates and deactivates the hint helper of the editor's multimonitor mode.
+```
+MESSAGESEC  dualedit
+WAIT 3
+MESSAGESEC  ready
+```
+
+Note the double space: one soace is the searator, the other is parte of the command sent to the second processor
+
 ### PRINT
 Wrapping of the Kerboscript _PRINT_. It has his own cursor location system (indipendent from kOSPropMonitor's one).
 You can use colors with command **CO**.
@@ -134,7 +147,7 @@ SD 45.23434 -73.00123
 ```
 Parameter      Effect
 
-[none]         reset all the changes
+[none]         resets all the changes
 BACKGROUND     set the highlighting
 FOREGROUND     disable the highlighting
 SMALL          set a small width for the caracters (80 columns)
