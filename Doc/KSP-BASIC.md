@@ -108,7 +108,7 @@ PRINT "Far from the edge"
 Any **PRINT** call increases the Y-coordinate and resets the X-coordinate to zero.
 
 ### MESSAGESEC
-Send a message to the second processor. The only parameter is the message itself.
+Sends a message to the second processor. The only parameter is the message itself.
 
 The following code activates and deactivates the hint helper of the editor's multimonitor mode.
 ```
@@ -117,7 +117,7 @@ WAIT 3
 MESSAGESEC  ready
 ```
 
-Note the double space: one soace is the searator, the other is parte of the command sent to the second processor
+Note the double space: one space is the searator, the other is parte of the command sent to the second processor.
 
 ### PRINT
 Wrapping of the Kerboscript _PRINT_. It has his own cursor location system (indipendent from kOSPropMonitor's one).
