@@ -17,6 +17,7 @@ local linumbers to list().
 
 local txtcolor to "".
 local background to "".
+local txtsize to "".
 
 global stepmode to false.
 
@@ -84,7 +85,7 @@ function toggledebug{
 	set mylabels:currentmonitor to ix.
 	
 	if debugbas {
-		mylabels:setlabel(0, "  Debug([#00FF00]on[#FFFFFF]) ").
+		mylabels:setlabel(0, " [/hw][#FFFFFF]Debug[hw] ").
 		set debugoffset to 15.
 		clsnoCur().
 		debugwinframe().
@@ -92,19 +93,14 @@ function toggledebug{
 	}
 	
 	if not debugbas {
-		mylabels:setlabel(0, " Debug([#FFA050]off[#FFFFFF]) ").
+		mylabels:setlabel(0, " [/hw][#8F8F8F]Debug[hw] ").
 		set debugoffset to 0.
 		clsnoCur().
 	}
 	
 	if Npage = 220{
-		//ClsNoCur().
 		local cou to 0.
-		
-		for lin in emptyprog {
-			print lin at(0 + debugoffset, cou).
-			set cou to cou + 1.
-		}
+		printstrlist(emptyprog, debugoffset).
 	}
 	
 	
@@ -242,7 +238,7 @@ function coPRINT {
 				set lxx to (lx + debugoffset).
 				set uniq to random().
 				//print "lxx:"+lxx+" do:"+debugoffset at (44,ly).
-				log "PRINT " + txtcolor + BackGround + l:REMOVE(0,sepi+1) +
+				log "PRINT " + txtcolor + BackGround + txtsize + l:REMOVE(0,sepi+1) +
 				" at(" + (lxx*1) + "," + ly +")." to // string to number.. tsk!
 				"/KOSmodore/temp/print" + uniq + ".ks".
 				RUNPATH("/KOSmodore/temp/print" + uniq + ".ks").
@@ -281,7 +277,7 @@ function coCOLOR {
 	
 	if l = "COLOR" {
 		set Txtcolor to "".
-		set BACKGROUND to "".
+		//set BACKGROUND to "".
 	}
 	else
 		if sepi > -1 {
@@ -301,8 +297,50 @@ function coCOLOR {
 				if color = "BLACK" {set Txtcolor to """[#000000]""+".}
 				if color = "GRAY" {set Txtcolor to """[#909090]""+".}
 				if color = "BROWN" {set Txtcolor to """[#663300]""+".}
-				if color = "BACKGROUND" {set BACKGROUND to """[font2]""+".}
-				if color = "FOREGROUND" {set BACKGROUND to "".}
+				//if color = "BACKGROUND" {set BACKGROUND to """[font2]""+".}
+				//if color = "FOREGROUND" {set BACKGROUND to "".}
+			}
+		}
+}
+
+function coTEXT {
+	parameter li.
+	local l to li:trim:toupper.
+	local styl to "".
+	local sepi to l:FIND(" ").
+	
+	if l = "TEXT" {
+		set BACKGROUND to "".
+		set txtsize to "".
+	}
+	else
+		if sepi > -1 {
+			if (l:REMOVE(sepi,(l:length-sepi)) = "TEXT"){
+				set styl to l:REMOVE(0,sepi+1).
+			
+			
+				if styl = "BACKGROUND" {set BACKGROUND to """[font2]""+".}
+				if styl = "FOREGROUND" {set BACKGROUND to "".}
+				if styl = "SMALL" {set txtsize to "".}
+				if styl = "LARGE" {set txtsize to """[dw]""+".}
+				if styl = "MEDIUM" {set txtsize to """[/hw]""+".}
+			}
+		}
+}
+
+function coMESSAGESEC {
+	parameter li.
+	local l to li:trim:toupper.
+	local messa to "".
+	local sepi to l:FIND(" ").
+	
+	//if l = "MESSAGESEC" {}
+	//else
+		if sepi > -1 {
+			if (l:REMOVE(sepi,(l:length-sepi)) = "MESSAGESEC"){
+				set messa to l:REMOVE(0,sepi+1).
+				//PRINT "("+MESSa+")" at(10,10).
+				sendmsg(messa).
 			}
 		}
 }
@@ -528,7 +566,9 @@ function RunBASICline {
 		coWR(LiNoN).
 		coKSLine(LiNoN).	
 		coCOLOR(LiNoN).
-		coRUNKS(LiNoN).		
+		coTEXT(LiNoN).
+		coRUNKS(LiNoN).
+		coMESSAGESEC(LiNoN).
 		coGOTO(LiNoN).
 		
 		if coEND(LiNoN) {set exodos to true.}

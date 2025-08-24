@@ -150,7 +150,10 @@ function T9bu1parE {
 	
 	set EdLine to EdLine:insert(cuX,sa).
 	set CuX to Cux + 1.
-	print EdLine at(0,Cuy+offsy).
+	
+	print EdLine at(hd:length,Cuy+offsy).
+	
+	
 	
 	MesSec(EdLine,Cux).
 	
@@ -162,11 +165,8 @@ function T9backspaceE {         //back space
 	if CuX > 0 {
 		set CuX to Cux - 1.
 		set EdLine to EdLine:remove(CuX, 1).
-		print EdLine + "  " at(0,Cuy+offsy). //duoble space for there is also the cursor to delete
+		print EdLine + "  " at(hd:length,Cuy+offsy). //duoble space for there is also the cursor to delete
 	}
-	
-	MesSec(EdLine,Cux).
-	
 	return EdLine.
 }
 
@@ -219,33 +219,19 @@ function EndHome {
 	if (tpress > TIME:SECONDS - 0.6) {
 		if not (tastopreced = id) {set conta to 0.}		
 	}
-	else {		
-		set conta to 0.
-	}
+	else {set conta to 0.}
 	set tastopreced to id.
-	if (tpress > TIME:SECONDS - 0.6) and (conta = 2) {
-		set conta to 0.
-		//set cux to cux - 1.
-			//set EdLine to EdLine:remove(cuX, 1).
-	}
+	if (tpress > TIME:SECONDS - 0.6) and (conta = 2) {set conta to 0.}
 	if (tpress > TIME:SECONDS - 0.6) and (conta = 1) {
 		set conta to conta + 1.
-		//set cux to cux - 1.
-		//	set EdLine to EdLine:remove(cuX, 1).
-		//	set EdLine to EdLine:insert(cuX, sb).
-		//set cux to cux + 1.
-		//print EdLine at(0,cuy+offsy).
 		cuHome().
 	}
 	if (conta = 0) {
-			//set EdLine to EdLine:insert(cuX,sa).
-		//set cux to cux + 1.
 		set conta to conta + 1.
-		//print EdLine at(0,cuy+offsy).
 		cuend().
 	}
 	set tpress to TIME:SECONDS.
-	//return EdLine.
+	MesSec(emptyprog[Cuy],Cux).
 }
 
 function T9bu3parE {
@@ -475,11 +461,12 @@ function T9backsE {
 			local cou to 0.
 		
 			for lin in emptyprog {
-				print lin at(0,cou).
+				print hd + lin at(0,cou).
 				set cou to cou + 1.
 			}
 		}
 	}
+	MesSec(emptyprog[cuY],Cux).
 }
 
 function InsertLineKST {
@@ -495,7 +482,7 @@ function InsertLineKST {
 		local cou to 0.
 		
 		for lin in emptyprog {
-			print lin at(0,cou).
+			print hd + lin at(0,cou).
 			set cou to cou + 1.
 		}
 //MesSec(emptyprog[Cuy],Cux).		
@@ -545,7 +532,7 @@ function punct5e { set emptyprog[cuY] to T9bu4parE("<",">","@","/",26, emptyprog
 function addhint {
 	parameter hint, curx.
 	set emptyprog[cuY] to  emptyprog[cuY]:INSERT(Cux, hint).
-	print emptyprog[cuY] at(0,Cuy+offsy).
+	print hd + emptyprog[cuY] at(0,Cuy+offsy).
 	//set cux to cux + (curx:tonumber).
 	set cux to cux + (hint:length).
 }

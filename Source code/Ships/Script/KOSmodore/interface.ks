@@ -554,6 +554,9 @@ function EnterListselect{
 	}
 	if Npage = 221 {
 		set emptyprog to readjson("/KOSmodore/ksp-basic/" + li[lind]).
+		
+		set hd to "[/hw]". // temporary
+		
 		GoPage(220).
 		
 	}

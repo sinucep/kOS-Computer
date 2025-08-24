@@ -1,6 +1,7 @@
 @lazyglobal off.
 
 run once "/KOSmodore/runKS.ks".
+run once "/KOSmodore/pages.ks".
 //run once "/KOSmodore/texted.ks".
 
 global CuX to 0.
@@ -15,6 +16,9 @@ global offsy to 0. //how much up or down to print the text
 function copyvarsave { //
 	parameter Pag,mult. //mult is a id needed if more strings are asked from the same page
 	//resetcicleset().
+	
+	set hd to "". // temporary
+	
 	set stextaux to emptyprog:copy.
 	emptyprog:clear.
 	emptyprog:add("").
@@ -25,9 +29,7 @@ function copyvarsave { //
 	Savefilelist(mult).
 }
 
-function Cur {
-	print Cuc at(Cux, Cuy+offsy).
-}
+function Cur {print cuc at(cux + hd:length,Cuy+offsy).}
 
 //buffer state function (when you have to do something just once)
 function bufTextEdit {
@@ -47,12 +49,13 @@ function cuBlank {
 function CuDel {   //what char there is in (x,y). Behind the cursor
 	
 	local cha to "".
+	
 	if cux < emptyprog[cuy]:length {
 		set cha to emptyprog[cuy]:substring(cux,1).
 	} else {
 		set cha to " ".
-	}
-	print cha at(cux,cuy+offsy).
+	}	
+	print cha at(cux + hd:length,Cuy+offsy).
 }
 
 function CuRight {

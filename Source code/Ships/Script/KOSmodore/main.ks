@@ -184,7 +184,7 @@ set CurrentNote to LBook:LENGTH-1.
 
 //GoPage(8). //test
 //GoPage(237).   //new basic
-//GoPage(221).   //open basic
+GoPage(221).   //open basic
 
 
 //set debugbas to true.

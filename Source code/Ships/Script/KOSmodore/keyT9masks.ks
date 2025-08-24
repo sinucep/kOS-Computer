@@ -1,5 +1,7 @@
 @lazyglobal off.
 
+// terminal masks for the main processor
+
 //svuota tutti i bottoni, etichette, funzioni delegate ecc.
 function ClearTerminal {
 	    

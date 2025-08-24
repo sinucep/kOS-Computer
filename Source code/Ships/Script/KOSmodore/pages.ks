@@ -7,6 +7,23 @@ run once "/KOSmodore/basicflow.ks".
 run once "/KOSmodore/proc2/terminal2.ks".
 run once "/KOSmodore/settings.ks".
 
+global hd to "[/hw]".  //high definition
+
+function ldhd {
+	if hd = "" {set hd to "[/hw]".} else {set hd to "".}
+	gopage(Npage).
+}
+
+
+function printstrlist {
+	parameter li, offsy is 0.
+	local cou to 0.
+	for lin in li {
+		print hd + lin at(0 + offsy, cou).
+		set cou to cou + 1.
+	}
+}
+
 function GoPage {
 	parameter p.
 	
@@ -272,7 +289,7 @@ function GoPage {
 		SPage(100).	
 		InitTermSettings(monitors).
         set lind to 0.
-		ListaStr(CFGnamesandvals).
+		ListaStr(CFGnamesandvals()).
 	}
 	
 	// rename ks
@@ -366,21 +383,19 @@ function GoPage {
 	// View basic prog
 	if p = 220 {
 		SPage(220).
+		
 		InitTermViewBas(monitors).	
 		CuReset().
-		local cou to 0.
-		
 		if debugbas {debugwinframe().}
+		printstrlist(emptyprog, debugoffset).
 		
-		for lin in emptyprog {
-			print lin at(0 + debugoffset, cou).
-			set cou to cou + 1.
-		}
+	
 	}
 	
 	// Select basic program file
 	if p = 221 {
 		SPage(221).
+		set hd to "". // temporary
 		set lind to 0.
 		InitTermFileLoad(monitors).
 		cd("KOSmodore").
@@ -434,13 +449,11 @@ function GoPage {
 // Edit basic prog 0 con cursore
 	if p = 237 {
 		SPage(237).
+		
+		set hd to "". // temporary
 		InitTermEditBas0cu(monitors).	
 		
-		local cou to 0.
-		for lin in emptyprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
+		printstrlist(emptyprog).
 		set li to emptyprog.
 	}
 	
@@ -482,7 +495,10 @@ function GoPage {
 	}
 	
 	// T9 save BAS pages
-	if p = 243 {InitTermFileSave(monitors).}
+	if p = 243 {
+	
+		InitTermFileSave(monitors).
+	}
 	if p = 244 {InitTermFileSave1(monitors).}
 	if p = 245 {InitTermFileSave2(monitors).}
 	
@@ -548,33 +564,21 @@ function GoPage {
 		SPage(290).
 		InitTermMultiType0(SettingsL[5], SettingsL[6]).	
 		
-		local cou to 0.
-		for lin in emptyprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
+		printstrlist(emptyprog).
 		set li to emptyprog.
 	}
 	if p = 291 {
 		SPage(291).
 		InitTermMultiType1(SettingsL[5], SettingsL[6]).	
 		
-		local cou to 0.
-		for lin in emptyprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
+		printstrlist(emptyprog).
 		set li to emptyprog.
 	}
 	if p = 292 {
 		SPage(292).
 		InitTermMultiType2(SettingsL[5], SettingsL[6]).	
 		
-		local cou to 0.
-		for lin in emptyprog {
-			print lin at(0,cou).
-			set cou to cou + 1.
-		}
+		printstrlist(emptyprog).
 		set li to emptyprog.
 	}
 	//  multimonmitor wizard

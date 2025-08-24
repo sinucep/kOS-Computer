@@ -3,6 +3,7 @@
 run once "/KOSmodore/rover.ks".
 run once "/KOSmodore/keybT9.ks".
 run once "/KOSmodore/keyT9masks.ks".
+run once "/KOSmodore/proc2/tmasks2.ks".
 run once "/KOSmodore/logbook.ks".
 run once "/KOSmodore/files.ks".
 run once "/KOSmodore/GPS.ks".
@@ -19,11 +20,11 @@ global mylabels to addons:kpm:labels.
 global myflags to addons:kpm:flags.
 
 // silly infos
-function button05Press {
-	clearscreen.	
-	print "GUID: " + id.
-	print "monindex: " + monindex.
-}
+//function button05Press {
+//	clearscreen.	
+//	print "GUID: " + id.
+//	print "monindex: " + monindex.
+//}
 
 function MSetLabel{
 	parameter nu.
@@ -565,21 +566,22 @@ function InitTermViewBas {
 		
 		ClearTerminal(x).
   
-		if debugbas {mylabels:setlabel(0, "  Debug([#00FF00]on[#FFFFFF]) ").}
-		else {mylabels:setlabel(0, " Debug([#FFA050]off[#FFFFFF]) ").}
+		if debugbas {mylabels:setlabel(0, " [/hw][#FFFFFF]Debug[hw] ").}
+		else {mylabels:setlabel(0, " [/hw][#8F8F8F]Debug[hw] ").}
 		
-		mylabels:setlabel(1, "    Run   ").
+		mylabels:setlabel(1, "  [/hw]Run[hw]  ").
 		mylabels:setlabel(2, " Step run ").
-		mylabels:setlabel(3, "   Reset  ").
+		mylabels:setlabel(3, "[/hw]Reset[hw]").
 		
 		
-		mylabels:setlabel(4, "    Edit  ").
+		mylabels:setlabel(4, " [/hw]Edit[hw] ").
 		mylabels:setlabel(5, " Dual-edit").
 		
 		//mylabels:setlabel(5, "  Show #  ").
-		mylabels:setlabel(7, "   Clear  ").
-		mylabels:setlabel(8, "   Save   ").
-		mylabels:setlabel(9, "   Load   ").
+		mylabels:setlabel(7, " [/hw]Clear[hw] ").
+		mylabels:setlabel(8, " [/hw]Save[hw] ").
+		mylabels:setlabel(9, " [/hw]Open[hw] ").
+		mylabels:setlabel(13, " [#9F9F00][/hw]HD/LD[hw] ").
 		//mylabels:setlabel(11, "  GOTO-id ").
 				
 		//mybuttons:setdelegate(0,DebugToggle@:bind(x)).
@@ -595,6 +597,7 @@ function InitTermViewBas {
 		mybuttons:setdelegate(7,initstextvar@).	
 		mybuttons:setdelegate(8,copyvarsave@:bind(243,0)).
 		mybuttons:setdelegate(9,GoPage@:bind(221)).
+		mybuttons:setdelegate(13,ldhd@).
 		//mybuttons:setdelegate(11,PrintGotoid@).
 		
 		mybuttons:setdelegate(-2,GoPage@:bind(200)).         //CANCEL
@@ -698,16 +701,17 @@ function InitTermEditBas2cu{
 	FROM {local x is 0.} UNTIL x = monitors STEP {set x to x+1.} DO {
 		
 		ClearTerminal(x).
-        
+        //hdldmask().
+		
 		SetBasicSymbolsNumbersE(x).
   
 		mylabels:setlabel(7,"     [...]  ").
 		mylabels:setlabel(8,"  - / : ' ").
 		mylabels:setlabel(9,"  . , ! ? ").
 		mylabels:setlabel(10,"  < > @ / ").
-		mylabels:setlabel(11,"  "" * ^ $ ").
+		mylabels:setlabel(11,"  "" * ^ $ ").		
+		mylabels:setlabel(12," ( ) = #  ").
 		
-		mylabels:setlabel(13,"  ( ) = #   ").
 	
 		mybuttons:setdelegate(7,cicleset@).
 		mybuttons:setdelegate(8,punct1e@).
@@ -715,7 +719,7 @@ function InitTermEditBas2cu{
 		mybuttons:setdelegate(10,punct5e@).
 		mybuttons:setdelegate(11,punct4e@).
 		
-		mybuttons:setdelegate(13,parentesiE@).
+		mybuttons:setdelegate(12,parentesiE@).
   
 		mybuttons:setdelegate(-2,GoPage@:bind(PageBack())). //CANCEL
 		mybuttons:setdelegate(-3,CuUp@).             //UP
