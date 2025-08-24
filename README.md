@@ -75,4 +75,4 @@ KSP-Basic can read files, activate Action Groups and much more.
 ### Dual processor
 Full keyboard (no T9), dual monitor.
 ### Settings save
-Setting saved in the craft.
+Settings saved in the craft.
