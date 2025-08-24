@@ -9,6 +9,7 @@ v1.1.0                 v0.0.0-alpha
 v1.1.1                 v0.0.0-alpha      
 v1.1.2                 v0.0.0-alpha
 v1.1.3                 v0.0.1-alpha
+v1.2.0                 v0.0.2
 ```
 ## KSP-BASIC commands
 KSP-BASIC is not case sensitive.
