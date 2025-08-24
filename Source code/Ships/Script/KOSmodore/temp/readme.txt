@@ -1,0 +1,1 @@
+Apart from this readme.txt, there should be no files in this folder. However, sometimes some files remain. These files are not required for the proper functioning of kOS-Computer, and while it can be useful to take a look at them to figure out what went wrong, they can be deleted.
